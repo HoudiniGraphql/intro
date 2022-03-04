@@ -1,0 +1,26 @@
+{
+	"name": "starterproject",
+	"version": "0.0.1",
+	"scripts": {
+		"server": "node api.cjs",
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"package": "svelte-kit package",
+		"preview": "svelte-kit preview",
+		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
+		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"apollo-server": "^3.6.3",
+		"apollo-server-core": "^3.6.3",
+		"graphql": "^16.3.0",
+		"graphql-relay": "^0.10.0",
+		"graphql-tag": "^2.12.6",
+		"prettier": "^2.5.1",
+		"prettier-plugin-svelte": "^2.5.0",
+		"svelte": "^3.44.0"
+	},
+	"type": "module"
+}
