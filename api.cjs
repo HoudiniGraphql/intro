@@ -19,7 +19,7 @@ const typeDefs = gql`
 		id: Int!
 		name: String!
 		flavor_text: String!
-		stats: Map!
+		base_stats: Map!
 		evolution_chain: [Species!]!
 		moves(first: Int, after: String): SpeciesMoveConnection!
 		types: [Type!]!
