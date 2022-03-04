@@ -64,16 +64,6 @@ const typeDefs = gql`
 	}
 `;
 
-// example data
-let items = [
-	{ id: '1', text: 'Taste JavaScript', createdAt: new Date() },
-	{ id: '2', text: 'Buy a unicorn', createdAt: new Date() },
-	{ id: '3', text: 'Taste more JavaScript', createdAt: new Date() },
-	{ id: '4', text: 'Buy a another unicorn', createdAt: new Date() },
-	{ id: '5', text: 'Taste even more JavaScript', createdAt: new Date() },
-	{ id: '6', text: 'Buy a third unicorn', createdAt: new Date() }
-];
-
 id = items.length;
 
 const resolvers = {
