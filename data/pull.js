@@ -16,6 +16,9 @@ const moveData = await (
                     name_en: pokemon_v2_movenames(where:{ language_id: {_eq: 9}}) {
                       value: name
                     }
+                    pokemon_v2_type {
+                      name
+                    }
                 }
             }
         `
@@ -30,7 +33,8 @@ const moves = moveData.data.moves.reduce(
 			accuracy: move.accuracy,
 			pp: move.pp,
 			power: move.power,
-			name: move.name_en[0].value
+			name: move.name_en[0].value,
+			type: move.pokemon_v2_type.name
 		}
 	}),
 	{}

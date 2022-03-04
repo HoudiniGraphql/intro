@@ -1,153 +1,130 @@
 const { ApolloServer } = require('apollo-server');
 const gql = require('graphql-tag');
-const { GraphQLScalarType, Kind } = require('graphql');
 const { connectionFromArray } = require('graphql-relay');
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
+const { readFile } = require('fs/promises');
+
+// load the data file before we do anything
+let data;
 
 const typeDefs = gql`
-	scalar DateTime
-	type Error {
-		message: String!
-		code: String!
-	}
-	type TodoItem {
-		id: ID!
-		text: String!
-		completed: Boolean!
-		createdAt: DateTime!
-	}
+	scalar Map
+
 	type Query {
-		items(first: Int, after: String, completed: Boolean): TodoItemConnection!
+		pokemon(first: Int, after: String): SpeciesConnection!
+		species(id: Int!): Species
 	}
-	type Mutation {
-		checkItem(item: ID!): UpdateItemOutput!
-		uncheckItem(item: ID!): UpdateItemOutput!
-		addItem(input: AddItemInput!): AddItemOutput!
-		deleteItem(item: ID!): DeleteIemOutput!
+
+	type Species {
+		id: Int!
+		name: String!
+		flavor_text: String!
+		stats: Map!
+		evolution_chain: [Species!]!
+		moves(first: Int, after: String): SpeciesMoveConnection!
+		types: [Type!]!
+		sprites: SpeciesSprites!
 	}
-	type Subscription {
-		itemUpdate(id: ID!): ItemUpdate!
-		newItem: ItemUpdate!
+
+	type SpeciesSprites {
+		front: String!
+		back: String!
 	}
-	input AddItemInput {
-		text: String!
+
+	type SpeciesMove {
+		learned_at: Int!
+		method: String!
+		move: Move!
 	}
-	type AddItemOutput {
-		error: Error
-		item: TodoItem
+
+	type Move {
+		name: String!
+		power: Int!
+		accuracy: Int!
+		pp: Int!
+		type: Type
 	}
-	type UpdateItemOutput {
-		error: Error
-		item: TodoItem
+
+	enum Type {
+		Grass
+		Poison
+		Fire
+		Flying
+		Water
+		Bug
+		Normal
+		Electric
+		Ground
+		Fairy
+		Fighting
+		Psychic
+		Rock
+		Steel
+		Ice
+		Ghost
+		Dragon
 	}
-	type DeleteIemOutput {
-		error: Error
-		itemID: ID
+
+	type SpeciesConnection {
+		edges: [SpeciesEdge!]!
+		pageInfo: PageInfo!
+		totalCount: Int!
 	}
-	type ItemUpdate {
-		item: TodoItem!
+
+	type SpeciesEdge {
+		cursor: String
+		node: Species
 	}
+
+	type SpeciesMoveConnection {
+		edges: [SpeciesMoveEdge!]!
+		pageInfo: PageInfo!
+		totalCount: Int!
+	}
+
+	type SpeciesMoveEdge {
+		cursor: String
+		node: SpeciesMove
+	}
+
 	type PageInfo {
-		startCursor: String
 		endCursor: String
 		hasNextPage: Boolean!
 		hasPreviousPage: Boolean!
-	}
-	type TodoItemConnection {
-		totalCount: Int!
-		pageInfo: PageInfo!
-		edges: [TodoItemEdge!]!
-	}
-	type TodoItemEdge {
-		cursor: String
-		node: TodoItem
+		startCursor: String
 	}
 `;
 
-id = items.length;
-
 const resolvers = {
 	Query: {
-		items: (_, { completed, ...args } = {}) => {
-			const filtered = items.filter((item) =>
-				typeof completed === 'boolean' ? Boolean(item.completed) === Boolean(completed) : true
-			);
-
-			const connection = connectionFromArray(filtered, args);
-			connection.totalCount = items.length;
+		species(_, { id }) {
+			return data.species[id - 1];
+		},
+		pokemon(_, args) {
+			const connection = connectionFromArray(data.species, args);
+			connection.totalCount = data.species.length;
 
 			return connection;
 		}
 	},
-	Mutation: {
-		checkItem(_, { item: targetID, ...rest }) {
-			// grab the item in question
-			const item = items.find(({ id }) => id === targetID);
-			if (!item) {
-				throw new Error('Could not find item');
-			}
-
-			// update the completed value
-			item.completed = true;
-
-			return {
-				error: null,
-				item
-			};
+	Species: {
+		name: ({ name }) => {
+			return name.charAt(0).toUpperCase() + name.slice(1);
 		},
-		uncheckItem(_, { item: targetID }) {
-			// grab the item in question
-			const item = items.find(({ id }) => id === targetID);
-
-			// update the completed value
-			item.completed = false;
-
-			return {
-				error: null,
-				item
-			};
+		types: ({ types }) => {
+			return types.map((type) => type.charAt(0).toUpperCase() + type.slice(1));
 		},
-		deleteItem(_, { item: targetID }) {
-			// filter out the item with the matching id
-			items = items.filter(({ id }) => id !== targetID);
+		evolution_chain: ({ evo_chain }) => evo_chain.map((id) => data.species[id - 1]),
+		moves({ moves }, args) {
+			const connection = connectionFromArray(
+				moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })),
+				args
+			);
+			connection.totalCount = moves.length;
 
-			return {
-				error: null,
-				itemID: targetID
-			};
-		},
-		addItem(_, { input: { text } }) {
-			const item = {
-				text,
-				completed: false,
-				id: (parseInt(id, 10) + 1).toString(),
-				createdAt: new Date()
-			};
-			id++;
-			items.unshift(item);
-
-			return { item, error: null };
+			return connection;
 		}
-	},
-	TodoItem: {
-		completed: ({ completed }) => Boolean(completed)
-	},
-	DateTime: new GraphQLScalarType({
-		name: 'DateTime',
-		description: 'Date custom scalar type',
-		serialize(value) {
-			return value.getTime();
-		},
-		parseValue(value) {
-			return new Date(value);
-		},
-		parseLiteral(ast) {
-			if (ast.kind === Kind.INT) {
-				return new Date(parseInt(ast.value, 10));
-			}
-			return null;
-		}
-	})
+	}
 };
 
 const server = new ApolloServer({
@@ -156,6 +133,10 @@ const server = new ApolloServer({
 	plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
 });
 
-server.listen().then(({ url }) => {
-	console.log(`🚀  Server ready at ${url}`);
-});
+readFile('./data/data.json', 'utf-8')
+	.then((result) => (data = JSON.parse(result)))
+	.then(() => {
+		server.listen().then(({ url }) => {
+			console.log(`🚀  Server ready at ${url}`);
+		});
+	});
