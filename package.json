@@ -18,6 +18,8 @@
 		"graphql": "^16.3.0",
 		"graphql-relay": "^0.10.0",
 		"graphql-tag": "^2.12.6",
+		"houdini": "^0.12.1",
+		"houdini-preprocess": "^0.12.2",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
 		"svelte": "^3.44.0"
