@@ -1,71 +1,85 @@
-input AddItemInput {
-  text: String!
+scalar Map
+
+type Query {
+	pokemon(first: Int, after: String): SpeciesConnection!
+	species(id: Int!): Species
 }
 
-type AddItemOutput {
-  error: Error
-  item: TodoItem
+type Species {
+	id: Int!
+	name: String!
+	flavor_text: String!
+	base_stats: Map!
+	evolution_chain: [Species!]!
+	moves(first: Int, after: String): SpeciesMoveConnection!
+	types: [Type!]!
+	sprites: SpeciesSprites!
 }
 
-"""Date custom scalar type"""
-scalar DateTime
-
-type DeleteIemOutput {
-  error: Error
-  itemID: ID
+type SpeciesSprites {
+	front: String!
+	back: String!
 }
 
-type Error {
-  code: String!
-  message: String!
+type SpeciesMove {
+	learned_at: Int!
+	method: String!
+	move: Move!
 }
 
-type ItemUpdate {
-  item: TodoItem!
+type Move {
+	name: String!
+	power: Int!
+	accuracy: Int!
+	pp: Int!
+	type: Type
 }
 
-type Mutation {
-  addItem(input: AddItemInput!): AddItemOutput!
-  checkItem(item: ID!): UpdateItemOutput!
-  deleteItem(item: ID!): DeleteIemOutput!
-  uncheckItem(item: ID!): UpdateItemOutput!
+enum Type {
+	Grass
+	Poison
+	Fire
+	Flying
+	Water
+	Bug
+	Normal
+	Electric
+	Ground
+	Fairy
+	Fighting
+	Psychic
+	Rock
+	Steel
+	Ice
+	Ghost
+	Dragon
+}
+
+type SpeciesConnection {
+	edges: [SpeciesEdge!]!
+	pageInfo: PageInfo!
+	totalCount: Int!
+}
+
+type SpeciesEdge {
+	cursor: String
+	node: Species
+}
+
+type SpeciesMoveConnection {
+	edges: [SpeciesMoveEdge!]!
+	pageInfo: PageInfo!
+	totalCount: Int!
+}
+
+type SpeciesMoveEdge {
+	cursor: String
+	node: SpeciesMove
 }
 
 type PageInfo {
-  endCursor: String
-  hasNextPage: Boolean!
-  hasPreviousPage: Boolean!
-  startCursor: String
-}
-
-type Query {
-  items(after: String, completed: Boolean, first: Int): TodoItemConnection!
-}
-
-type Subscription {
-  itemUpdate(id: ID!): ItemUpdate!
-  newItem: ItemUpdate!
-}
-
-type TodoItem {
-  completed: Boolean!
-  createdAt: DateTime!
-  id: ID!
-  text: String!
-}
-
-type TodoItemConnection {
-  edges: [TodoItemEdge!]!
-  pageInfo: PageInfo!
-  totalCount: Int!
-}
-
-type TodoItemEdge {
-  cursor: String
-  node: TodoItem
-}
-
-type UpdateItemOutput {
-  error: Error
-  item: TodoItem
+	endCursor: String
+	hasNextPage: Boolean!
+	hasPreviousPage: Boolean!
+	startCursor: String
 }

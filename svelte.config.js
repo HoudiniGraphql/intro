@@ -11,6 +11,8 @@ const config = {
 		vite: {
 			resolve: {
 				alias: {
+					// these are the aliases and paths to them
+					'~': path.resolve('./src'),
 					$houdini: path.resolve('.', '$houdini')
 				}
 			},
