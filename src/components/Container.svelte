@@ -17,6 +17,18 @@
         <slot name="right" />
     </div>
     <div>
+        <div id="ball-highlight"/>
+        <div id="ball"/>
+        <div id="highlights">
+            <div class="highlight"/>
+            <div  class="highlight"/>
+            <div class="highlight"/>
+        </div>
+        <div id="light-container">
+            <div id="red-light" class="light"/>
+            <div id="yellow-light" class="light"/>
+            <div id="green-light" class="light"/>
+        </div>
         <div id="left-header" />
         <div id="left-cap" />
         <div id="left-cap-border" />
@@ -72,7 +84,7 @@
         flex-grow:  1;
         border-bottom-left-radius: 5px;
         padding: 16px;
-        padding-top: 5px;
+        padding-top: 13px;
         box-sizing: border-box;
         height: 81%;
     }
@@ -282,7 +294,7 @@
         height: calc(12% - 5px);
         position: absolute;
         right: calc(50% - 15px);
-        left: calc(-3px - 0.1%);
+        left: calc(-2px - 0.2%);
         top: 41px;
         background: black;
         z-index: 4;
@@ -311,5 +323,77 @@
         z-index: 12;
         border-bottom-right-radius: 12px;
         border-top-right-radius: 12px;
+    }
+
+    #ball { 
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: #429bd3;
+        top: 10px;
+        left: 20px;
+        z-index: 10;
+        border: 7px solid #d8d8d8;
+    }
+
+    #ball-highlight { 
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background-color: #90c3e2;
+        top: 24px;
+        left: 35px;
+        z-index: 11;
+    }
+
+    #light-container { 
+        position: absolute;
+        top: 10px;
+        left: 105px;
+        height: 20px;
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        z-index: 12;
+    }
+
+    .light { 
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    #red-light { 
+        background: rgb(167, 3, 3);
+    }
+
+    #yellow-light { 
+        background: rgb(250, 226, 10);
+    }
+
+    #green-light { 
+        background: rgb(16, 145, 33)
+    }
+
+    #highlights { 
+        position: absolute;
+        top: 13px;
+        left: 109px;
+        height: 20px;
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .highlight { 
+        height: 4px;
+        width: 4px;
+        border-radius: 50%;
+        margin-right: 21px;
+        background: rgb(255, 255, 255, 0.7);
+        z-index: 13;
     }
 </style>
