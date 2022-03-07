@@ -40,7 +40,6 @@
         <div id="inner-border" />
         <div id="top-left-corner" class="corner" />
         <div id="middle-corner" class="corner" />
-        <div id="top-right-corner" class="corner" />
         <div id="bottom-right-corner" class="corner" />
         <div id="bottom-left-corner" class="corner" /> 
         <div id="right-panel-shadow" />
@@ -179,7 +178,7 @@
             /* top of left panel */    
             3% 0%, 49% 0%, calc(50% + 15px) 3%, calc(50% + 15px) calc(10% - 9px), 
             /* right panel */        
-            calc(65% + 10px) calc(10% - 9px), 80% calc(19% - 1px), 97% calc(19% - 1px), 100% 24%, 
+            calc(65% + 10px) calc(10% - 9px), 80% calc(19% - 1px),  100% calc(19% - 1px), 
             /* bottom line */
             100% 97%, 97% 100%, 3% 100%, 0% 97%, 0% 3%
         );
@@ -196,7 +195,7 @@
             /* top of left panel */    
             calc(3% - 4px) 0%, calc(48% + 3px ) 0%, calc(49.1% + 18px) calc(3%), calc(49.1% + 18px) calc(10% - 8px),  calc(49% + 22px) calc(10% - 8px), 
             /* right panel */        
-            calc(65% + 10px) calc(10% - 8px), calc(80% + 1px) calc(19% + 0px), calc(97% + 2px) calc(19%), calc(100.1% - 1px) calc(24% - 3px), 
+            calc(65% + 10px) calc(10% - 8px), calc(80% + 1px) calc(19% + 0px), 100% calc(19%), 
             /* bottom line */
             100% calc(97% + 3px), calc(97% + 3px) 100%, calc(3% - 3px) 100%, 0% calc(97% + 3px), 0% calc(3% - 3px)
         );
@@ -214,9 +213,9 @@
             /* top of left panel */    
             calc(3% - 3px) 1px, calc(48.3% + 20px) 1px, calc(48.3% + 20px) calc(10% - 7px), 
             /* right panel */        
-            calc(65% + 12px) calc(10% - 7px), calc(80% + 2px) calc(19% + 2px), calc(97% + 2px) calc(19% + 2px), 100% calc(24% - 3px), 
+            calc(65% + 12px) calc(10% - 7px), calc(80% + 2px) calc(19% + 2px), 100% calc(19% + 2px), 
             /* bottom line */
-            100% calc(97% + 3px), calc(97% + 3px) 100%, calc(3% - 3px) 100%, 1px calc(97% + 3px), 1px calc(3% - 3px)
+            100% calc(97% + 3px), calc(97% + 3px) 100%, 50% 100%, 1px calc(3% - 3px)
         );
         z-index: 3;
     }
@@ -226,13 +225,6 @@
         left: -10px;
         clip-path: polygon(0 0, 50% 0, 50% 50%, 0 50%);
         border: 3px solid black;
-    }
-    
-    #top-right-corner { 
-        top: calc(17.9% - 1px);
-        right: -10px;
-        clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%);
-        border: 10px double black;
     }
 
     #bottom-right-corner { 
@@ -253,7 +245,7 @@
         bottom: -10px;
         left: -10px;
         clip-path: polygon(0% 50%, 50% 50%, 50% 100%, 0% 100%);
-        border: 10px double black;
+        border: 3px solid black;
     }
 
     .corner { 
@@ -282,9 +274,9 @@
         height: calc(21% + 2px);
         position: absolute;
         right: calc(50% + 15px);
-        left: 0px;
+        left: -7px;
         bottom: calc(70% + 10px);
-        clip-path: polygon(0% 3px, calc(30% + 2px) 2%, calc(60% - 2px) calc(49.8% + 2px ), 100% calc(49.8% + 2px ), 100% 62%, 100% 100%, 0% 100%);
+        clip-path: polygon(0% 3px, calc(30% + 1px) 2%, calc(60% - 4px) calc(49.8% + 2px ), 100% calc(49.8% + 2px ), 100% 62%, 100% 56.4%, 0% 56.4%);
         background: var(--pokedex-shadow);
         z-index: 4;
         transform: scaleX(-1);
@@ -294,7 +286,7 @@
         height: calc(12% - 5px);
         position: absolute;
         right: calc(50% - 15px);
-        left: calc(-2px - 0.2%);
+        left: calc(-6px - 0.2%);
         top: 41px;
         background: black;
         z-index: 4;
@@ -322,7 +314,6 @@
         width: 4px;
         z-index: 12;
         border-bottom-right-radius: 12px;
-        border-top-right-radius: 12px;
     }
 
     #ball { 
@@ -395,7 +386,7 @@
         width: 4px;
         border-radius: 50%;
         margin-right: 25px;
-        background: rgb(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.5);
         z-index: 13;
     }
 </style>
