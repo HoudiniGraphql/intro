@@ -14,19 +14,24 @@
         </div>
     </div>
     <div id="right-panel" class="panel">
-        
         <slot name="right" />
     </div>
     <div>
-        <div id="cap" />
-        <div id="border-spacing"/>
+        <div id="left-header" />
+        <div id="left-cap" />
+        <div id="left-cap-border" />
+        <div id="left-cap-shadow" />
+        <div id="right-cap" />
+        <div id="right-cap-shadow" />
         <div id="outer-line" />
+        <div id="border-spacing"/>
         <div id="inner-border" />
         <div id="top-left-corner" class="corner" />
+        <div id="middle-corner" class="corner" />
         <div id="top-right-corner" class="corner" />
         <div id="bottom-right-corner" class="corner" />
-        <div id="middle-corner" class="corner" />
-        <div id="bottom-left-corner" class="corner" />
+        <div id="bottom-left-corner" class="corner" /> 
+        <div id="right-panel-shadow" />
     </div>
 </div>
 
@@ -37,7 +42,8 @@
         flex-direction: row;
         height: 600px;
         width: 50%;
-        max-width: 848px;
+        width: 650px;
+        flex-shrink: 0;
         align-items: flex-end;
         margin: 0 auto;
         margin-top: 100px;
@@ -49,22 +55,25 @@
     }
 
     #divider { 
-        height: calc(90% + 2px);
+        height: calc(90% + 23px);
         display: flex;
         flex-direction: column;
         align-items: center;
         border: inset #460f0f 4px;
         background: #460f0f;
         border-top-width: 3px;
+        margin-bottom: -10px;
+        border-bottom-color: black;
+        border-bottom-width: 2px;
     }
     
     #left-panel { 
         width: 10px;
         flex-grow:  1;
-        border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
         padding: 1em;
         box-sizing: border-box;
+        height: 80%;
     }
 
     #right-panel { 
@@ -81,13 +90,9 @@
         z-index: 10;
     }
 
-    #left-panel, #middle-panel { 
-        height: 100%;
-    }
-
     #middle-panel { 
+        height: 100%;
         width: 30px;
-        background-color: var(--pokedex-red);
         display: flex;
         justify-content: flex-end;
         flex-direction: column;
@@ -127,7 +132,7 @@
         border-left-color: #5f1010 !important;
     }
     
-    #cap { 
+    #right-cap { 
         height: calc(21% + 2px);
         position: absolute;
         left: calc(50% + 15px);
@@ -136,6 +141,18 @@
         clip-path: polygon(0% 1px, calc(30% + 2px) 1%, calc(60% - 2px) calc(49.8% + 1px ), 97% calc(49.8% + 1px ), 100% 62%, 100% 100%, 0% 100%);
         background: var(--pokedex-red);
         z-index: 5;
+    }
+
+    #right-cap-shadow { 
+        height: calc(21%);
+        position: absolute;
+        left: calc(50% + 15px);
+        right: 1px;
+        bottom: calc(70% + 3px);
+        clip-path: polygon(0% 1px, calc(30% + 1px) 1%, calc(60% - 2px) calc(49.8% + 3px), 101% calc(49.8% + 3px ), 100% 62%, 99% 99%, calc(90% - 15px) 100%, calc(30% + 1px) 4%, 0 4%);
+        background: var(--pokedex-shadow);
+        z-index: 6;
+
     }
 
     #outer-line { 
@@ -147,7 +164,7 @@
         bottom: -10px;
         clip-path: polygon(
             /* top of left panel */    
-            3% 0%, calc(50% + 25px) 0%, 49% 0%, calc(50.1% + 24px) 3%, calc(50.1% + 24px) calc(10% - 9px), 
+            3% 0%, 49% 0%, calc(50% + 15px) 3%, calc(50% + 15px) calc(10% - 9px), 
             /* right panel */        
             calc(65% + 10px) calc(10% - 9px), 80% calc(19% - 1px), 97% calc(19% - 1px), 100% 24%, 
             /* bottom line */
@@ -160,11 +177,11 @@
         background: var(--pokedex-red);
         left: -7px;
         right: -7px;
-        top: -7px;
+        top: calc(-7px - 0.1%);
         bottom: -7px;
         clip-path: polygon(
             /* top of left panel */    
-            calc(3% - 4px) 0%, calc(50% + 22px) 0%, calc(50% + 10px) 0%, calc(50.1% + 21px) calc(2%), calc(50.1% + 21px) calc(10% - 8px),  calc(50.2% + 22px) calc(10% - 8px), 
+            calc(3% - 4px) 0%, calc(48% + 3px ) 0%, calc(49.1% + 18px) calc(3%), calc(49.1% + 18px) calc(10% - 8px),  calc(49% + 22px) calc(10% - 8px), 
             /* right panel */        
             calc(65% + 10px) calc(10% - 8px), calc(80% + 1px) calc(19% + 0px), calc(97% + 2px) calc(19%), calc(100.1% - 1px) calc(24% - 3px), 
             /* bottom line */
@@ -182,7 +199,7 @@
         bottom: -3px;
         clip-path: polygon(
             /* top of left panel */    
-            calc(3% - 3px) 1px, calc(50% + 19px) 1px, calc(50% + 19px) calc(10% - 7px), 
+            calc(3% - 3px) 1px, calc(48.3% + 20px) 1px, calc(48.3% + 20px) calc(10% - 7px), 
             /* right panel */        
             calc(65% + 12px) calc(10% - 7px), calc(80% + 2px) calc(19% + 2px), calc(97% + 2px) calc(19% + 2px), 100% calc(24% - 3px), 
             /* bottom line */
@@ -194,41 +211,102 @@
     #top-left-corner { 
         top: -10px;
         left: -10px;
-        clip-path: polygon(0 0, 50% 0, 50% 50%, 0 50%)
+        clip-path: polygon(0 0, 50% 0, 50% 50%, 0 50%);
+        border: 3px solid black;
     }
     
     #top-right-corner { 
         top: calc(17.9% - 1px);
         right: -10px;
-        clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%)
+        clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%);
+        border: 10px double black;
     }
 
     #bottom-right-corner { 
         bottom: -10px;
         right: -10px;
-        clip-path: polygon(100% 50%, 100% 100%, 50% 100%, 50% 50%)
+        clip-path: polygon(100% 50%, 100% 100%, 50% 100%, 50% 50%);
+        border: 10px double black;
     }
     
     #middle-corner { 
         top: -10px;
-        right: calc(50% - 25px);
-        clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%)
+        right: calc(50% - 15px);
+        clip-path: polygon(50% 0%, 100% 0%, 100% 50%, 50% 50%);
+        border: 3px solid black;
     }
 
     #bottom-left-corner { 
         bottom: -10px;
         left: -10px;
-        clip-path: polygon(0% 50%, 50% 50%, 50% 100%, 0% 100%)
+        clip-path: polygon(0% 50%, 50% 50%, 50% 100%, 0% 100%);
+        border: 10px double black;
     }
 
     .corner { 
         background-color: var(--pokedex-red);
-        border: 10px double black;
         height: 50px;
         width: 50px;
-        border-radius: 15px;
+        border-radius: 13px;
 
         position: absolute;
         z-index: 5;
+    }
+
+    #left-cap { 
+        height: calc(21% + 2px);
+        position: absolute;
+        right: calc(50% + 15px);
+        left: 0px;
+        bottom: calc(70% + 3px);
+        clip-path: polygon(0% 1px, calc(30% + 2px) 1%, calc(60% - 2px) calc(49.8% + 1px ), 100% calc(49.8% + 1px ), 100% 62%, 100% 100%, 0% 100%);
+        background: var(--pokedex-red);
+        z-index: 5;
+        transform: scaleX(-1);
+    }
+
+    #left-cap-shadow { 
+        height: calc(21% + 2px);
+        position: absolute;
+        right: calc(50% + 15px);
+        left: 0px;
+        bottom: calc(70% + 10px);
+        clip-path: polygon(0% 3px, calc(30% + 2px) 2%, calc(60% - 2px) calc(49.8% + 2px ), 100% calc(49.8% + 2px ), 100% 62%, 100% 100%, 0% 100%);
+        background: var(--pokedex-shadow);
+        z-index: 4;
+        transform: scaleX(-1);
+    }
+
+    #left-cap-border { 
+        height: calc(12% - 5px);
+        position: absolute;
+        right: calc(50% - 15px);
+        left: calc(-3px - 0.1%);
+        top: 41px;
+        background: black;
+        z-index: 4;
+        clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 calc(100% - 4px), 37.5% calc(100% - 4px),  63.5% 0);
+        
+    }
+
+    #left-header { 
+        height: calc(18% + 3px);
+        position: absolute;
+        right: calc(50% - 10px);
+        left: calc(-6px - 0.1%);
+        top: -4px;
+        background: var(--pokedex-red);
+        z-index: 4;
+        transform: scaleX(-1);
+    }
+
+    #right-panel-shadow { 
+        position: absolute;
+        background-color: var(--pokedex-shadow);
+        right: 0;
+        bottom: 0;
+        top: calc(20% - 1px);
+        width: 4px;
+        z-index: 12;
     }
 </style>

@@ -28,8 +28,8 @@
         );
         background-color: #09a8ff;
         background-blend-mode: overlay;
-        height: 100vh;
-        width: 100vw;
+        min-height: 100vh;
+        min-width: 100vw;
         display: flex;
         flex-direction: column;
     }
