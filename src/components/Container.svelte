@@ -71,9 +71,10 @@
         width: 10px;
         flex-grow:  1;
         border-bottom-left-radius: 5px;
-        padding: 1em;
+        padding: 16px;
+        padding-top: 5px;
         box-sizing: border-box;
-        height: 80%;
+        height: 81%;
     }
 
     #right-panel { 
@@ -147,9 +148,9 @@
         height: calc(21%);
         position: absolute;
         left: calc(50% + 15px);
-        right: 1px;
+        right: 3px;
         bottom: calc(70% + 3px);
-        clip-path: polygon(0% 1px, calc(30% + 1px) 1%, calc(60% - 2px) calc(49.8% + 3px), 101% calc(49.8% + 3px ), 100% 62%, 99% 99%, calc(90% - 15px) 100%, calc(30% + 1px) 4%, 0 4%);
+        clip-path: polygon(0% 1px, calc(30% + 1px) 1%, calc(60.1% - 1px) calc(49.8% + 3px), 101% calc(49.8% + 3px ), 100% 62%, 99% 99%, calc(90% - 15px) 100%, calc(30% + 1px) 4%, 0 4%);
         background: var(--pokedex-shadow);
         z-index: 6;
 
@@ -305,8 +306,10 @@
         background-color: var(--pokedex-shadow);
         right: 0;
         bottom: 0;
-        top: calc(20% - 1px);
+        top: calc(20% - 3px);
         width: 4px;
         z-index: 12;
+        border-bottom-right-radius: 12px;
+        border-top-right-radius: 12px;
     }
 </style>
