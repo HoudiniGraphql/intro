@@ -53,7 +53,7 @@
         flex-direction: row;
         height: 600px;
         width: 50%;
-        width: 650px;
+        width: 800px;
         flex-shrink: 0;
         align-items: flex-end;
         margin: 0 auto;
@@ -121,7 +121,7 @@
     }
 
     .gap {    
-        background: linear-gradient(90deg, #460f0f 0, #891313 30%, #b31818 45%, #fd5555 65%, #b31818 95%);
+        background-color: #b31818;
         border-top-color: #891313 !important;
         border-right-color: #b31818 !important;
         flex: 1;
@@ -136,7 +136,7 @@
     }
 
     .hinge { 
-        background: linear-gradient(90deg, #891313 0, #b31818 30%, #e61515 45%, #fd5555 65%, #e61515 95%);
+        background: #e61515;
         border-right-color: #fd5555 !important;
         border-top-color: #fd5555 !important;
         flex: 10;
@@ -290,14 +290,14 @@
         top: 41px;
         background: black;
         z-index: 4;
-        clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 calc(100% - 4px), 37.5% calc(100% - 4px),  63.5% 0);
+        clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 calc(100% - 4px), 37.9% calc(100% - 4px),  64.5% 0);
         
     }
 
     #left-header { 
         height: calc(18% + 3px);
         position: absolute;
-        right: calc(50% - 10px);
+        right: calc(49.9% - 12px);
         left: calc(-6px - 0.1%);
         top: -4px;
         background: var(--pokedex-red);
