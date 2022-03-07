@@ -335,6 +335,7 @@
         left: 20px;
         z-index: 10;
         border: 7px solid #d8d8d8;
+        outline: 3px solid black;
     }
 
     #ball-highlight { 
@@ -364,6 +365,7 @@
         width: 15px;
         border-radius: 50%;
         margin-right: 10px;
+        border: 2px solid black;
     }
 
     #red-light { 
@@ -380,8 +382,8 @@
 
     #highlights { 
         position: absolute;
-        top: 13px;
-        left: 109px;
+        top: 15px;
+        left: 111px;
         height: 20px;
         width: 100px;
         display: flex;
@@ -392,7 +394,7 @@
         height: 4px;
         width: 4px;
         border-radius: 50%;
-        margin-right: 21px;
+        margin-right: 25px;
         background: rgb(255, 255, 255, 0.7);
         z-index: 13;
     }
