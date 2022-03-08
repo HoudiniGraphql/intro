@@ -1,0 +1,16 @@
+#species-display {
+	font-size: 28px;
+	letter-spacing: 4px;
+	text-transform: capitalize;
+	height: 45px;
+	box-sizing: border-box;
+}
+
+#species-sprite {
+	height: 250px;
+	flex-grow: 1;
+}
+
+#species-flavor_text {
+	font-size: 20px;
+}

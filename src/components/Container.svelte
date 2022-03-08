@@ -43,16 +43,15 @@
         <div id="bottom-right-corner" class="corner" />
         <div id="bottom-left-corner" class="corner" /> 
         <div id="right-panel-shadow" />
+        <div id="background" />
     </div>
 </div>
 
 <style>
-
     #pokedex { 
         display: flex;
         flex-direction: row;
         height: 600px;
-        width: 50%;
         width: 800px;
         flex-shrink: 0;
         align-items: flex-end;
@@ -63,6 +62,13 @@
 
     #left-panel, #divider, #right-panel { 
         background-color: var(--pokedex-red);
+    }
+
+    :global(#left-panel > div) { 
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        height: 100%;
     }
 
     #divider { 
@@ -84,8 +90,11 @@
         border-bottom-left-radius: 5px;
         padding: 16px;
         padding-top: 13px;
+        padding-left: 12px;
+        margin-right: 4px;
         box-sizing: border-box;
         height: 81%;
+        background-color: var(--pokedex-red);
     }
 
     #right-panel { 
@@ -145,7 +154,7 @@
     }
     
     #right-cap { 
-        height: calc(21% + 2px);
+        height: 128px;
         position: absolute;
         left: calc(50% + 15px);
         right: 0px;
@@ -259,9 +268,9 @@
     }
 
     #left-cap { 
-        height: calc(21% + 2px);
+        height: 128px;
         position: absolute;
-        right: calc(50% + 15px);
+        right: calc(50% + 14px);
         left: 0px;
         bottom: calc(70% + 3px);
         clip-path: polygon(0% 1px, calc(30% + 2px) 1%, calc(60% - 2px) calc(49.8% + 1px ), 100% calc(49.8% + 1px ), 100% 62%, 100% 100%, 0% 100%);
@@ -271,7 +280,7 @@
     }
 
     #left-cap-shadow { 
-        height: calc(21% + 2px);
+        height: 128px;
         position: absolute;
         right: calc(50% + 15px);
         left: -7px;
@@ -298,7 +307,7 @@
         height: calc(18% + 3px);
         position: absolute;
         right: calc(49.9% - 12px);
-        left: calc(-6px - 0.1%);
+        left: calc(-6px - 0.2%);
         top: -4px;
         background: var(--pokedex-red);
         z-index: 4;
@@ -388,5 +397,15 @@
         margin-right: 25px;
         background: rgba(255, 255, 255, 0.5);
         z-index: 13;
+    }
+
+    #background {
+        position: absolute;
+        top: 28%;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        background: var(--pokedex-red);
+        z-index: 3;
     }
 </style>
