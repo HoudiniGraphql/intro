@@ -44,6 +44,7 @@ nav a[disabled='true'] {
 	background-color: #3a3a3a;
 	border-top: none;
 	border-right: none;
+	color: #727272;
 }
 
 a[disabled='true'] {

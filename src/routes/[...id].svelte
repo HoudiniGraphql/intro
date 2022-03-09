@@ -48,8 +48,8 @@
 	</div>
 	<div slot="right">
 		<nav>
-			<a href={`/${$data.species.id - 1}`} disabled={$data.species.id <= 1}> previous </a>
-			<a href={`/${$data.species.id + 1}`} disabled={$data.species.id >= 151}> next </a>
+			<a href={$data.species.id - 1} disabled={$data.species.id <= 1}> previous </a>
+			<a href={$data.species.id + 1} disabled={$data.species.id >= 151}> next </a>
 		</nav>
 	</div>
 </Container>
