@@ -13,4 +13,39 @@
 
 #species-flavor_text {
 	font-size: 20px;
+	height: 3em;
+}
+
+nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+nav a {
+	width: 45%;
+	height: 40px;
+	background-color: black;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	text-decoration: none;
+
+	border-top: 2px solid #3a3a3a;
+	border-right: 2px solid #3a3a3a;
+	color: white;
+	font-family: 'VT323';
+	box-sizing: border-box;
+}
+
+nav a[disabled='true'] {
+	background-color: #3a3a3a;
+	border-top: none;
+	border-right: none;
+}
+
+a[disabled='true'] {
+	pointer-events: none;
 }

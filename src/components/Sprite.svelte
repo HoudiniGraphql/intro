@@ -1,9 +1,10 @@
 <script>
     export let src
     export let speciesName
+    export let id = ""
 </script>
 
-<div id={$$props.id}>
+<div id={id}>
     <img height="100%" src={src} alt={`${speciesName} sprite`}/>
 </div>
 
