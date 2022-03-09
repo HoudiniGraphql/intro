@@ -1,2 +1,1 @@
-
- export { default as SpeciesInfo} from './SpeciesInfo'
+export { default as SpeciesInfo } from './SpeciesInfo';
