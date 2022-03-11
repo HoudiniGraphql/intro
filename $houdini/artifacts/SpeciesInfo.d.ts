@@ -7,6 +7,7 @@ export type SpeciesInfo$result = {
     readonly species: {
         readonly name: string,
         readonly flavor_text: string,
+        readonly favorite: boolean,
         readonly evolution_chain: ({
             readonly $fragments: {
                 SpeciesPreview: true

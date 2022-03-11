@@ -1,12 +1,13 @@
 <script>
 	import { Panel, Container, Display, Sprite, SpeciesPreview, SpeciesPreviewPlaceholder, Icon } from '~/components';
-	import { query, graphql } from '$houdini';
+	import { query, graphql, mutation } from '$houdini';
 
 	const { data } = query(graphql`
 		query SpeciesInfo($id: Int!) {
 			species(id: $id) {
 				name
 				flavor_text
+				favorite
 				evolution_chain {
 					...SpeciesPreview
 				}
@@ -15,7 +16,16 @@
 		}
 	`);
 
-
+	const toggleFavorite = mutation(graphql`
+		mutation ToggleFavorite($id: Int!) { 
+			toggleFavorite(id: $id) { 
+				species { 
+					id
+					favorite
+				}
+			}
+		}
+	`)
 </script>
 
 <script context="module">
@@ -46,8 +56,12 @@
 		<Display id="species-flavor_text">
 			{$data.species.flavor_text}
 		</Display>
-		<button id="favorite" class="interaction-point">
-			<Icon name="star" fill="lightgrey" id="favorite-star" />
+		<button id="favorite" on:click={() => toggleFavorite({id: $data.species.id})}>
+			<Icon
+				name="star"
+				id="favorite-star"
+				fill={$data.species.favorite ? "gold" :"lightgrey"}
+			/>
 		</button>
 	</Panel>
 	<Panel slot="right">

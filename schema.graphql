@@ -10,6 +10,7 @@ type Species {
 	name: String!
 	flavor_text: String!
 	base_stats: Map!
+	favorite: Boolean!
 	evolution_chain: [Species!]!
 	moves(first: Int, after: String): SpeciesMoveConnection!
 	types: [Type!]!
@@ -82,4 +83,12 @@ type PageInfo {
 	hasNextPage: Boolean!
 	hasPreviousPage: Boolean!
 	startCursor: String
+}
+
+type Mutation {
+	toggleFavorite(id: Int!): ToggleFavoriteOutput
+}
+
+type ToggleFavoriteOutput {
+	species: Species
 }

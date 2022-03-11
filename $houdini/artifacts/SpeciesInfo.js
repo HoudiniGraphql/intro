@@ -1,12 +1,13 @@
 export default {
     name: "SpeciesInfo",
     kind: "HoudiniQuery",
-    hash: "5ec78607485aacb872fd6a669f63a8344c4e34b197c9564980343e96c1e1f0a8",
+    hash: "2edfc10f9f431228d83bad434566bb62fde38c8804cae61149d769bb05269cdf",
 
     raw: `query SpeciesInfo($id: Int!) {
   species(id: $id) {
     name
     flavor_text
+    favorite
     evolution_chain {
       ...SpeciesPreview
       id
@@ -46,6 +47,11 @@ fragment SpriteInfo on Species {
                 flavor_text: {
                     type: "String",
                     keyRaw: "flavor_text"
+                },
+
+                favorite: {
+                    type: "Boolean",
+                    keyRaw: "favorite"
                 },
 
                 evolution_chain: {

@@ -20,6 +20,7 @@ const typeDefs = gql`
 		name: String!
 		flavor_text: String!
 		base_stats: Map!
+		favorite: Boolean!
 		evolution_chain: [Species!]!
 		moves(first: Int, after: String): SpeciesMoveConnection!
 		types: [Type!]!
@@ -93,6 +94,14 @@ const typeDefs = gql`
 		hasPreviousPage: Boolean!
 		startCursor: String
 	}
+
+	type Mutation {
+		toggleFavorite(id: Int!): ToggleFavoriteOutput
+	}
+
+	type ToggleFavoriteOutput {
+		species: Species
+	}
 `;
 
 const resolvers = {
@@ -107,14 +116,30 @@ const resolvers = {
 			return connection;
 		}
 	},
+	Mutation: {
+		toggleFavorite(_, { id }) {
+			// invert the favorite field of the species in question
+			const species = data.species[id - 1];
+			species.favorite = !species.favorite;
+
+			return {
+				species
+			};
+		}
+	},
 	Species: {
-		name: ({ name }) => {
+		name({ name }) {
 			return name.charAt(0).toUpperCase() + name.slice(1);
 		},
-		types: ({ types }) => {
+		types({ types }) {
 			return types.map((type) => type.charAt(0).toUpperCase() + type.slice(1));
 		},
-		evolution_chain: ({ evo_chain }) => evo_chain.map((id) => data.species[id - 1]),
+		favorite({ favorite }) {
+			return Boolean(favorite);
+		},
+		evolution_chain({ evo_chain }) {
+			return evo_chain.map((id) => data.species[id - 1]);
+		},
 		moves({ moves }, args) {
 			const connection = connectionFromArray(
 				moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })),
