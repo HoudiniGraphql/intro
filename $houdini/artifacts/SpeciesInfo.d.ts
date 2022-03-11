@@ -1,19 +1,23 @@
 export type SpeciesInfo = {
-	readonly input: SpeciesInfo$input;
-	readonly result: SpeciesInfo$result;
+    readonly "input": SpeciesInfo$input,
+    readonly "result": SpeciesInfo$result | undefined
 };
 
 export type SpeciesInfo$result = {
-	readonly species: {
-		readonly name: string;
-		readonly flavor_text: string;
-		readonly sprites: {
-			readonly front: string;
-			readonly back: string;
-		};
-	} | null;
+    readonly species: {
+        readonly name: string,
+        readonly flavor_text: string,
+        readonly evolution_chain: ({
+            readonly $fragments: {
+                SpeciesPreview: true
+            }
+        })[],
+        readonly $fragments: {
+            SpriteInfo: true
+        }
+    } | null
 };
 
 export type SpeciesInfo$input = {
-	id: number;
+    id: number
 };

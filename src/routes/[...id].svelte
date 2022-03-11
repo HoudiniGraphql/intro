@@ -1,3 +1,23 @@
+<script>
+	import { Container, Display, Sprite, SpeciesPreview, SpeciesPreviewPlaceholder } from '~/components';
+	import { query, graphql } from '$houdini';
+
+	const { data } = query(graphql`
+		query SpeciesInfo($id: Int!) {
+			species(id: $id) {
+				name
+				flavor_text
+				evolution_chain {
+					...SpeciesPreview
+				}
+				...SpriteInfo
+			}
+		}
+	`);
+
+
+</script>
+
 <script context="module">
 	export function SpeciesInfoVariables({ params }) {
 		// if we were given an id, convert the string to a number
@@ -14,24 +34,6 @@
 	}
 </script>
 
-<script>
-	import { Container, Display, Sprite } from '~/components';
-	import { query, graphql } from '$houdini';
-
-	const { data } = query(graphql`
-		query SpeciesInfo($id: Int!) {
-			species(id: $id) {
-				name
-				flavor_text
-				sprites {
-					front
-					back
-				}
-			}
-		}
-	`);
-</script>
-
 <Container>
 	<div slot="left">
 		<Display id="species-display">
@@ -39,14 +41,22 @@
 		</Display>
 		<Sprite
 			id="species-sprite"
-			src={$data.species.sprites.front}
-			speciesName={$data.species.name}
+			species={$data.species}
 		/>
 		<Display id="species-flavor_text">
 			{$data.species.flavor_text}
 		</Display>
 	</div>
 	<div slot="right">
+		<div id="species-evolution-chain">
+			{#each $data.species.evolution_chain as form, i }
+				<SpeciesPreview species={form} number={i + 1} />
+			{/each}
+			<!-- if there are less than three species in the chain, leave a placeholder behind -->
+			{#each Array.from({length: 3 - $data.species.evolution_chain?.length}) as _, i}
+				<SpeciesPreviewPlaceholder number={$data.species.evolution_chain.length + i + 1} />
+			{/each}
+		</div>
 		<nav>
 			<a href={$data.species.id - 1} disabled={$data.species.id <= 1}> previous </a>
 			<a href={$data.species.id + 1} disabled={$data.species.id >= 151}> next </a>

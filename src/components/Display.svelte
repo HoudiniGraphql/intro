@@ -9,5 +9,6 @@
 		border-radius: 3px;
 		font-family: 'VT323';
 		border: inset #879a65 3px;
+		color: black;
 	}
 </style>

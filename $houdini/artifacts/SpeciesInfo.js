@@ -1,71 +1,109 @@
 export default {
-	name: 'SpeciesInfo',
-	kind: 'HoudiniQuery',
-	hash: '2e8505424d03eb097ae5d95180c5c9a52b3254eb10de7839b376a90de6605d9e',
+    name: "SpeciesInfo",
+    kind: "HoudiniQuery",
+    hash: "5ec78607485aacb872fd6a669f63a8344c4e34b197c9564980343e96c1e1f0a8",
 
-	raw: `query SpeciesInfo($id: Int!) {
+    raw: `query SpeciesInfo($id: Int!) {
   species(id: $id) {
     name
     flavor_text
-    sprites {
-      front
-      back
+    evolution_chain {
+      ...SpeciesPreview
+      id
     }
+    ...SpriteInfo
     id
+  }
+}
+
+fragment SpeciesPreview on Species {
+  name
+  id
+  ...SpriteInfo
+}
+
+fragment SpriteInfo on Species {
+  name
+  sprites {
+    front
   }
 }
 `,
 
-	rootType: 'Query',
+    rootType: "Query",
 
-	selection: {
-		species: {
-			type: 'Species',
-			keyRaw: 'species(id: $id)',
+    selection: {
+        species: {
+            type: "Species",
+            keyRaw: "species(id: $id)",
 
-			fields: {
-				name: {
-					type: 'String',
-					keyRaw: 'name'
-				},
+            fields: {
+                name: {
+                    type: "String",
+                    keyRaw: "name"
+                },
 
-				flavor_text: {
-					type: 'String',
-					keyRaw: 'flavor_text'
-				},
+                flavor_text: {
+                    type: "String",
+                    keyRaw: "flavor_text"
+                },
 
-				sprites: {
-					type: 'SpeciesSprites',
-					keyRaw: 'sprites',
+                evolution_chain: {
+                    type: "Species",
+                    keyRaw: "evolution_chain",
 
-					fields: {
-						front: {
-							type: 'String',
-							keyRaw: 'front'
-						},
+                    fields: {
+                        name: {
+                            type: "String",
+                            keyRaw: "name"
+                        },
 
-						back: {
-							type: 'String',
-							keyRaw: 'back'
-						}
-					}
-				},
+                        id: {
+                            type: "Int",
+                            keyRaw: "id"
+                        },
 
-				id: {
-					type: 'Int',
-					keyRaw: 'id'
-				}
-			}
-		}
-	},
+                        sprites: {
+                            type: "SpeciesSprites",
+                            keyRaw: "sprites",
 
-	input: {
-		fields: {
-			id: 'Int'
-		},
+                            fields: {
+                                front: {
+                                    type: "String",
+                                    keyRaw: "front"
+                                }
+                            }
+                        }
+                    }
+                },
 
-		types: {}
-	},
+                sprites: {
+                    type: "SpeciesSprites",
+                    keyRaw: "sprites",
 
-	policy: 'NetworkOnly'
+                    fields: {
+                        front: {
+                            type: "String",
+                            keyRaw: "front"
+                        }
+                    }
+                },
+
+                id: {
+                    type: "Int",
+                    keyRaw: "id"
+                }
+            }
+        }
+    },
+
+    input: {
+        fields: {
+            id: "Int"
+        },
+
+        types: {}
+    },
+
+    policy: "NetworkOnly"
 };

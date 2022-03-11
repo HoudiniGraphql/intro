@@ -1,6 +1,7 @@
 import { GraphQLTagResult } from './types';
 export * from './network';
 export * from './types';
+export * from './proxy';
 export { query, routeQuery, componentQuery } from './query';
 export { mutation } from './mutation';
 export { fragment } from './fragment';
