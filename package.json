@@ -1,15 +1,16 @@
 {
-	"name": "starterproject",
+	"name": "houdini-intro",
 	"version": "0.0.1",
 	"scripts": {
 		"server": "node api.cjs",
-		"dev": "svelte-kit dev",
+		"web": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-		"generate": "houdini generate"
+		"generate": "houdini generate",
+		"dev": "concurrently \"npm run web\" \"npm run server\""
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
@@ -24,7 +25,8 @@
 		"node-fetch": "^3.2.1",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
-		"svelte": "^3.44.0"
+		"svelte": "^3.44.0",
+		"concurrently": "^7.0.0"
 	},
 	"type": "module"
 }
