@@ -9,7 +9,6 @@ export function fragment(fragment, initialValue) {
     const store = writable(initialValue);
     // make sure the store always stays up to date with the fragment value
     fragment.proxy.listen((val) => {
-        console.log('new value');
         // update the fragment value to match the new value
         store.set(val);
     });

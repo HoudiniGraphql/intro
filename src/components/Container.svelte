@@ -66,13 +66,6 @@
 		background-color: var(--pokedex-red);
 	}
 
-	:global(#left-panel > div) {
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-		height: 100%;
-	}
-
 	#divider {
 		height: calc(90% + 23px);
 		display: flex;
@@ -124,6 +117,8 @@
 
 	.panel {
 		z-index: 10;
+		display: flex;
+		flex-direction: column;
 	}
 
 	#divider > * {

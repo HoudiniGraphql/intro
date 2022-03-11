@@ -1,5 +1,5 @@
 <script>
-	import { Container, Display, Sprite, SpeciesPreview, SpeciesPreviewPlaceholder } from '~/components';
+	import { Panel, Container, Display, Sprite, SpeciesPreview, SpeciesPreviewPlaceholder, Icon } from '~/components';
 	import { query, graphql } from '$houdini';
 
 	const { data } = query(graphql`
@@ -35,7 +35,7 @@
 </script>
 
 <Container>
-	<div slot="left">
+	<Panel slot="left">
 		<Display id="species-display">
 			{$data.species.name}
 		</Display>
@@ -46,8 +46,11 @@
 		<Display id="species-flavor_text">
 			{$data.species.flavor_text}
 		</Display>
-	</div>
-	<div slot="right">
+		<button id="favorite" class="interaction-point">
+			<Icon name="star" fill="lightgrey" id="favorite-star" />
+		</button>
+	</Panel>
+	<Panel slot="right">
 		<div id="species-evolution-chain">
 			{#each $data.species.evolution_chain as form, i }
 				<SpeciesPreview species={form} number={i + 1} />
@@ -61,5 +64,5 @@
 			<a href={$data.species.id - 1} disabled={$data.species.id <= 1}> previous </a>
 			<a href={$data.species.id + 1} disabled={$data.species.id >= 151}> next </a>
 		</nav>
-	</div>
+	</Panel>
 </Container>

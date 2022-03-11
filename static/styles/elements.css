@@ -81,3 +81,24 @@ a[disabled='true'] {
 a {
 	text-decoration: none;
 }
+
+#favorite {
+	position: absolute;
+	top: 10%;
+	right: 54.5%;
+}
+
+.interaction-point {
+	background: none;
+	display: inline-block;
+	border: none;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+}
+
+#favorite-star {
+	height: 50px !important;
+	width: 50px !important;
+	stroke-width: 1px;
+}
