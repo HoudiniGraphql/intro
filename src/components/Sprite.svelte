@@ -13,7 +13,7 @@
 	`, species)
 </script>
 
-<div id={$$props.id} class="sprite">
+<div id={$$props.id} class={`sprite ${$$props.class}`}>
 	<img 
 		height="100%" 
 		src={$data.sprites.front} 

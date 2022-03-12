@@ -17,9 +17,16 @@
 
 <a href={$data.id}>
     <Number value={number} />
-    <Sprite species={species} />
+    <Sprite species={species} class="preview-sprite" />
     <Display>
         {$data.name}
     </Display>
 </a>
+
+<style>
+    :global(.preview-sprite) {
+        height: 102px;
+        width: 102px;
+    }
+</style>
 

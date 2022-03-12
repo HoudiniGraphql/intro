@@ -25,7 +25,6 @@
         align-items: center;
         width: 102px;
         height: 102px;
-
     }
 
     .poke-ball { 
