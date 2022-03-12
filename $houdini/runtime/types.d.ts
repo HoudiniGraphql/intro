@@ -100,7 +100,7 @@ export declare enum DataSource {
     Network = "network"
 }
 export declare type MutationOperation = {
-    action: 'insert' | 'remove' | 'delete';
+    action: 'insert' | 'remove' | 'delete' | 'toggle';
     list?: string;
     type?: string;
     parentID?: {

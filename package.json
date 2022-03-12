@@ -21,8 +21,8 @@
 		"graphql": "^16.3.0",
 		"graphql-relay": "^0.10.0",
 		"graphql-tag": "^2.12.6",
-		"houdini": "^0.13.0-alpha.1",
-		"houdini-preprocess": "^0.13.0-alpha.1",
+		"houdini": "^0.13.0-alpha.3",
+		"houdini-preprocess": "^0.13.0-alpha.2",
 		"node-fetch": "^3.2.1",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"feather-icons": "^4.28.0"
+		"feather-icons": "^4.28.0",
+		"houdini-common": "^0.13.0-alpha.2"
 	}
 }

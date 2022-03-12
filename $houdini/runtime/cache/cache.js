@@ -334,7 +334,7 @@ class CacheInternal {
                 // if there was a change in the list
                 if (contentChanged || (oldIDs.length === 0 && newIDs.length === 0)) {
                     // update the cached value
-                    layer.writeField(parent, key, linkedIDs);
+                    layer.writeLink(parent, key, linkedIDs);
                 }
             }
             // handle any operations relative to this node
@@ -377,7 +377,7 @@ class CacheInternal {
                             .when(operation.when)
                             .remove(target, variables);
                     }
-                    // delete the operation if we have to
+                    // delete the target if we have to
                     else if (operation.action === 'delete' && operation.type) {
                         if (typeof target !== 'string') {
                             throw new Error('Cannot delete a record with a non-string ID');
@@ -387,6 +387,16 @@ class CacheInternal {
                             continue;
                         }
                         this.cache.delete(targetID);
+                    }
+                    // the toggle operation
+                    else if (operation.action === 'toggle' &&
+                        target instanceof Object &&
+                        fields &&
+                        operation.list) {
+                        this.cache
+                            .list(operation.list, parentID)
+                            .when(operation.when)
+                            .toggleElement(fields, target, variables, operation.position || 'last');
                     }
                 }
             }

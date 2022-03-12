@@ -1,14 +1,29 @@
 export default {
     name: "ToggleFavorite",
     kind: "HoudiniMutation",
-    hash: "050518647715410b1a5b013046380888e356ec17b0afe3970c04bf5169f8737e",
+    hash: "2d03c0b021898c8114b2befcdf8ec838936105a8af0fc484adf59f87210c39b2",
 
     raw: `mutation ToggleFavorite($id: Int!) {
   toggleFavorite(id: $id) {
     species {
       id
       favorite
+      ...FavoriteSpecies_toggle
     }
+  }
+}
+
+fragment FavoriteSpecies_toggle on Species {
+  ...FavoritePreview
+  id
+  id
+}
+
+fragment FavoritePreview on Species {
+  id
+  name
+  sprites {
+    front
   }
 }
 `,
@@ -25,6 +40,12 @@ export default {
                     type: "Species",
                     keyRaw: "species",
 
+                    operations: [{
+                        action: "toggle",
+                        list: "FavoriteSpecies",
+                        position: "last"
+                    }],
+
                     fields: {
                         id: {
                             type: "Int",
@@ -34,6 +55,23 @@ export default {
                         favorite: {
                             type: "Boolean",
                             keyRaw: "favorite"
+                        },
+
+                        name: {
+                            type: "String",
+                            keyRaw: "name"
+                        },
+
+                        sprites: {
+                            type: "SpeciesSprites",
+                            keyRaw: "sprites",
+
+                            fields: {
+                                front: {
+                                    type: "String",
+                                    keyRaw: "front"
+                                }
+                            }
                         }
                     }
                 }

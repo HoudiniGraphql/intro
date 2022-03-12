@@ -39,8 +39,9 @@ export declare class List {
     append(selection: SubscriptionSelection, data: {}, variables?: {}): void;
     prepend(selection: SubscriptionSelection, data: {}, variables?: {}): void;
     addToList(selection: SubscriptionSelection, data: {}, variables: {}, where: 'first' | 'last'): void;
-    removeID(id: string, variables?: {}): void;
-    remove(data: {}, variables?: {}): void;
+    removeID(id: string, variables?: {}): boolean;
+    remove(data: {}, variables?: {}): boolean;
     private validateWhen;
+    toggleElement(selection: SubscriptionSelection, data: {}, variables: {}, where: 'first' | 'last'): void;
     [Symbol.iterator](): Generator<string, void, unknown>;
 }

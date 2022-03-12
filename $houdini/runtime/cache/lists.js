@@ -195,7 +195,7 @@ export class List {
         // if the id is not contained in the list, dont notify anyone
         const value = this.cache._internal_unstable.storage.get(parentID, targetKey)
             .value;
-        if (!value.includes(targetID)) {
+        if (!value || !value.includes(targetID)) {
             return;
         }
         // get the list of specs that are subscribing to the list
@@ -220,6 +220,8 @@ export class List {
         if (this.connection) {
             this.cache._internal_unstable.storage.delete(targetID);
         }
+        // return true if we deleted something
+        return true;
     }
     remove(data, variables = {}) {
         const targetID = this.cache._internal_unstable.id(this.listType, data);
@@ -227,7 +229,7 @@ export class List {
             return;
         }
         // figure out the id of the type we are adding
-        this.removeID(targetID, variables);
+        return this.removeID(targetID, variables);
     }
     validateWhen() {
         // if this when doesn't apply, we should look at others to see if we should update those behind the scenes
@@ -248,6 +250,12 @@ export class List {
             }
         }
         return ok;
+    }
+    toggleElement(selection, data, variables = {}, where) {
+        // if we dont have something to remove, then add it instead
+        if (!this.remove(data, variables)) {
+            this.addToList(selection, data, variables, where);
+        }
     }
     // iterating over the list handler should be the same as iterating over
     // the underlying linked list

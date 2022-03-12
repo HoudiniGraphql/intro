@@ -1,5 +1,15 @@
 <script>
-	import { Panel, Container, Display, Sprite, SpeciesPreview, SpeciesPreviewPlaceholder, Icon } from '~/components';
+	import { 
+		Panel, 
+		Container, 
+		Display, 
+		Sprite, 
+		SpeciesPreview, 
+		SpeciesPreviewPlaceholder, 
+		Icon, 
+		FavoritesContainer,
+		FavoritePreview
+	} from '~/components';
 	import { query, graphql, mutation } from '$houdini';
 
 	const { data } = query(graphql`
@@ -16,16 +26,27 @@
 		}
 	`);
 
+    // this is a second query in the same route
+    const { data: favoriteData } = query(graphql`
+        query Favorites {
+            favorites @list(name:"FavoriteSpecies"){
+				...FavoritePreview
+            }
+        }
+    `)
+
 	const toggleFavorite = mutation(graphql`
 		mutation ToggleFavorite($id: Int!) { 
 			toggleFavorite(id: $id) { 
 				species { 
 					id
 					favorite
+					...FavoriteSpecies_toggle 
 				}
 			}
 		}
 	`)
+
 </script>
 
 <script context="module">
@@ -43,6 +64,16 @@
 		};
 	}
 </script>
+
+<FavoritesContainer>
+	{#each $favoriteData.favorites as favorite} 
+		<FavoritePreview species={favorite} />
+	{:else}
+		<p>
+			No Favorites Selected
+		</p>
+	{/each}
+</FavoritesContainer>
 
 <Container>
 	<Panel slot="left">

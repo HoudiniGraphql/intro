@@ -3,6 +3,7 @@ scalar Map
 type Query {
 	pokemon(first: Int, after: String): SpeciesConnection!
 	species(id: Int!): Species
+	favorites: [Species!]!
 }
 
 type Species {

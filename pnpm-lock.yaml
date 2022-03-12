@@ -10,8 +10,9 @@ specifiers:
   graphql: ^16.3.0
   graphql-relay: ^0.10.0
   graphql-tag: ^2.12.6
-  houdini: ^0.13.0-alpha.1
-  houdini-preprocess: ^0.13.0-alpha.1
+  houdini: ^0.13.0-alpha.3
+  houdini-common: ^0.13.0-alpha.2
+  houdini-preprocess: ^0.13.0-alpha.2
   node-fetch: ^3.2.1
   prettier: ^2.5.1
   prettier-plugin-svelte: ^2.5.0
@@ -19,6 +20,7 @@ specifiers:
 
 dependencies:
   feather-icons: 4.28.0
+  houdini-common: 0.13.0-alpha.2_graphql@16.3.0
 
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.31
@@ -29,8 +31,8 @@ devDependencies:
   graphql: 16.3.0
   graphql-relay: 0.10.0_graphql@16.3.0
   graphql-tag: 2.12.6_graphql@16.3.0
-  houdini: 0.13.0-alpha.1
-  houdini-preprocess: 0.13.0-alpha.1
+  houdini: 0.13.0-alpha.3
+  houdini-preprocess: 0.13.0-alpha.2
   node-fetch: 3.2.1
   prettier: 2.5.1
   prettier-plugin-svelte: 2.6.0_prettier@2.5.1+svelte@3.46.4
@@ -73,7 +75,6 @@ packages:
     resolution: {integrity: sha512-7yJPvPV+ESz2IUTPbOL+YkIGyCqOyNIzdguKQuJGnH7bg1WTIifuM21YqokFt/THWh1AkCRn9IgoykTRCBVpzA==}
     engines: {node: '>=6.0.0'}
     hasBin: true
-    dev: true
 
   /@graphql-tools/merge/6.2.17_graphql@15.8.0:
     resolution: {integrity: sha512-G5YrOew39fZf16VIrc49q3c8dBqQDD0ax5LYPiNja00xsXDi0T9zsEWVt06ApjtSdSF6HDddlu5S12QjeN8Tow==}
@@ -1191,16 +1192,6 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /houdini-common/0.12.1_graphql@15.5.0:
-    resolution: {integrity: sha512-KnNibwAFBszbx5LrFkEeZyENVcXu/SZ5Pp55RIFfTqxZXm2XmgvXQy+gHtjwjylbMH9fUQplvsUYZ7fySV2dnA==}
-    peerDependencies:
-      graphql: ^15.x
-    dependencies:
-      '@babel/parser': 7.17.3
-      graphql: 15.5.0
-      mkdirp: 1.0.4
-    dev: true
-
   /houdini-common/0.12.1_graphql@15.8.0:
     resolution: {integrity: sha512-KnNibwAFBszbx5LrFkEeZyENVcXu/SZ5Pp55RIFfTqxZXm2XmgvXQy+gHtjwjylbMH9fUQplvsUYZ7fySV2dnA==}
     peerDependencies:
@@ -1211,15 +1202,45 @@ packages:
       mkdirp: 1.0.4
     dev: true
 
-  /houdini-preprocess/0.13.0-alpha.1:
-    resolution: {integrity: sha512-HkXzevOTfB8y3mx86t/2sm34FXoIWlLAFduLBSmwT/xi9/pzdlEudyyfBXW50dVLw2+QEGy1ZYZix7l0C/CCnQ==}
+  /houdini-common/0.13.0-alpha.2_graphql@15.5.0:
+    resolution: {integrity: sha512-aDzqzPs5k/cn+kDigmMrRSXT35AfjXViYSgUQ+NdAsNg7vYSLDjuLeM52uPwz7o2XU8D2OudxA7uBtHjHLWl+Q==}
+    peerDependencies:
+      graphql: ^15.x
+    dependencies:
+      '@babel/parser': 7.17.3
+      graphql: 15.5.0
+      mkdirp: 1.0.4
+    dev: true
+
+  /houdini-common/0.13.0-alpha.2_graphql@15.8.0:
+    resolution: {integrity: sha512-aDzqzPs5k/cn+kDigmMrRSXT35AfjXViYSgUQ+NdAsNg7vYSLDjuLeM52uPwz7o2XU8D2OudxA7uBtHjHLWl+Q==}
+    peerDependencies:
+      graphql: ^15.x
+    dependencies:
+      '@babel/parser': 7.17.3
+      graphql: 15.8.0
+      mkdirp: 1.0.4
+    dev: true
+
+  /houdini-common/0.13.0-alpha.2_graphql@16.3.0:
+    resolution: {integrity: sha512-aDzqzPs5k/cn+kDigmMrRSXT35AfjXViYSgUQ+NdAsNg7vYSLDjuLeM52uPwz7o2XU8D2OudxA7uBtHjHLWl+Q==}
+    peerDependencies:
+      graphql: ^15.x
+    dependencies:
+      '@babel/parser': 7.17.3
+      graphql: 16.3.0
+      mkdirp: 1.0.4
+    dev: false
+
+  /houdini-preprocess/0.13.0-alpha.2:
+    resolution: {integrity: sha512-3UunbcAjLob67BKXcxnM255edA6gTIwrRYBTbMFP2QnqoU1NO+rqr825dQWzyNVj34h32oZYXLcyQoHLDQD29g==}
     dependencies:
       '@types/mkdirp': 1.0.2
       babylon: 7.0.0-beta.47
       estree-walker: 2.0.2
       graphql: 15.5.0
       houdini: 0.12.4
-      houdini-common: 0.12.1_graphql@15.5.0
+      houdini-common: 0.13.0-alpha.2_graphql@15.5.0
       mkdirp: 1.0.4
       prettier: 2.5.1
       prettier-plugin-svelte: 2.6.0_prettier@2.5.1+svelte@3.46.4
@@ -1254,8 +1275,8 @@ packages:
       - rollup
     dev: true
 
-  /houdini/0.13.0-alpha.1:
-    resolution: {integrity: sha512-BYLdDGnW8G56prj/Fj8F7EifZpRt5pKDVuyJEwAKK8QQcMWXpvYVZMrT85EtW7CW1jpMGJbPQogOMGXhFxo9lg==}
+  /houdini/0.13.0-alpha.3:
+    resolution: {integrity: sha512-gV1vUmcWsRoNhexURH6Ht4LYyitKwqtFiqH9pVAIo0VXsFzvGYioRuWZsRsEsPvkj0ev4c8rnhtCM4MRQ+21YQ==}
     engines: {node: '>=14.13'}
     hasBin: true
     dependencies:
@@ -1266,7 +1287,7 @@ packages:
       estree-walker: 2.0.2
       glob: 7.2.0
       graphql: 15.8.0
-      houdini-common: 0.12.1_graphql@15.8.0
+      houdini-common: 0.13.0-alpha.2_graphql@15.8.0
       inquirer: 7.3.3
       mkdirp: 1.0.4
       node-fetch: 2.6.7
@@ -1424,7 +1445,6 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
-    dev: true
 
   /mri/1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}

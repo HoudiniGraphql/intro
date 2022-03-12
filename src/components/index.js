@@ -5,3 +5,5 @@ export { default as SpeciesPreview } from './SpeciesPreview.svelte';
 export { default as SpeciesPreviewPlaceholder } from './SpeciesPreviewPlaceholder.svelte';
 export { default as Icon } from './Icon.svelte';
 export { default as Panel } from './Panel.svelte';
+export { default as FavoritePreview } from './FavoritePreview.svelte';
+export { default as FavoritesContainer } from './FavoritesContainer.svelte';

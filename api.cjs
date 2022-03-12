@@ -13,6 +13,7 @@ const typeDefs = gql`
 	type Query {
 		pokemon(first: Int, after: String): SpeciesConnection!
 		species(id: Int!): Species
+		favorites: [Species!]!
 	}
 
 	type Species {
@@ -104,6 +105,9 @@ const typeDefs = gql`
 	}
 `;
 
+// the list of favorites
+const favorites = [];
+
 const resolvers = {
 	Query: {
 		species(_, { id }) {
@@ -114,16 +118,23 @@ const resolvers = {
 			connection.totalCount = data.species.length;
 
 			return connection;
+		},
+		favorites() {
+			return favorites.map((id) => data.species[id - 1]);
 		}
 	},
 	Mutation: {
 		toggleFavorite(_, { id }) {
-			// invert the favorite field of the species in question
-			const species = data.species[id - 1];
-			species.favorite = !species.favorite;
+			// if the id is in the list of favorites, remove it
+			if (favorites.includes(id)) {
+				favorites.splice(favorites.indexOf(id), 1);
+			} else {
+				favorites.push(id);
+			}
 
+			// invert the favorite field of the species in question
 			return {
-				species
+				species: data.species[id - 1]
 			};
 		}
 	},
@@ -134,8 +145,8 @@ const resolvers = {
 		types({ types }) {
 			return types.map((type) => type.charAt(0).toUpperCase() + type.slice(1));
 		},
-		favorite({ favorite }) {
-			return Boolean(favorite);
+		favorite({ id }) {
+			return favorites.includes(id);
 		},
 		evolution_chain({ evo_chain }) {
 			return evo_chain.map((id) => data.species[id - 1]);
