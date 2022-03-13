@@ -6,7 +6,6 @@ export type ToggleFavorite = {
 export type ToggleFavorite$result = {
     readonly toggleFavorite: {
         readonly species: {
-            readonly id: number,
             readonly favorite: boolean,
             readonly $fragments: {
                 FavoriteSpecies_toggle: true

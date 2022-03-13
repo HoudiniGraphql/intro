@@ -8,11 +8,14 @@
 		SpeciesPreviewPlaceholder, 
 		Icon, 
 		FavoritesContainer,
-		FavoritePreview
+		FavoritePreview,
+		MoveDisplay,
+		UpButton,
+		DownButton
 	} from '~/components';
-	import { query, graphql, mutation } from '$houdini';
+	import { query, paginatedQuery, graphql, mutation } from '$houdini';
 
-	const { data } = query(graphql`
+	const { data, loadNextPage, pageInfo } = paginatedQuery(graphql`
 		query SpeciesInfo($id: Int!) {
 			species(id: $id) {
 				name
@@ -20,6 +23,13 @@
 				favorite
 				evolution_chain {
 					...SpeciesPreview
+				}
+				moves(first: 1) @paginate { 
+					edges { 
+						node { 
+							...MoveDisplay
+						}
+					}
 				}
 				...SpriteInfo
 			}
@@ -39,7 +49,6 @@
 		mutation ToggleFavorite($id: Int!) { 
 			toggleFavorite(id: $id) { 
 				species { 
-					id
 					favorite
 					...FavoriteSpecies_toggle 
 				}
@@ -47,6 +56,25 @@
 		}
 	`)
 
+	let moveIndex = 0
+	$: hasPrevMove = moveIndex > 0
+	$: hasNextMove = moveIndex < $data.species.moves.edges.length -1 || $pageInfo.hasNextPage
+	$: currentMove = $data.species.moves.edges[moveIndex].node
+
+    const loadNextMove = async () => {
+        // if we haven't already seen this page
+        if (!$data.species.moves.edges[moveIndex + 1] && $pageInfo.hasNextPage) {
+            // load the next page of data
+            await loadNextPage()
+        }
+
+		// its safe to increment the move index
+		moveIndex = moveIndex+ 1
+    }
+
+    const loadPrevMove = async () => {
+        moveIndex--
+    }
 </script>
 
 <script context="module">
@@ -77,8 +105,9 @@
 
 <Container>
 	<Panel slot="left">
-		<Display id="species-display">
+		<Display id="species-name">
 			{$data.species.name}
+			<span>no.{$data.species.id}</span>
 		</Display>
 		<Sprite
 			id="species-sprite"
@@ -104,6 +133,13 @@
 			{#each Array.from({length: 3 - $data.species.evolution_chain?.length}) as _, i}
 				<SpeciesPreviewPlaceholder number={$data.species.evolution_chain.length + i + 1} />
 			{/each}
+		</div>
+		<div id="move-summary">
+			<MoveDisplay move={currentMove} />
+			<div id="move-controls">
+				<UpButton disabled={!hasPrevMove} on:click={loadPrevMove} />
+				<DownButton disabled={!hasNextMove} on:click={loadNextMove} />
+			</div>
 		</div>
 		<nav>
 			<a href={$data.species.id - 1} disabled={$data.species.id <= 1}> previous </a>

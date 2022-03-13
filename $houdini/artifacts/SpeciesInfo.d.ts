@@ -13,6 +13,15 @@ export type SpeciesInfo$result = {
                 SpeciesPreview: true
             }
         })[],
+        readonly moves: {
+            readonly edges: ({
+                readonly node: {
+                    readonly $fragments: {
+                        MoveDisplay: true
+                    }
+                } | null
+            })[]
+        },
         readonly $fragments: {
             SpriteInfo: true
         }

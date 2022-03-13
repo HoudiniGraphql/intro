@@ -7,3 +7,6 @@ export { default as Icon } from './Icon.svelte';
 export { default as Panel } from './Panel.svelte';
 export { default as FavoritePreview } from './FavoritePreview.svelte';
 export { default as FavoritesContainer } from './FavoritesContainer.svelte';
+export { default as MoveDisplay } from './MoveDisplay.svelte';
+export { default as UpButton } from './UpButton.svelte';
+export { default as DownButton } from './DownButton.svelte';

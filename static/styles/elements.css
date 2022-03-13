@@ -1,9 +1,11 @@
-#species-display {
+#species-name {
 	font-size: 28px;
 	letter-spacing: 4px;
 	text-transform: capitalize;
 	height: 45px;
 	box-sizing: border-box;
+	display: flex;
+	justify-content: space-between;
 }
 
 #species-sprite {
@@ -75,7 +77,6 @@ a[disabled='true'] {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	margin-bottom: 20px;
 }
 
 a {
@@ -98,4 +99,47 @@ a {
 	height: 50px !important;
 	width: 50px !important;
 	stroke-width: 1px;
+}
+
+.arrow-button {
+	height: 40px;
+	width: 40px;
+	font-size: 37px;
+	border: groove grey 3px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-shadow: #e78181 -1px 1px;
+	cursor: pointer;
+	transform: rotate(60deg);
+	background: none;
+}
+
+.arrow-button svg {
+	transform: rotate(-60deg) !important;
+}
+
+#move-summary {
+	display: flex;
+	flex-direction: row;
+}
+
+#move-summary ~ nav {
+	position: absolute;
+	bottom: 18px;
+	left: 54%;
+	right: 20px;
+}
+
+#move-display {
+	flex-grow: 1;
+}
+
+#move-controls {
+	margin: 0 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 }

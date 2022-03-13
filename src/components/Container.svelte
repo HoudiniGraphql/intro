@@ -100,6 +100,9 @@
 		box-sizing: border-box;
 		margin-top: -30px;
 		border-bottom-right-radius: 5px;
+		display: flex;
+		flex-direction: column;
+		gap: 30px;
 	}
 
 	#right-panel *:not(#cap) {
