@@ -7,6 +7,7 @@
     const data = fragment(graphql`
         fragment MoveDisplay on SpeciesMove {
             learned_at
+            method
             move { 
                 name
                 accuracy
@@ -16,12 +17,49 @@
             }
         }
     `, move)
+    
+    const padValue = (val) => {
+        if (val ===null) {
+            return '..0'
+        }
+
+        return Array.from({length: 3 - val.toString().length}).map(() => '.').join('') + val
+    }
+
+    const padKey = (val) => { 
+        return val + Array.from({length: 8 - val.toString().length }).map(() => '.').join('') 
+    }
 </script>
 
+
 <Display id="move-display">
-    <h3>
-        {$data.move.name}
-    </h3>
+    <div>
+        <h3>
+            {$data.move.name}
+        </h3>
+        <div class="stat">
+            {padKey('Accuracy')}.....{padValue($data.move.accuracy)}
+        </div>
+        <div class="stat">
+            {padKey('Power')}.....{padValue($data.move.power)}
+        </div>
+        <div class="stat">
+            {padKey('PP')}.....{padValue($data.move.pp)}
+        </div>
+    </div>
+    <div class="right-column">
+         <div class="type-pill">
+            Type: {$data.move.type}
+         </div>
+         <div class="learn-data">
+            Learn: 
+            {#if $data.method === 'level-up'}
+                Lvl {$data.learned_at}
+            {:else}
+                TM
+            {/if}
+         </div>
+    </div>
 </Display>
 
 <style>
@@ -29,6 +67,9 @@
         position: relative;
         padding: 10px 20px;
         height: 80px;
+        flex-direction: row;
+        display: flex;
+        
     }
 
 
@@ -40,4 +81,29 @@
         display: inline-flex;
         padding: 0 4px;
     }
+
+    .type-pill { 
+        font-size: 18px;
+        text-transform: uppercase;
+        border: solid black 2px;
+        border-radius: 7px;
+        padding: 2px 10px;
+        text-align: center;
+    }
+
+    .right-column { 
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        flex-grow: 1;
+    }
+
+    .learn-data { 
+        margin-right: 10px;
+    }
+
+    .stat { 
+        margin-top: 3px;
+    }
+
 </style>

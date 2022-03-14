@@ -1,12 +1,17 @@
 export default {
     name: "MoveDisplay",
     kind: "HoudiniFragment",
-    hash: "7857de909b81e032bd8def5a6914078e68e1c9cde9c9cc5c1b78414331ce96b1",
+    hash: "f531d0b97e32bed7bf18ece292d7dd1e2305cf78b724b58447ace6ebc40147f9",
 
     raw: `fragment MoveDisplay on SpeciesMove {
   learned_at
+  method
   move {
     name
+    accuracy
+    power
+    pp
+    type
   }
 }
 `,
@@ -19,6 +24,11 @@ export default {
             keyRaw: "learned_at"
         },
 
+        method: {
+            type: "String",
+            keyRaw: "method"
+        },
+
         move: {
             type: "Move",
             keyRaw: "move",
@@ -27,6 +37,26 @@ export default {
                 name: {
                     type: "String",
                     keyRaw: "name"
+                },
+
+                accuracy: {
+                    type: "Int",
+                    keyRaw: "accuracy"
+                },
+
+                power: {
+                    type: "Int",
+                    keyRaw: "power"
+                },
+
+                pp: {
+                    type: "Int",
+                    keyRaw: "pp"
+                },
+
+                type: {
+                    type: "Type",
+                    keyRaw: "type"
                 }
             }
         }

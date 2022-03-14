@@ -1,7 +1,7 @@
 export default {
     name: "SpeciesInfo",
     kind: "HoudiniQuery",
-    hash: "b569cf055083bbfe8f63dd8e732e51140177dd214bfa05db16251802d8f07beb",
+    hash: "86448bb0334e9e6cafd1ae55c819c36834c4f836df9ad3666f4f948164e1b8fe",
 
     refetch: {
         update: "append",
@@ -52,8 +52,13 @@ fragment SpeciesPreview on Species {
 
 fragment MoveDisplay on SpeciesMove {
   learned_at
+  method
   move {
     name
+    accuracy
+    power
+    pp
+    type
   }
 }
 
@@ -147,6 +152,11 @@ fragment SpriteInfo on Species {
                                             keyRaw: "learned_at"
                                         },
 
+                                        method: {
+                                            type: "String",
+                                            keyRaw: "method"
+                                        },
+
                                         move: {
                                             type: "Move",
                                             keyRaw: "move",
@@ -155,6 +165,26 @@ fragment SpriteInfo on Species {
                                                 name: {
                                                     type: "String",
                                                     keyRaw: "name"
+                                                },
+
+                                                accuracy: {
+                                                    type: "Int",
+                                                    keyRaw: "accuracy"
+                                                },
+
+                                                power: {
+                                                    type: "Int",
+                                                    keyRaw: "power"
+                                                },
+
+                                                pp: {
+                                                    type: "Int",
+                                                    keyRaw: "pp"
+                                                },
+
+                                                type: {
+                                                    type: "Type",
+                                                    keyRaw: "type"
                                                 }
                                             }
                                         }

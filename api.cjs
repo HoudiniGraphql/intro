@@ -41,8 +41,8 @@ const typeDefs = gql`
 
 	type Move {
 		name: String!
-		power: Int!
-		accuracy: Int!
+		power: Int
+		accuracy: Int
 		pp: Int!
 		type: Type
 	}
@@ -138,6 +138,12 @@ const resolvers = {
 			};
 		}
 	},
+	Move: {
+		type({ type }) {
+			console.log(type[0].toUpperCase() + type.slice(1));
+			return type[0].toUpperCase() + type.slice(1);
+		}
+	},
 	Species: {
 		name({ name }) {
 			return name.charAt(0).toUpperCase() + name.slice(1);
@@ -152,6 +158,7 @@ const resolvers = {
 			return evo_chain.map((id) => data.species[id - 1]);
 		},
 		moves({ moves }, args) {
+			console.log(moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })));
 			const connection = connectionFromArray(
 				moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })),
 				args

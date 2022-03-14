@@ -31,8 +31,8 @@ type SpeciesMove {
 
 type Move {
 	name: String!
-	power: Int!
-	accuracy: Int!
+	power: Int
+	accuracy: Int
 	pp: Int!
 	type: Type
 }
