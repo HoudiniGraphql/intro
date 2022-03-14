@@ -78,8 +78,10 @@
         font-weight: normal;
         font-size: 24px;
         border-bottom: 2px solid black;
-        display: inline-flex;
         padding: 0 4px;
+        width: 103px;
+        text-align: center;
+        white-space: nowrap;
     }
 
     .type-pill { 
