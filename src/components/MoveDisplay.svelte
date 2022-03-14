@@ -9,6 +9,10 @@
             learned_at
             move { 
                 name
+                accuracy
+                power
+                pp
+                type
             }
         }
     `, move)
@@ -27,16 +31,13 @@
         height: 80px;
     }
 
-    h2 { 
-        font-weight: normal;
-        text-shadow: #e78181 -1px 1px;
-    }
 
     h3 { 
         margin: 0;
         font-weight: normal;
         font-size: 24px;
-        text-decoration: underline;
+        border-bottom: 2px solid black;
+        display: inline-flex;
+        padding: 0 4px;
     }
-    
 </style>

@@ -254,6 +254,7 @@ class CacheInternal {
                     variables: variables,
                     fields,
                     layer,
+                    startingWith: applyUpdates && update === 'append' ? oldIDs.length : 0,
                 });
                 // if we're supposed to apply this write as an update, we need to figure out how
                 if (applyUpdates && update) {
@@ -492,7 +493,7 @@ class CacheInternal {
             return this.getSelection({ parent: entry, selection: fields, variables });
         });
     }
-    extractNestedListIDs({ value, abstract, recordID, key, linkedType, fields, variables, applyUpdates, specs, layer, }) {
+    extractNestedListIDs({ value, abstract, recordID, key, linkedType, fields, variables, applyUpdates, specs, layer, startingWith, }) {
         var _a;
         // build up the two lists
         const nestedIDs = [];
@@ -513,6 +514,7 @@ class CacheInternal {
                     applyUpdates,
                     specs,
                     layer,
+                    startingWith,
                 });
                 // add the list of new ids to our list
                 newIDs.push(...inner.newIDs);
@@ -529,7 +531,7 @@ class CacheInternal {
             // we know now that entry is an object
             const entryObj = entry;
             // start off building up the embedded id
-            let linkedID = `${recordID}.${key}[${id++}]`;
+            let linkedID = `${recordID}.${key}[${startingWith + id++}]`;
             // figure out if this is an embedded list or a linked one by looking for all of the fields marked as
             // required to compute the entity's id
             const embedded = ((_a = this.idFields(linkedType)) === null || _a === void 0 ? void 0 : _a.filter((field) => typeof entry[field] === 'undefined').length) > 0;
@@ -552,23 +554,6 @@ class CacheInternal {
                 }
                 else {
                     continue;
-                }
-            }
-            // if the field is marked for pagination and we are looking at edges, we need
-            // to use the underlying node for the id because the embedded key will conflict
-            // with entries in the previous loaded value.
-            // NOTE: this approach might cause weird behavior of a node is loaded in the same
-            // location in two different pages. In practice, nodes rarely show up in the same
-            // connection so it might not be a problem.
-            if (key === 'edges' &&
-                entryObj.node &&
-                entryObj.node.__typename) {
-                const node = entryObj.node;
-                // @ts-ignore
-                const typename = node.__typename;
-                let nodeID = this.id(typename, node);
-                if (nodeID) {
-                    linkedID += '#' + nodeID;
                 }
             }
             // update the linked fields too

@@ -71,7 +71,7 @@ declare class CacheInternal {
         variables?: {};
         linkedList: LinkedList;
     }): LinkedList<GraphQLValue>;
-    extractNestedListIDs({ value, abstract, recordID, key, linkedType, fields, variables, applyUpdates, specs, layer, }: {
+    extractNestedListIDs({ value, abstract, recordID, key, linkedType, fields, variables, applyUpdates, specs, layer, startingWith, }: {
         value: GraphQLValue[];
         recordID: string;
         key: string;
@@ -82,6 +82,7 @@ declare class CacheInternal {
         applyUpdates: boolean;
         fields: SubscriptionSelection;
         layer: Layer;
+        startingWith: number;
     }): {
         nestedIDs: LinkedList;
         newIDs: (string | null)[];

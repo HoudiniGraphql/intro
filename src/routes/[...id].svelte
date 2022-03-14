@@ -14,6 +14,14 @@
 		DownButton
 	} from '~/components';
 	import { query, paginatedQuery, graphql, mutation } from '$houdini';
+	import cache from '$houdini/runtime/cache'
+import { onMount } from 'svelte';
+	import { navigating} from '$app/stores'
+
+
+	onMount(() =>{
+		window.cache = cache
+	})
 
 	const { data, loadNextPage, pageInfo } = paginatedQuery(graphql`
 		query SpeciesInfo($id: Int!) {
@@ -59,7 +67,10 @@
 	let moveIndex = 0
 	$: hasPrevMove = moveIndex > 0
 	$: hasNextMove = moveIndex < $data.species.moves.edges.length -1 || $pageInfo.hasNextPage
-	$: currentMove = $data.species.moves.edges[moveIndex].node
+
+	navigating.subscribe(() => {
+		moveIndex = 0
+	})
 
     const loadNextMove = async () => {
         // if we haven't already seen this page
@@ -72,7 +83,7 @@
 		moveIndex = moveIndex+ 1
     }
 
-    const loadPrevMove = async () => {
+    const loadPrevMove = () => {
         moveIndex--
     }
 </script>
@@ -135,7 +146,7 @@
 			{/each}
 		</div>
 		<div id="move-summary">
-			<MoveDisplay move={currentMove} />
+			<MoveDisplay move={$data.species.moves.edges[moveIndex].node} />
 			<div id="move-controls">
 				<UpButton disabled={!hasPrevMove} on:click={loadPrevMove} />
 				<DownButton disabled={!hasNextMove} on:click={loadNextMove} />

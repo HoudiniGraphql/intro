@@ -10,7 +10,7 @@ specifiers:
   graphql: ^16.3.0
   graphql-relay: ^0.10.0
   graphql-tag: ^2.12.6
-  houdini: ^0.13.0-alpha.4
+  houdini: ^0.13.0-alpha.5
   houdini-common: ^0.13.0-alpha.2
   houdini-preprocess: ^0.13.0-alpha.4
   node-fetch: ^3.2.1
@@ -31,7 +31,7 @@ devDependencies:
   graphql: 16.3.0
   graphql-relay: 0.10.0_graphql@16.3.0
   graphql-tag: 2.12.6_graphql@16.3.0
-  houdini: 0.13.0-alpha.4
+  houdini: 0.13.0-alpha.5
   houdini-preprocess: 0.13.0-alpha.4
   node-fetch: 3.2.1
   prettier: 2.5.1
@@ -1275,8 +1275,8 @@ packages:
       - rollup
     dev: true
 
-  /houdini/0.13.0-alpha.4:
-    resolution: {integrity: sha512-ZH3Vj/NhvY+0mJuxS1Nn3MbMM7zhFITMZP5cMmyYAzZelXpZnufZfAGcd/fvJ6t0SB3Dd4xET/uuc/QUFo7wuw==}
+  /houdini/0.13.0-alpha.5:
+    resolution: {integrity: sha512-yEhMrCM78LnhBnNgbxgPGDa3soO8iMsWRAa5mzHN+MRsGHpkpnTMREnqXHGFdzREjSAtmmMGoH2621NKIXmPDQ==}
     engines: {node: '>=14.13'}
     hasBin: true
     dependencies:
