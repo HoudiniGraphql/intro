@@ -13,15 +13,8 @@
 		UpButton,
 		DownButton
 	} from '~/components';
-	import { query, paginatedQuery, graphql, mutation } from '$houdini';
-	import cache from '$houdini/runtime/cache'
-import { onMount } from 'svelte';
+	import { query, paginatedQuery, graphql, mutation, subscription } from '$houdini';
 	import { navigating} from '$app/stores'
-
-
-	onMount(() =>{
-		window.cache = cache
-	})
 
 	const { data, loadNextPage, pageInfo } = paginatedQuery(graphql`
 		query SpeciesInfo($id: Int!) {
@@ -58,7 +51,6 @@ import { onMount } from 'svelte';
 			toggleFavorite(id: $id) { 
 				species { 
 					favorite
-					...FavoriteSpecies_toggle 
 				}
 			}
 		}
@@ -86,6 +78,18 @@ import { onMount } from 'svelte';
     const loadPrevMove = () => {
         moveIndex--
     }
+
+	
+    subscription(graphql`
+        subscription TrackSpeciesFavorite {
+            speciesFavoriteToggled {
+                species {
+                    favorite
+					...FavoriteSpecies_toggle
+                }
+            }
+        }
+    `)
 </script>
 
 <script context="module">

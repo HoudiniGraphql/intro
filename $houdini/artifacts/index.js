@@ -6,3 +6,4 @@
  export { default as SpeciesInfo} from './SpeciesInfo'
  export { default as Favorites} from './Favorites'
  export { default as ToggleFavorite} from './ToggleFavorite'
+ export { default as TrackSpeciesFavorite} from './TrackSpeciesFavorite'

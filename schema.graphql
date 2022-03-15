@@ -93,3 +93,11 @@ type Mutation {
 type ToggleFavoriteOutput {
 	species: Species
 }
+
+type Subscription {
+	speciesFavoriteToggled: SpeciesFavoriteToggledOutput!
+}
+
+type SpeciesFavoriteToggledOutput {
+	species: Species!
+}

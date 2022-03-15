@@ -3,6 +3,10 @@ const gql = require('graphql-tag');
 const { connectionFromArray } = require('graphql-relay');
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
 const { readFile } = require('fs/promises');
+const { PubSub, withFilter } = require('graphql-subscriptions');
+
+// an event broker for our subscription implementation
+const pubsub = new PubSub();
 
 // load the data file before we do anything
 let data;
@@ -103,6 +107,14 @@ const typeDefs = gql`
 	type ToggleFavoriteOutput {
 		species: Species
 	}
+
+	type Subscription {
+		speciesFavoriteToggled: SpeciesFavoriteToggledOutput!
+	}
+
+	type SpeciesFavoriteToggledOutput {
+		species: Species!
+	}
 `;
 
 // the list of favorites
@@ -132,15 +144,17 @@ const resolvers = {
 				favorites.push(id);
 			}
 
-			// invert the favorite field of the species in question
-			return {
-				species: data.species[id - 1]
-			};
+			const species = data.species[id - 1];
+
+			// notify any subscribers
+			pubsub.publish('FAVORITE_TOGGLED', { speciesFavoriteToggled: { species } });
+
+			// return the species
+			return { species };
 		}
 	},
 	Move: {
 		type({ type }) {
-			console.log(type[0].toUpperCase() + type.slice(1));
 			return type[0].toUpperCase() + type.slice(1);
 		}
 	},
@@ -158,7 +172,6 @@ const resolvers = {
 			return evo_chain.map((id) => data.species[id - 1]);
 		},
 		moves({ moves }, args) {
-			console.log(moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })));
 			const connection = connectionFromArray(
 				moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })),
 				args
@@ -166,6 +179,11 @@ const resolvers = {
 			connection.totalCount = moves.length;
 
 			return connection;
+		}
+	},
+	Subscription: {
+		speciesFavoriteToggled: {
+			subscribe: () => pubsub.asyncIterator('FAVORITE_TOGGLED')
 		}
 	}
 };
