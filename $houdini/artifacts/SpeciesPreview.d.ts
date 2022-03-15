@@ -8,7 +8,7 @@ export type SpeciesPreview = {
 export type SpeciesPreview$data = {
     readonly name: string,
     readonly id: number,
-    readonly $fragments: {
-        SpriteInfo: true
+    readonly sprites: {
+        readonly front: string
     }
 };

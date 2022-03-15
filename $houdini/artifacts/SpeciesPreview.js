@@ -1,12 +1,14 @@
 export default {
     name: "SpeciesPreview",
     kind: "HoudiniFragment",
-    hash: "e2da9bc5d6dddd23bd7199c9c07f4a48f24f9b01b69fe8e766c97946d7990597",
+    hash: "bef70c0d53a696ec5ff4b0141619750b8d04b417deefd802bc1b0a7b52aacae1",
 
     raw: `fragment SpeciesPreview on Species {
   name
   id
-  ...SpriteInfo
+  sprites {
+    front
+  }
 }
 `,
 
@@ -21,6 +23,18 @@ export default {
         id: {
             type: "Int",
             keyRaw: "id"
+        },
+
+        sprites: {
+            type: "SpeciesSprites",
+            keyRaw: "sprites",
+
+            fields: {
+                front: {
+                    type: "String",
+                    keyRaw: "front"
+                }
+            }
         }
     }
 };
