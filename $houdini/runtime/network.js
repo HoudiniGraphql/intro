@@ -94,7 +94,7 @@ export async function fetchQuery({ context, artifact, variables, session, cached
     if (cached && artifact.kind === 'HoudiniQuery') {
         // tick the garbage collector asynchronously
         setTimeout(() => {
-            cache.collectGarbage();
+            cache._internal_unstable.collectGarbage();
         }, 0);
         // this function is called as the first step in requesting data. If the policy prefers
         // cached data, we need to load data from the cache (if its available). If the policy
@@ -105,11 +105,14 @@ export async function fetchQuery({ context, artifact, variables, session, cached
             CachePolicy.CacheOnly,
             CachePolicy.CacheAndNetwork,
         ].includes(artifact.policy) &&
-            cache.internal.isDataAvailable(artifact.selection, variables)) {
-            console.log('using cached data');
+            cache._internal_unstable.isDataAvailable(artifact.selection, variables)) {
             return [
                 {
-                    data: cache.internal.getData(cache.internal.record(rootID), artifact.selection, variables),
+                    data: cache.read({
+                        parent: rootID,
+                        selection: artifact.selection,
+                        variables,
+                    }),
                     errors: [],
                 },
                 DataSource.Cache,
@@ -159,7 +162,6 @@ export class RequestContext {
     graphqlErrors(payload) {
         // if we have a list of errors
         if (payload.errors) {
-            console.log('registering graphql errors', payload.errors);
             return this.error(500, payload.errors.map(({ message }) => message).join('\n'));
         }
         return this.error(500, 'Encountered invalid response: ' + JSON.stringify(payload));

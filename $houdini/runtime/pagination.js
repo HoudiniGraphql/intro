@@ -58,7 +58,9 @@ export function paginatedFragment(document, initialValue) {
             store: data,
             artifact: paginationArtifact,
             queryVariables: paginationArtifact.refetch.embedded
-                ? () => ({ id: cache.internal.computeID(fragmentArtifact.rootType, initialValue) })
+                ? () => ({
+                    id: cache._internal_unstable.computeID(fragmentArtifact.rootType, initialValue),
+                })
                 : () => ({}),
         }),
     };

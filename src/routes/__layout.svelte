@@ -4,3 +4,5 @@
 
 	setEnvironment(env);
 </script>
+
+<slot />

@@ -1,4 +1,5 @@
 import type { Config } from 'houdini-common';
+import { HoudiniDocumentProxy } from './proxy';
 export declare enum CachePolicy {
     CacheOrNetwork = "CacheOrNetwork",
     CacheOnly = "CacheOnly",
@@ -65,6 +66,7 @@ export declare type TaggedGraphqlFragment = {
     artifact: FragmentArtifact;
     config: Config;
     paginationArtifact?: QueryArtifact;
+    proxy: HoudiniDocumentProxy;
 };
 export declare type TaggedGraphqlMutation = {
     kind: 'HoudiniMutation';
@@ -98,7 +100,7 @@ export declare enum DataSource {
     Network = "network"
 }
 export declare type MutationOperation = {
-    action: 'insert' | 'remove' | 'delete';
+    action: 'insert' | 'remove' | 'delete' | 'toggle';
     list?: string;
     type?: string;
     parentID?: {
