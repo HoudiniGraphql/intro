@@ -1,28 +1,43 @@
 {
-	"name": "starterproject",
+	"name": "houdini-intro",
 	"version": "0.0.1",
 	"scripts": {
 		"server": "node api.cjs",
-		"dev": "svelte-kit dev",
+		"web": "svelte-kit dev",
 		"build": "svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
-		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+		"generate": "houdini generate",
+		"dev": "concurrently \"npm run web\" \"npm run server\""
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"apollo-server": "^3.6.3",
 		"apollo-server-core": "^3.6.3",
-		"graphql": "^16.3.0",
+		"concurrently": "^7.0.0",
+		"graphql": "15.5.0",
 		"graphql-relay": "^0.10.0",
 		"graphql-tag": "^2.12.6",
-		"houdini": "^0.12.1",
-		"houdini-preprocess": "^0.12.2",
+		"houdini": "^0.13.0-alpha.5",
+		"houdini-preprocess": "^0.13.0-alpha.4",
+		"node-fetch": "^3.2.1",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
 		"svelte": "^3.44.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"@graphql-tools/schema": "^8.3.2",
+		"apollo-server": "^2.24.0",
+		"subscriptions-transport-ws": "^0.9.18",
+		"express": "^4.17.3",
+		"feather-icons": "^4.28.0",
+		"graphql-subscriptions": "^2.0.0",
+		"graphql-ws": "^5.6.3",
+		"houdini-common": "^0.13.0-alpha.2",
+		"ws": "^8.5.0"
+	}
 }

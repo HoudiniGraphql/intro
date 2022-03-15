@@ -1,63 +1,95 @@
 import type { Config } from 'houdini-common';
-import { GraphQLValue, SubscriptionSelection, SubscriptionSpec } from '../types';
-import { ListHandler } from './list';
+import { GraphQLObject, GraphQLValue, SubscriptionSelection, SubscriptionSpec } from '..';
+import { GarbageCollector } from './gc';
+import { List, ListManager } from './lists';
+import { InMemoryStorage, Layer, LayerID } from './storage';
+import { InMemorySubscriptions } from './subscription';
 export declare class Cache {
-    _config: Config;
-    private _data;
-    private _lists;
-    private _disabled;
-    readonly cacheBufferSize: number;
+    _internal_unstable: CacheInternal;
     constructor(config: Config);
-    write({ selection, data, variables, parent, applyUpdates, }: {
-        selection: SubscriptionSelection;
+    write({ layer: layerID, ...args }: {
         data: {
             [key: string]: GraphQLValue;
         };
+        selection: SubscriptionSelection;
         variables?: {};
         parent?: string;
+        layer?: LayerID;
         applyUpdates?: boolean;
-    }): void;
+    }): LayerID;
+    read(...args: Parameters<CacheInternal['getSelection']>): GraphQLObject;
+    subscribe(spec: SubscriptionSpec, variables?: {}): void;
+    unsubscribe(spec: SubscriptionSpec, variables?: {}): void;
+    list(name: string, parentID?: string): List;
+    delete(id: string): void;
+}
+declare class CacheInternal {
+    private _disabled;
+    config: Config;
+    storage: InMemoryStorage;
+    subscriptions: InMemorySubscriptions;
+    lists: ListManager;
+    cache: Cache;
+    lifetimes: GarbageCollector;
+    constructor({ config, storage, subscriptions, lists, cache, lifetimes, }: {
+        storage: InMemoryStorage;
+        config: Config;
+        subscriptions: InMemorySubscriptions;
+        lists: ListManager;
+        cache: Cache;
+        lifetimes: GarbageCollector;
+    });
+    writeSelection({ data, selection, variables, root, parent, applyUpdates, layer, toNotify, }: {
+        data: {
+            [key: string]: GraphQLValue;
+        };
+        selection: SubscriptionSelection;
+        variables?: {
+            [key: string]: GraphQLValue;
+        };
+        parent?: string;
+        root?: string;
+        layer: Layer;
+        toNotify?: SubscriptionSpec[];
+        applyUpdates?: boolean;
+    }): SubscriptionSpec[];
+    getSelection({ selection, parent, variables, }: {
+        selection: SubscriptionSelection;
+        parent?: string;
+        variables?: {};
+    }): GraphQLObject | null;
     id(type: string, data: {
         id?: string;
     } | null): string | null;
     id(type: string, id: string): string | null;
     idFields(type: string): string[];
-    subscribe(spec: SubscriptionSpec, variables?: {}): void;
-    unsubscribe(spec: SubscriptionSpec, variables?: {}): void;
-    list(name: string, id?: string): ListHandler;
-    delete(type: string, id: string, variables?: {}): boolean;
-    private record;
-    get internal(): CacheProxy;
-    private computeID;
-    private root;
-    private getData;
-    private addSubscribers;
-    private removeSubscribers;
-    private _write;
-    private hydrateNestedList;
-    private extractNestedListIDs;
-    private getRecord;
-    private notifySubscribers;
-    private insertSubscribers;
-    private unsubscribeSelection;
-    private evaluateKey;
-    clear(): void;
-    disable(): void;
-    private deleteID;
-    private isDataAvailable;
+    computeID(type: string, data: {
+        [key: string]: GraphQLValue;
+    }): string | undefined;
+    hydrateNestedList({ fields, variables, linkedList, }: {
+        fields: SubscriptionSelection;
+        variables?: {};
+        linkedList: LinkedList;
+    }): LinkedList<GraphQLValue>;
+    extractNestedListIDs({ value, abstract, recordID, key, linkedType, fields, variables, applyUpdates, specs, layer, startingWith, }: {
+        value: GraphQLValue[];
+        recordID: string;
+        key: string;
+        linkedType: string;
+        abstract: boolean;
+        variables: {};
+        specs: SubscriptionSpec[];
+        applyUpdates: boolean;
+        fields: SubscriptionSelection;
+        layer: Layer;
+        startingWith: number;
+    }): {
+        nestedIDs: LinkedList;
+        newIDs: (string | null)[];
+    };
+    isDataAvailable(target: SubscriptionSelection, variables: {}, parentID?: string): boolean;
     collectGarbage(): void;
 }
-export declare type CacheProxy = {
-    record: Cache['record'];
-    notifySubscribers: Cache['notifySubscribers'];
-    unsubscribeSelection: Cache['unsubscribeSelection'];
-    insertSubscribers: Cache['insertSubscribers'];
-    evaluateKey: Cache['evaluateKey'];
-    getRecord: Cache['getRecord'];
-    getData: Cache['getData'];
-    deleteID: Cache['deleteID'];
-    computeID: Cache['computeID'];
-    isDataAvailable: Cache['isDataAvailable'];
-};
 export declare const rootID = "_ROOT_";
 export declare type LinkedList<_Result = string> = (_Result | null | LinkedList<_Result>)[];
+export {};

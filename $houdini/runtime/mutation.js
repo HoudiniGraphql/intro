@@ -31,7 +31,7 @@ export function mutation(document) {
             cache.write({
                 selection: artifact.selection,
                 data: result.data,
-                variables: queryVariables(),
+                variables,
             });
             // unmarshal any scalars on the body
             return unmarshalSelection(config, artifact.selection, result.data);

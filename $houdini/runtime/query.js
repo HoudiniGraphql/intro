@@ -9,7 +9,6 @@ import { executeQuery } from './network';
 import { marshalInputs, unmarshalSelection } from './scalars';
 // @ts-ignore: this file will get generated and does not exist in the source code
 import { getSession, goTo, isBrowser } from './adapter.mjs';
-import { rootID } from './cache/cache';
 export function query(document) {
     var _a;
     // make sure we got a query document
@@ -197,9 +196,12 @@ export const componentQuery = ({ config, artifact, queryHandler, variableFunctio
             CachePolicy.CacheOnly,
             CachePolicy.CacheAndNetwork,
         ].includes(artifact.policy) &&
-            cache.internal.isDataAvailable(artifact.selection, variables)) {
+            cache._internal_unstable.isDataAvailable(artifact.selection, variables)) {
             writeData({
-                data: cache.internal.getData(cache.internal.record(rootID), artifact.selection, variables),
+                data: cache.read({
+                    selection: artifact.selection,
+                    variables,
+                }),
                 errors: [],
             }, variables);
             cached = true;
