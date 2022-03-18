@@ -2,12 +2,10 @@ import { Environment } from '$houdini';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { browser } from '$app/env';
 
-const API_URL = 'localhost:4000/graphql';
-
 // this function can take a second argument that will contain the session
 // data during a request or mutation
 async function fetchQuery({ text, variables = {} }) {
-	const result = await this.fetch('http://' + API_URL, {
+	const result = await this.fetch(API_URL, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -27,7 +25,7 @@ async function fetchQuery({ text, variables = {} }) {
 let socketClient = null;
 if (browser) {
 	// instantiate the transport client
-	const client = new SubscriptionClient('ws://' + API_URL, {
+	const client = new SubscriptionClient(WS_URL, {
 		reconnect: true
 	});
 

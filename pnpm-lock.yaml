@@ -22,6 +22,7 @@ specifiers:
   prettier-plugin-svelte: ^2.5.0
   subscriptions-transport-ws: ^0.9.18
   svelte: ^3.44.0
+  vite-plugin-replace: ^0.1.1
   ws: ^8.5.0
 
 dependencies:
@@ -37,7 +38,7 @@ dependencies:
 
 devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.33
-  '@sveltejs/kit': 1.0.0-next.297_svelte@3.46.4
+  '@sveltejs/kit': 1.0.0-next.301_svelte@3.46.4
   apollo-server-core: 3.6.3_graphql@15.5.0
   concurrently: 7.0.0
   graphql: 15.5.0
@@ -49,6 +50,7 @@ devDependencies:
   prettier: 2.5.1
   prettier-plugin-svelte: 2.6.0_prettier@2.5.1+svelte@3.46.4
   svelte: 3.46.4
+  vite-plugin-replace: 0.1.1
 
 packages:
 
@@ -275,8 +277,8 @@ packages:
       esbuild: 0.14.25
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.297_svelte@3.46.4:
-    resolution: {integrity: sha512-u2fQDMzPxz8gKreYRp7AYdWzlq0kdFeA/XAdKnsvvBirn2tAvo6OTJgIlMaKkflsQlUViDLWBLa/Kuw3bNYnPg==}
+  /@sveltejs/kit/1.0.0-next.301_svelte@3.46.4:
+    resolution: {integrity: sha512-F/XP1VEu+fpvgY04JekNxAFupccNMKOyXtbox0LwNJvBulL15/Tzy6tf4g+9t2Jy7mprwI3h0ZC9G/nVujRFnQ==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -2494,6 +2496,12 @@ packages:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=}
     engines: {node: '>= 0.8'}
     dev: false
+
+  /vite-plugin-replace/0.1.1:
+    resolution: {integrity: sha512-v+okl3JNt2pf1jDYijw+WPVt6h9FWa/atTi+qnSFBqmKThLTDhlesx0r3bh+oFPmxRJmis5tNx9HtN6lGFoqWg==}
+    peerDependencies:
+      vite: ^2
+    dev: true
 
   /vite/2.8.6:
     resolution: {integrity: sha512-e4H0QpludOVKkmOsRyqQ7LTcMUDF3mcgyNU4lmi0B5JUbe0ZxeBBl8VoZ8Y6Rfn9eFKYtdXNPcYK97ZwH+K2ug==}
