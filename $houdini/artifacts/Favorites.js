@@ -58,5 +58,6 @@ fragment FavoritePreview on Species {
         }
     },
 
-    policy: "NetworkOnly"
+    policy: "NetworkOnly",
+    partial: false
 };

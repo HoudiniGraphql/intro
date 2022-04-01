@@ -41,12 +41,14 @@ export default {
 
                 accuracy: {
                     type: "Int",
-                    keyRaw: "accuracy"
+                    keyRaw: "accuracy",
+                    nullable: true
                 },
 
                 power: {
                     type: "Int",
-                    keyRaw: "power"
+                    keyRaw: "power",
+                    nullable: true
                 },
 
                 pp: {
@@ -56,7 +58,8 @@ export default {
 
                 type: {
                     type: "Type",
-                    keyRaw: "type"
+                    keyRaw: "type",
+                    nullable: true
                 }
             }
         }

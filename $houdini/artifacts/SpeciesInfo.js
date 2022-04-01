@@ -76,6 +76,7 @@ fragment SpriteInfo on Species {
         species: {
             type: "Species",
             keyRaw: "species(id: $id)",
+            nullable: true,
 
             fields: {
                 name: {
@@ -134,12 +135,14 @@ fragment SpriteInfo on Species {
                             fields: {
                                 cursor: {
                                     type: "String",
-                                    keyRaw: "cursor"
+                                    keyRaw: "cursor",
+                                    nullable: true
                                 },
 
                                 node: {
                                     type: "SpeciesMove",
                                     keyRaw: "node",
+                                    nullable: true,
 
                                     fields: {
                                         __typename: {
@@ -169,12 +172,14 @@ fragment SpriteInfo on Species {
 
                                                 accuracy: {
                                                     type: "Int",
-                                                    keyRaw: "accuracy"
+                                                    keyRaw: "accuracy",
+                                                    nullable: true
                                                 },
 
                                                 power: {
                                                     type: "Int",
-                                                    keyRaw: "power"
+                                                    keyRaw: "power",
+                                                    nullable: true
                                                 },
 
                                                 pp: {
@@ -184,7 +189,8 @@ fragment SpriteInfo on Species {
 
                                                 type: {
                                                     type: "Type",
-                                                    keyRaw: "type"
+                                                    keyRaw: "type",
+                                                    nullable: true
                                                 }
                                             }
                                         }
@@ -212,12 +218,14 @@ fragment SpriteInfo on Species {
 
                                 startCursor: {
                                     type: "String",
-                                    keyRaw: "startCursor"
+                                    keyRaw: "startCursor",
+                                    nullable: true
                                 },
 
                                 endCursor: {
                                     type: "String",
-                                    keyRaw: "endCursor"
+                                    keyRaw: "endCursor",
+                                    nullable: true
                                 }
                             }
                         }
@@ -254,5 +262,6 @@ fragment SpriteInfo on Species {
         types: {}
     },
 
-    policy: "NetworkOnly"
+    policy: "NetworkOnly",
+    partial: false
 };

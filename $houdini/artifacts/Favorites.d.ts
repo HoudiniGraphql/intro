@@ -10,3 +10,9 @@ export type Favorites$result = {
         }
     })[]
 };
+
+export type Favorites$afterLoad = {
+    readonly "data": {
+        readonly "Favorites": Favorites$result
+    }
+};

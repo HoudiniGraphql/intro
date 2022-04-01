@@ -19,11 +19,13 @@ export default {
         toggleFavorite: {
             type: "ToggleFavoriteOutput",
             keyRaw: "toggleFavorite(id: $id)",
+            nullable: true,
 
             fields: {
                 species: {
                     type: "Species",
                     keyRaw: "species",
+                    nullable: true,
 
                     fields: {
                         favorite: {

@@ -13,3 +13,9 @@ export type TrackSpeciesFavorite$result = {
         }
     }
 };
+
+export type TrackSpeciesFavorite$afterLoad = {
+    readonly "data": {
+        readonly "TrackSpeciesFavorite": TrackSpeciesFavorite$result
+    }
+};

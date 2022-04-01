@@ -28,6 +28,12 @@ export type SpeciesInfo$result = {
     } | null
 };
 
+export type SpeciesInfo$afterLoad = {
+    readonly "data": {
+        readonly "SpeciesInfo": SpeciesInfo$result
+    }
+};
+
 export type SpeciesInfo$input = {
     id: number
 };

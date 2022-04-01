@@ -11,6 +11,12 @@ export type ToggleFavorite$result = {
     } | null
 };
 
+export type ToggleFavorite$afterLoad = {
+    readonly "data": {
+        readonly "ToggleFavorite": ToggleFavorite$result
+    }
+};
+
 export type ToggleFavorite$input = {
     id: number
 };

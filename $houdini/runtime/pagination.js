@@ -21,9 +21,19 @@ export function paginatedQuery(document) {
         throw new Error('paginatedQuery must be passed a query with @paginate.');
     }
     // pass the artifact to the base query operation
-    const { data, loading, refetch, ...restOfQueryResponse } = query(document);
+    const { data, loading, refetch, partial, onLoad, ...restOfQueryResponse } = query(document);
+    const paginationPartial = writable(false);
+    partial.subscribe((val) => {
+        paginationPartial.set(val);
+    });
     return {
         data,
+        partial: { subscribe: paginationPartial.subscribe },
+        onLoad(newValue) {
+            onLoad.call(this, newValue);
+            // keep the partial store in sync
+            paginationPartial.set(newValue.partial);
+        },
         ...paginationHandlers({
             initialValue: document.initialValue.data,
             store: data,
@@ -31,6 +41,7 @@ export function paginatedQuery(document) {
             queryVariables: () => document.variables,
             documentLoading: loading,
             refetch,
+            partial: paginationPartial,
         }),
         ...restOfQueryResponse,
     };
@@ -51,9 +62,11 @@ export function paginatedFragment(document, initialValue) {
     const paginationArtifact = 
     // @ts-ignore: typing esm/cjs interop is hard
     document.paginationArtifact.default || document.paginationArtifact;
+    const partial = writable(false);
     return {
         data,
         ...paginationHandlers({
+            partial,
             initialValue,
             store: data,
             artifact: paginationArtifact,
@@ -65,7 +78,7 @@ export function paginatedFragment(document, initialValue) {
         }),
     };
 }
-function paginationHandlers({ initialValue, artifact, store, queryVariables, documentLoading, refetch, }) {
+function paginationHandlers({ initialValue, artifact, store, queryVariables, documentLoading, refetch, partial, }) {
     var _a;
     // start with the defaults and no meaningful page info
     let loadPreviousPage = defaultLoadPreviousPage;
@@ -89,6 +102,7 @@ function paginationHandlers({ initialValue, artifact, store, queryVariables, doc
             queryVariables,
             loading: paginationLoadingState,
             refetch,
+            partial,
         });
         // always track pageInfo
         pageInfo = cursor.pageInfo;
@@ -112,6 +126,7 @@ function paginationHandlers({ initialValue, artifact, store, queryVariables, doc
             loading: paginationLoadingState,
             refetch,
             store,
+            partial,
         });
         loadNextPage = offset.loadPage;
         refetchQuery = offset.refetch;
@@ -124,19 +139,18 @@ function paginationHandlers({ initialValue, artifact, store, queryVariables, doc
     const loading = derived([paginationLoadingState, documentLoading], ($loadingStates) => $loadingStates[0] || $loadingStates[1]);
     return { loadNextPage, loadPreviousPage, pageInfo, loading, refetch: refetchQuery };
 }
-function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVariables, loading, refetch, }) {
+function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVariables, loading, refetch, partial, }) {
+    var _a;
     // pull out the context accessors
     const variables = getVariables();
     const sessionStore = getSession();
     // track the current page info in an easy-to-reach store
-    const initialPageInfo = initialValue
-        ? extractPageInfo(initialValue, artifact.refetch.path)
-        : {
-            startCursor: null,
-            endCursor: null,
-            hasNextPage: false,
-            hasPreviousPage: false,
-        };
+    const initialPageInfo = (_a = extractPageInfo(initialValue, artifact.refetch.path)) !== null && _a !== void 0 ? _a : {
+        startCursor: null,
+        endCursor: null,
+        hasNextPage: false,
+        hasPreviousPage: false,
+    };
     const pageInfo = writable(initialPageInfo);
     // hold onto the current value
     let value = initialValue;
@@ -159,7 +173,8 @@ function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVa
             throw missingPageSizeError(functionName);
         }
         // send the query
-        const result = await executeQuery(artifact, queryVariables, sessionStore, false);
+        const { result, partial: partialData } = await executeQuery(artifact, queryVariables, sessionStore, false);
+        partial.set(partialData);
         // if the query is embedded in a node field (paginated fragments)
         // make sure we look down one more for the updated page info
         const resultPath = [...artifact.refetch.path];
@@ -234,7 +249,8 @@ function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVa
             }
             // we are updating the current set of items, count the number of items that currently exist
             // and ask for the full data set
-            const count = countPage(artifact.refetch.path.concat('edges'), value);
+            const count = countPage(artifact.refetch.path.concat('edges'), value) ||
+                artifact.refetch.pageSize;
             // build up the variables to pass to the query
             const queryVariables = {
                 ...variables(),
@@ -245,7 +261,8 @@ function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVa
             // set the loading state to true
             loading.set(true);
             // send the query
-            const result = await executeQuery(artifact, queryVariables, sessionStore, false);
+            const { result, partial: partialData } = await executeQuery(artifact, queryVariables, sessionStore, false);
+            partial.set(partialData);
             // update cache with the result
             cache.write({
                 selection: artifact.selection,
@@ -259,7 +276,7 @@ function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVa
         },
     };
 }
-function offsetPaginationHandler({ artifact, queryVariables: extraVariables, loading, refetch, initialValue, store, }) {
+function offsetPaginationHandler({ artifact, queryVariables: extraVariables, loading, refetch, initialValue, store, partial, }) {
     var _a;
     // we need to track the most recent offset for this handler
     let currentOffset = ((_a = artifact.refetch) === null || _a === void 0 ? void 0 : _a.start) || 0;
@@ -290,7 +307,8 @@ function offsetPaginationHandler({ artifact, queryVariables: extraVariables, loa
             // set the loading state to true
             loading.set(true);
             // send the query
-            const result = await executeQuery(artifact, queryVariables, sessionStore, false);
+            const { result, partial: partialData } = await executeQuery(artifact, queryVariables, sessionStore, false);
+            partial.set(partialData);
             // update cache with the result
             cache.write({
                 selection: artifact.selection,
@@ -325,7 +343,8 @@ function offsetPaginationHandler({ artifact, queryVariables: extraVariables, loa
             // set the loading state to true
             loading.set(true);
             // send the query
-            const result = await executeQuery(artifact, queryVariables, sessionStore, false);
+            const { result, partial: partialData } = await executeQuery(artifact, queryVariables, sessionStore, false);
+            partial.set(partialData);
             // update cache with the result
             cache.write({
                 selection: artifact.selection,

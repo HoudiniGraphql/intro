@@ -132,17 +132,6 @@ export class List {
                 newEntries: [{ ...data, __typename: this.listType }],
             };
         }
-        // get the list of specs that are subscribing to the list
-        const subscribers = this.cache._internal_unstable.subscriptions.get(this.recordID, this.key);
-        // walk down the list fields relative to the new record
-        // and make sure all of the list's subscribers are listening
-        // to that object
-        this.cache._internal_unstable.subscriptions.addMany({
-            parent: dataID,
-            selection,
-            variables,
-            subscribers,
-        });
         // update the cache with the data we just found
         this.cache.write({
             selection: insertSelection,
@@ -214,7 +203,7 @@ export class List {
                 parent: spec.parentID || this.manager.rootID,
                 selection: spec.selection,
                 variables: ((_a = spec.variables) === null || _a === void 0 ? void 0 : _a.call(spec)) || {},
-            }));
+            }).data);
         }
         // if we are removing from a connection, delete the embedded edge holding the record
         if (this.connection) {

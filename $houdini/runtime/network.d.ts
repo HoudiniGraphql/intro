@@ -65,34 +65,47 @@ export declare type RequestPayload<_Data = any> = {
     }[];
 };
 export declare type RequestHandler<_Data> = (this: FetchContext, params: FetchParams, session?: FetchSession) => Promise<RequestPayload<_Data>>;
-export declare function executeQuery<_Data extends GraphQLObject, _Input>(artifact: QueryArtifact | MutationArtifact, variables: _Input, sessionStore: Readable<any>, cached: boolean): Promise<RequestPayload>;
+export declare function executeQuery<_Data extends GraphQLObject, _Input>(artifact: QueryArtifact | MutationArtifact, variables: _Input, sessionStore: Readable<any>, cached: boolean): Promise<{
+    result: RequestPayload;
+    partial: boolean;
+}>;
 export declare function convertKitPayload(context: RequestContext, loader: (ctx: FetchContext) => Promise<KitLoadResponse>, page: FetchContext['page'], session: FetchContext['session']): Promise<Record<string, any>>;
+export declare type FetchQueryResult<_Data> = {
+    result: RequestPayload<_Data | {} | null>;
+    source: DataSource | null;
+    partial: boolean;
+};
+export declare type QueryInputs<_Data> = FetchQueryResult<_Data> & {
+    variables: {
+        [key: string]: any;
+    };
+};
 export declare function fetchQuery<_Data extends GraphQLObject>({ context, artifact, variables, session, cached, }: {
     context: FetchContext;
     artifact: QueryArtifact | MutationArtifact;
     variables: {};
     session?: FetchSession;
     cached?: boolean;
-}): Promise<[RequestPayload<_Data | {} | null>, DataSource | null]>;
+}): Promise<FetchQueryResult<_Data>>;
 export declare class RequestContext {
     context: FetchContext;
     continue: boolean;
     returnValue: {};
     constructor(ctx: FetchContext);
-    error(status: number, message: string | Error): void;
-    redirect(status: number, location: string): void;
+    error(status: number, message: string | Error): any;
+    redirect(status: number, location: string): any;
     fetch(input: RequestInfo, init?: RequestInit): any;
     graphqlErrors(payload: {
         errors?: GraphQLError[];
-    }): void;
-    invokeLoadHook({ variant, mode, hookFn, data, }: {
+    }): any;
+    invokeLoadHook({ variant, framework, hookFn, data, }: {
         variant: 'before' | 'after';
-        mode: 'kit' | 'sapper';
+        framework: 'kit' | 'sapper';
         hookFn: KitBeforeLoad | KitAfterLoad | SapperBeforeLoad | SapperAfterLoad;
         data: Record<string, any>;
     }): Promise<void>;
-    computeInput({ config, mode, variableFunction, artifact, }: {
-        mode: 'kit' | 'sapper';
+    computeInput({ config, framework, variableFunction, artifact, }: {
+        framework: 'kit' | 'sapper';
         variableFunction: SapperBeforeLoad | KitBeforeLoad;
         artifact: QueryArtifact | MutationArtifact | SubscriptionArtifact;
         config: Config;
