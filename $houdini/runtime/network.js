@@ -1,6 +1,5 @@
 // externals
 import { get } from 'svelte/store';
-// locals
 import { CachePolicy, DataSource, } from './types';
 import { marshalInputs } from './scalars';
 import cache from './cache';

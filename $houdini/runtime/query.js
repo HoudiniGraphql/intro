@@ -1,7 +1,6 @@
 // externals
 import { writable, readable } from 'svelte/store';
 import { onDestroy, onMount } from 'svelte';
-// locals
 import { CachePolicy, DataSource, } from './types';
 import cache from './cache';
 import { setVariables } from './context';

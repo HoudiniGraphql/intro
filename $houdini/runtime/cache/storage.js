@@ -148,6 +148,10 @@ export class InMemoryStorage {
         if (startingIndex === null) {
             throw new Error('could not find layer with id: ' + id);
         }
+        // if we are resolving the base layer make sure we start at zero
+        if (startingIndex === -1) {
+            startingIndex = 0;
+        }
         // if the starting layer is optimistic then we can't write to it
         if (this.data[startingIndex].optimistic) {
             startingIndex++;
@@ -160,6 +164,7 @@ export class InMemoryStorage {
             const layer = this.data[layerIndex++];
             // if the layer is optimistic, we can't go further
             if (layer.optimistic) {
+                layerIndex--;
                 break;
             }
             // apply the layer onto our base
@@ -252,7 +257,14 @@ export class Layer {
         };
         return this.id;
     }
+    isDisplayLayer(displayLayers) {
+        return (displayLayers.length === 0 ||
+            displayLayers.includes(this.id) ||
+            Math.max(...displayLayers) < this.id);
+    }
     clear() {
+        // before we clear the data of the layer, look for any subscribers that need to be updated
+        // now that everything has been notified we can reset the data
         this.links = {};
         this.fields = {};
         this.operations = {};

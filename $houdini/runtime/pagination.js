@@ -9,6 +9,7 @@ import cache from './cache';
 import { getSession } from './adapter.mjs';
 // this has to be in a separate file since config isn't defined in cache/index.ts
 import { countPage, extractPageInfo } from './utils';
+import { keyFieldsForType } from './config';
 export function paginatedQuery(document) {
     // make sure we got a query document
     if (document.kind !== 'HoudiniQuery') {
@@ -35,6 +36,7 @@ export function paginatedQuery(document) {
             paginationPartial.set(newValue.partial);
         },
         ...paginationHandlers({
+            config: document.config,
             initialValue: document.initialValue.data,
             store: data,
             artifact,
@@ -47,6 +49,7 @@ export function paginatedQuery(document) {
     };
 }
 export function paginatedFragment(document, initialValue) {
+    var _a, _b;
     // make sure we got a query document
     if (document.kind !== 'HoudiniFragment') {
         throw new Error('paginatedFragment() must be passed a fragment document');
@@ -63,22 +66,37 @@ export function paginatedFragment(document, initialValue) {
     // @ts-ignore: typing esm/cjs interop is hard
     document.paginationArtifact.default || document.paginationArtifact;
     const partial = writable(false);
+    const { targetType } = paginationArtifact.refetch || {};
+    const typeConfig = (_a = document.config.types) === null || _a === void 0 ? void 0 : _a[targetType || ''];
+    if (!typeConfig) {
+        throw new Error(`Missing type refetch configuration for ${targetType}. For more information, see https://www.houdinigraphql.com/guides/pagination#paginated-fragments`);
+    }
+    let queryVariables = () => ({});
+    // if the query is embedded we have to figure out the correct variables to pass
+    if (paginationArtifact.refetch.embedded) {
+        // if we have a specific function to use when computing the variables
+        if ((_b = typeConfig.resolve) === null || _b === void 0 ? void 0 : _b.arguments) {
+            queryVariables = () => { var _a, _b; return ((_b = (_a = typeConfig.resolve).arguments) === null || _b === void 0 ? void 0 : _b.call(_a, initialValue)) || {}; };
+        }
+        else {
+            const keys = keyFieldsForType(document.config, targetType || '');
+            // @ts-ignore
+            queryVariables = () => Object.fromEntries(keys.map((key) => [key, initialValue[key]]));
+        }
+    }
     return {
         data,
         ...paginationHandlers({
+            config: document.config,
             partial,
             initialValue,
             store: data,
             artifact: paginationArtifact,
-            queryVariables: paginationArtifact.refetch.embedded
-                ? () => ({
-                    id: cache._internal_unstable.computeID(fragmentArtifact.rootType, initialValue),
-                })
-                : () => ({}),
+            queryVariables,
         }),
     };
 }
-function paginationHandlers({ initialValue, artifact, store, queryVariables, documentLoading, refetch, partial, }) {
+function paginationHandlers({ initialValue, artifact, store, queryVariables, documentLoading, refetch, partial, config, }) {
     var _a;
     // start with the defaults and no meaningful page info
     let loadPreviousPage = defaultLoadPreviousPage;
@@ -103,6 +121,7 @@ function paginationHandlers({ initialValue, artifact, store, queryVariables, doc
             loading: paginationLoadingState,
             refetch,
             partial,
+            config,
         });
         // always track pageInfo
         pageInfo = cursor.pageInfo;
@@ -139,7 +158,7 @@ function paginationHandlers({ initialValue, artifact, store, queryVariables, doc
     const loading = derived([paginationLoadingState, documentLoading], ($loadingStates) => $loadingStates[0] || $loadingStates[1]);
     return { loadNextPage, loadPreviousPage, pageInfo, loading, refetch: refetchQuery };
 }
-function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVariables, loading, refetch, partial, }) {
+function cursorHandlers({ config, initialValue, artifact, store, queryVariables: extraVariables, loading, refetch, partial, }) {
     var _a;
     // pull out the context accessors
     const variables = getVariables();
@@ -160,6 +179,7 @@ function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVa
     });
     // dry up the page-loading logic
     const loadPage = async ({ pageSizeVar, input, functionName, }) => {
+        var _a, _b;
         // set the loading state to true
         loading.set(true);
         // build up the variables to pass to the query
@@ -179,7 +199,13 @@ function cursorHandlers({ initialValue, artifact, store, queryVariables: extraVa
         // make sure we look down one more for the updated page info
         const resultPath = [...artifact.refetch.path];
         if (artifact.refetch.embedded) {
-            resultPath.unshift('node');
+            const { targetType } = artifact.refetch;
+            // make sure we have a type config for the pagination target type
+            if (!((_b = (_a = config.types) === null || _a === void 0 ? void 0 : _a[targetType]) === null || _b === void 0 ? void 0 : _b.resolve)) {
+                throw new Error(`Missing type resolve configuration for ${targetType}. For more information, see https://www.houdinigraphql.com/guides/pagination#paginated-fragments`);
+            }
+            // make sure that we pull the value out of the correct query field
+            resultPath.unshift(config.types[targetType].resolve.queryField);
         }
         // we need to find the connection object holding the current page info
         pageInfo.set(extractPageInfo(result.data, resultPath));

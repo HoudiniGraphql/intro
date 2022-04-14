@@ -1,4 +1,4 @@
-import type { Config } from 'houdini-common';
+import { ConfigFile } from '../config';
 import { GraphQLObject, GraphQLValue, SubscriptionSelection, SubscriptionSpec } from '..';
 import { GarbageCollector } from './gc';
 import { List, ListManager } from './lists';
@@ -6,17 +6,19 @@ import { InMemoryStorage, Layer, LayerID } from './storage';
 import { InMemorySubscriptions } from './subscription';
 export declare class Cache {
     _internal_unstable: CacheInternal;
-    constructor(config: Config);
-    write({ layer: layerID, ...args }: {
+    constructor(config: ConfigFile);
+    write({ layer: layerID, notifySubscribers, ...args }: {
         data: {
             [key: string]: GraphQLValue;
         };
         selection: SubscriptionSelection;
         variables?: {};
         parent?: string;
-        layer?: LayerID;
+        layer?: LayerID | null;
         applyUpdates?: boolean;
-    }): LayerID;
+        notifySubscribers?: SubscriptionSpec[];
+        forceNotify?: boolean;
+    }): SubscriptionSpec[];
     read(...args: Parameters<CacheInternal['getSelection']>): {
         data: GraphQLObject;
         partial: boolean;
@@ -28,7 +30,7 @@ export declare class Cache {
 }
 declare class CacheInternal {
     private _disabled;
-    config: Config;
+    config: ConfigFile;
     storage: InMemoryStorage;
     subscriptions: InMemorySubscriptions;
     lists: ListManager;
@@ -36,13 +38,13 @@ declare class CacheInternal {
     lifetimes: GarbageCollector;
     constructor({ config, storage, subscriptions, lists, cache, lifetimes, }: {
         storage: InMemoryStorage;
-        config: Config;
+        config: ConfigFile;
         subscriptions: InMemorySubscriptions;
         lists: ListManager;
         cache: Cache;
         lifetimes: GarbageCollector;
     });
-    writeSelection({ data, selection, variables, root, parent, applyUpdates, layer, toNotify, }: {
+    writeSelection({ data, selection, variables, root, parent, applyUpdates, layer, toNotify, forceNotify, }: {
         data: {
             [key: string]: GraphQLValue;
         };
@@ -55,6 +57,7 @@ declare class CacheInternal {
         layer: Layer;
         toNotify?: SubscriptionSpec[];
         applyUpdates?: boolean;
+        forceNotify?: boolean;
     }): SubscriptionSpec[];
     getSelection({ selection, parent, variables, }: {
         selection: SubscriptionSelection;
@@ -70,9 +73,7 @@ declare class CacheInternal {
     } | null): string | null;
     id(type: string, id: string): string | null;
     idFields(type: string): string[];
-    computeID(type: string, data: {
-        [key: string]: GraphQLValue;
-    }): string | undefined;
+    computeID(type: string, data: any): string;
     hydrateNestedList({ fields, variables, linkedList, }: {
         fields: SubscriptionSelection;
         variables?: {};
@@ -82,7 +83,7 @@ declare class CacheInternal {
         partial: boolean;
         hasData: boolean;
     };
-    extractNestedListIDs({ value, abstract, recordID, key, linkedType, fields, variables, applyUpdates, specs, layer, startingWith, }: {
+    extractNestedListIDs({ value, abstract, recordID, key, linkedType, fields, variables, applyUpdates, specs, layer, startingWith, forceNotify, }: {
         value: GraphQLValue[];
         recordID: string;
         key: string;
@@ -94,6 +95,7 @@ declare class CacheInternal {
         fields: SubscriptionSelection;
         layer: Layer;
         startingWith: number;
+        forceNotify?: boolean;
     }): {
         nestedIDs: LinkedList;
         newIDs: (string | null)[];

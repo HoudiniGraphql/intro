@@ -32,6 +32,7 @@ export declare class Layer {
     getOperations(id: string, field: string): Operation[] | undefined;
     writeField(id: string, field: string, value: GraphQLField): LayerID;
     writeLink(id: string, field: string, value: null | string | LinkedList): LayerID;
+    isDisplayLayer(displayLayers: number[]): boolean;
     clear(): void;
     applyDeletes(): void;
     delete(id: string): void;

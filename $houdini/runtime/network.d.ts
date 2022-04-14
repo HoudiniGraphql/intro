@@ -1,5 +1,5 @@
 import { Readable } from 'svelte/store';
-import type { Config } from 'houdini-common';
+import type { ConfigFile } from './config';
 import { DataSource, GraphQLObject, MutationArtifact, QueryArtifact, SubscriptionArtifact } from './types';
 export declare class Environment {
     private fetch;
@@ -108,7 +108,7 @@ export declare class RequestContext {
         framework: 'kit' | 'sapper';
         variableFunction: SapperBeforeLoad | KitBeforeLoad;
         artifact: QueryArtifact | MutationArtifact | SubscriptionArtifact;
-        config: Config;
+        config: ConfigFile;
     }): {};
 }
 declare type SapperBeforeLoad = (page: FetchContext['page'], session: FetchContext['session']) => Record<string, any>;

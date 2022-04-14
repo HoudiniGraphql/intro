@@ -8,7 +8,8 @@ export default {
         path: ["species", "moves"],
         method: "cursor",
         pageSize: 1,
-        embedded: false
+        embedded: false,
+        targetType: "Query"
     },
 
     raw: `query SpeciesInfo($id: Int!, $first: Int = 1, $after: String) {

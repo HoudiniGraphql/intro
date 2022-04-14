@@ -1,5 +1,5 @@
 import { Readable } from 'svelte/store';
-import type { Config } from 'houdini-common';
+import type { ConfigFile } from './config';
 import { Operation, GraphQLTagResult, QueryArtifact, GraphQLObject, DataSource } from './types';
 import { RequestPayload } from './network';
 import type { FetchQueryResult } from './network';
@@ -21,7 +21,7 @@ export declare const routeQuery: <_Data, _Input>({ queryHandler, artifact, sourc
     source: DataSource;
 }) => QueryResponse<_Data, _Input>;
 export declare const componentQuery: <_Data extends GraphQLObject, _Input>({ config, artifact, queryHandler, variableFunction, getProps, }: {
-    config: Config;
+    config: ConfigFile;
     artifact: QueryArtifact;
     queryHandler: QueryResponse<_Data, _Input>;
     variableFunction: (...args: any[]) => _Input;
