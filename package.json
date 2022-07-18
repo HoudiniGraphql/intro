@@ -13,6 +13,7 @@
 		"dev": "concurrently \"npm run web\" \"npm run server\""
 	},
 	"devDependencies": {
+		"@kitql/vite-plugin-watch-and-run": "^0.4.2",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"apollo-server": "^3.6.3",
