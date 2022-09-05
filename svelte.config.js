@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-auto';
-import houdini from 'houdini-preprocess';
+import houdini from 'houdini/preprocess';
 import path from 'path';
 import { replaceCodePlugin } from 'vite-plugin-replace';
 import watchAndRun from '@kitql/vite-plugin-watch-and-run';
