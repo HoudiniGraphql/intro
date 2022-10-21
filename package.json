@@ -24,7 +24,7 @@
 		"graphql-relay": "^0.10.0",
 		"graphql-tag": "^2.12.6",
 		"houdini": "^0.17.0",
-		"houdini-svelte": "^0.1.0",
+		"houdini-svelte": "^0.17.0",
 		"node-fetch": "^3.2.1",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
