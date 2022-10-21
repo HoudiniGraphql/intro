@@ -1,4 +1,4 @@
-import { Environment } from '$houdini';
+import { HoudiniClient } from '$houdini';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { browser } from '$app/env';
 
@@ -41,4 +41,4 @@ if (browser) {
 	};
 }
 
-export default new Environment(fetchQuery, socketClient);
+export default new HoudiniClient(fetchQuery, socketClient);
