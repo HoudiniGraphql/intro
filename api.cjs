@@ -1,6 +1,5 @@
 const { ApolloServer } = require('apollo-server');
 const gql = require('graphql-tag');
-const { connectionFromArray } = require('graphql-relay');
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
 const { readFile } = require('fs/promises');
 const { PubSub, withFilter } = require('graphql-subscriptions');
