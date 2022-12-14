@@ -7,14 +7,14 @@
 	export let number;
 
 	const data = fragment(
+		species,
 		graphql`
 			fragment SpeciesPreview on Species {
 				name
 				id
 				...SpriteInfo
 			}
-		`,
-		species
+		`
 	);
 </script>
 

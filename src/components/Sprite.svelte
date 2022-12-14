@@ -4,6 +4,7 @@
 	export let species;
 
 	const data = fragment(
+		species,
 		graphql`
 			fragment SpriteInfo on Species {
 				name
@@ -11,8 +12,7 @@
 					front
 				}
 			}
-		`,
-		species
+		`
 	);
 </script>
 

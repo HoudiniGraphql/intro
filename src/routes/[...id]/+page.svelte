@@ -13,7 +13,7 @@
 		UpButton,
 		DownButton
 	} from '~/components';
-	import { graphql, subscription } from '$houdini';
+	import { graphql } from '$houdini';
 	import { navigating } from '$app/stores';
 
 	const SpeciesInfo = graphql`
@@ -84,7 +84,7 @@
 		moveIndex--;
 	};
 
-	subscription(graphql`
+	graphql`
 		subscription TrackSpeciesFavorite {
 			speciesFavoriteToggled {
 				species {
@@ -93,7 +93,7 @@
 				}
 			}
 		}
-	`);
+	`;
 </script>
 
 <FavoritesContainer>
@@ -114,7 +114,10 @@
 		<Display id="species-flavor_text">
 			{$SpeciesInfo.data.species.flavor_text}
 		</Display>
-		<button id="favorite" on:click={() => toggleFavorite({ id: $SpeciesInfo.data.species.id })}>
+		<button
+			id="favorite"
+			on:click={() => toggleFavorite.mutate({ id: $SpeciesInfo.data.species.id })}
+		>
 			<Icon
 				name="star"
 				id="favorite-star"
