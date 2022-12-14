@@ -1,11 +1,14 @@
 import { HoudiniClient } from '$houdini';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 import { browser } from '$app/environment';
+import { PUBLIC_GRAPHQL_HTTP, PUBLIC_GRAPHQL_WS } from '$env/static/public';
+
+console.log(`PUBLIC_GRAPHQL_HTTP`, PUBLIC_GRAPHQL_HTTP);
 
 // this function can take a second argument that will contain the session
 // data during a request or mutation
-async function fetchQuery({ text, fetch, variables = {} }) {
-	const result = await fetch('http://localhost:4000/graphql', {
+async function fetchQuery({ fetch, text, variables = {} }) {
+	const result = await fetch(PUBLIC_GRAPHQL_HTTP, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -20,4 +23,25 @@ async function fetchQuery({ text, fetch, variables = {} }) {
 	return await result.json();
 }
 
-export default new HoudiniClient(fetchQuery);
+// this client is used to handle any socket connections that are made to the api
+// since websockets only exist on the client, set to null on the server
+let socketClient = null;
+if (browser) {
+	// instantiate the transport client
+	const client = new SubscriptionClient(PUBLIC_GRAPHQL_WS, {
+		reconnect: true
+	});
+
+	// wrap the client in something houdini can use
+	socketClient = {
+		subscribe(payload, handlers) {
+			// send the request
+			const { unsubscribe } = client.request(payload).subscribe(handlers);
+
+			// return the function to unsubscribe
+			return unsubscribe;
+		}
+	};
+}
+
+export default new HoudiniClient(fetchQuery, socketClient);

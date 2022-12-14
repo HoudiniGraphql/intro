@@ -1,4 +1,4 @@
-export function SpeciesInfoVariables({ params }) {
+export function _SpeciesInfoVariables({ params }) {
 	// if we were given an id, convert the string to a number
 	const id = params.id ? parseInt(params.id) : 1;
 

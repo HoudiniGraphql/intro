@@ -13,7 +13,7 @@
 		UpButton,
 		DownButton
 	} from '~/components';
-	import { graphql } from '$houdini';
+	import { graphql, subscription } from '$houdini';
 	import { navigating } from '$app/stores';
 
 	const SpeciesInfo = graphql`
