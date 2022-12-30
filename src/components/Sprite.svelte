@@ -1,22 +1,23 @@
-<script>
-	import { fragment, graphql } from '$houdini'
+<script lang="ts">
+    import { fragment, graphql } from '$houdini'
+    import type { SprintInfo } from '$houdini'
 
-	export let species
+    export let species: SprintInfo
 
-	const data = fragment(graphql`
-		fragment SpriteInfo on Species { 
-			name
-			sprites { 
-				front
-			}
-		}
-	`, species)
+    $: info = fragment(species, graphql(`
+        fragment SpriteInfo on Species {
+            name
+            sprites {
+                front
+            }
+        }
+    `))
 </script>
 
-<div id={$$props.id} class={`sprite ${$$props.class}`}>
-	<img 
-		height="100%" 
-		src={$data.sprites.front} 
-		alt={`${$data.name} sprite`} 
-	/>
+<div id={$$props.id} class="sprite">
+    <img
+        src={$info.sprites.front}
+        alt={`${$info.name} sprite`}
+        height="100%"
+    />
 </div>
