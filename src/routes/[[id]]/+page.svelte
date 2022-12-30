@@ -15,7 +15,6 @@
 	} from '~/components';
 	import { graphql } from '$houdini';
 	import { navigating } from '$app/stores';
-
     import type { PageData } from './$houdini'
 
     export let data: PageData
