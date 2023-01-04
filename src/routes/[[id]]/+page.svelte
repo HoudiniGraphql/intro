@@ -62,7 +62,7 @@
 	};
 </script>
 
-{#if $Info.isFetching}
+{#if $Info.fetching}
 	<FavoritesContainer/>
 	<Container />
 {:else}
