@@ -21,6 +21,8 @@
 
     $: ({ Info } = data)
 
+	$: console.log($Info)
+
 	const toggleFavorite = graphql(`
 		mutation ToggleFavorite($id: Int!) {
 			toggleFavorite(id: $id) {
@@ -111,10 +113,10 @@
 				</div>
 			</div>
 			<nav>
-				<a href={($Info.data.species.id - 1).toString()} disabled={$Info.data.species.id <= 1}>
+				<a href={$Info.data.species.id - 1} disabled={$Info.data.species.id <= 1}>
 					previous
 				</a>
-				<a href={($Info.data.species.id + 1).toString()} disabled={$Info.data.species.id >= 151}>
+				<a href={$Info.data.species.id + 1} disabled={$Info.data.species.id >= 151}>
 					next
 				</a>
 			</nav>

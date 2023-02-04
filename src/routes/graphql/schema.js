@@ -112,6 +112,7 @@ const favorites = [];
 export const resolvers = {
 	Query: {
 		species(_, { id }) {
+			console.log(id);
 			return data.species[id - 1];
 		},
 		async pokemon(_, args) {

@@ -10,7 +10,8 @@ export async function POST({ request }) {
 	return json(
 		await graphql.execute({
 			schema,
-			document: graphql.parse(query)
+			document: graphql.parse(query),
+			variableValues: variables
 		})
 	);
 }
