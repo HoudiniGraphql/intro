@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import {
 		Panel,
 		Container,
@@ -21,7 +21,7 @@
 
     $: ({ Info } = data)
 
-	const toggleFavorite = graphql`
+	const toggleFavorite = graphql(`
 		mutation ToggleFavorite($id: Int!) {
 			toggleFavorite(id: $id) {
 				species {
@@ -31,12 +31,12 @@
 				}
 			}
 		}
-	`;
+	`);
 
 	let moveIndex = 0;
 	$: hasPrevMove = moveIndex > 0;
 	$: hasNextMove =
-		moveIndex < $Info.data.species.moves.edges.length - 1 ||
+		moveIndex < $Info.data?.species.moves.edges.length - 1 ||
 		$Info.pageInfo.hasNextPage;
 
 	navigating.subscribe(() => {
@@ -46,11 +46,11 @@
 	const loadNextMove = async () => {
 		// if we haven't already seen this page
 		if (
-			!$Info.data.species.moves.edges[moveIndex + 1] &&
+			!$Info.data?.species.moves.edges[moveIndex + 1] &&
 			$Info.pageInfo.hasNextPage
 		) {
 			// load the next page of data
-			await loadNextPage();
+			await Info.loadNextPage();
 		}
 
 		// its safe to increment the move index
@@ -83,7 +83,7 @@
 			<Display id="species-flavor_text">
 				{$Info.data.species.flavor_text}
 			</Display>
-			<button id="favorite" on:click={() => toggleFavorite({ id: $Info.data.species.id })}>
+			<button id="favorite" on:click={() => toggleFavorite.mutate({ id: $Info.data.species.id })}>
 				<Icon
 					name="star"
 					id="favorite-star"
@@ -111,10 +111,10 @@
 				</div>
 			</div>
 			<nav>
-				<a href={$Info.data.species.id - 1} disabled={$Info.data.species.id <= 1}>
+				<a href={($Info.data.species.id - 1).toString()} disabled={$Info.data.species.id <= 1}>
 					previous
 				</a>
-				<a href={$Info.data.species.id + 1} disabled={$Info.data.species.id >= 151}>
+				<a href={($Info.data.species.id + 1).toString()} disabled={$Info.data.species.id >= 151}>
 					next
 				</a>
 			</nav>

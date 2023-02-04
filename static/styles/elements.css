@@ -56,10 +56,15 @@ a[disabled='true'] {
 .sprite {
 	display: flex;
 	image-rendering: pixelated;
-	border: inset #9aa28b 3px;
 	border-radius: 5px;
 	margin: 10px 0;
 	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+}
+
+.sprite:not(.transparentBackground) {
+	border: inset #9aa28b 3px;
 	background: linear-gradient(
 		15deg,
 		#cad5b5 64%,
@@ -69,8 +74,7 @@ a[disabled='true'] {
 		#dde2d4 89%,
 		#dde2d4 100%
 	);
-	align-items: center;
-	justify-content: center;
+
 }
 
 #species-evolution-chain {

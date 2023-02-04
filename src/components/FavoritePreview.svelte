@@ -4,20 +4,17 @@
 
     export let species
 
-    const data = fragment(graphql`
-        fragment FavoritePreview on Species { 
-            id 
-            name
-            sprites { 
-                front
-            }
+    const data = fragment(species, graphql(`
+        fragment FavoritePreview on Species {
+            id
+            ...SpriteInfo
         }
-    `, species)
+    `))
 
 </script>
 
 <a href={$data.id}>
-    <img src={$data.sprites.front} alt={`${$data.name} sprite`} />
+    <Sprite species={$data} transparentBackground />
 </a>
 
 <style>

@@ -4,11 +4,11 @@
 
     export let move
 
-    const data = fragment(graphql`
+    $: data = fragment(move, graphql(`
         fragment MoveDisplay on SpeciesMove {
             learned_at
             method
-            move { 
+            move {
                 name
                 accuracy
                 power
@@ -16,8 +16,8 @@
                 type
             }
         }
-    `, move)
-    
+    `))
+
     const padValue = (val) => {
         if (val ===null) {
             return '..0'
@@ -26,8 +26,8 @@
         return Array.from({length: 3 - val.toString().length}).map(() => '.').join('') + val
     }
 
-    const padKey = (val) => { 
-        return val + Array.from({length: 8 - val.toString().length }).map(() => '.').join('') 
+    const padKey = (val) => {
+        return val + Array.from({length: 8 - val.toString().length }).map(() => '.').join('')
     }
 </script>
 
@@ -52,7 +52,7 @@
             Type: {$data.move.type}
          </div>
          <div class="learn-data">
-            Learn: 
+            Learn:
             {#if $data.method === 'level-up'}
                 Lvl {$data.learned_at}
             {:else}
@@ -63,17 +63,17 @@
 </Display>
 
 <style>
-    :global(#move-display) { 
+    :global(#move-display) {
         position: relative;
         padding: 10px 20px;
         height: 80px;
         flex-direction: row;
         display: flex;
-        
+
     }
 
 
-    h3 { 
+    h3 {
         margin: 0;
         font-weight: normal;
         font-size: 24px;
@@ -84,7 +84,7 @@
         white-space: nowrap;
     }
 
-    .type-pill { 
+    .type-pill {
         font-size: 18px;
         text-transform: uppercase;
         border: solid black 2px;
@@ -93,18 +93,18 @@
         text-align: center;
     }
 
-    .right-column { 
+    .right-column {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         flex-grow: 1;
     }
 
-    .learn-data { 
+    .learn-data {
         margin-right: 10px;
     }
 
-    .stat { 
+    .stat {
         margin-top: 3px;
     }
 

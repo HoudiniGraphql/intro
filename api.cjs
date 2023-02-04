@@ -1,6 +1,5 @@
 const { ApolloServer } = require('apollo-server');
 const gql = require('graphql-tag');
-const { connectionFromArray } = require('graphql-relay');
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
 const { readFile } = require('fs/promises');
 const { PubSub, withFilter } = require('graphql-subscriptions');
@@ -125,7 +124,9 @@ const resolvers = {
 		species(_, { id }) {
 			return data.species[id - 1];
 		},
-		pokemon(_, args) {
+		async pokemon(_, args) {
+			const { connectionFromArray } = await import('./src/lib/connections.mjs');
+
 			const connection = connectionFromArray(data.species, args);
 			connection.totalCount = data.species.length;
 
@@ -171,7 +172,9 @@ const resolvers = {
 		evolution_chain({ evo_chain }) {
 			return evo_chain.map((id) => data.species[id - 1]);
 		},
-		moves({ moves }, args) {
+		async moves({ moves }, args) {
+			const { connectionFromArray } = await import('./src/lib/connections.mjs');
+
 			const connection = connectionFromArray(
 				moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })),
 				args

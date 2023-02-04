@@ -3,6 +3,7 @@
     import type { SprintInfo } from '$houdini'
 
     export let species: SprintInfo
+    export let transparentBackground: boolean = false
 
     $: info = fragment(species, graphql(`
         fragment SpriteInfo on Species {
@@ -14,7 +15,7 @@
     `))
 </script>
 
-<div id={$$props.id} class="sprite">
+<div id={$$props.id} class="sprite" class:transparentBackground>
     <img
         src={$info.sprites.front}
         alt={`${$info.name} sprite`}

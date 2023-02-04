@@ -1,12 +1,17 @@
+import path from 'path';
 import adapter from '@sveltejs/adapter-auto';
-import houdini from 'houdini-preprocess';
+import sveltePreprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	preprocess: [houdini()],
-
+	preprocess: [sveltePreprocess()],
 	kit: {
 		adapter: adapter(),
+		alias: {
+			$houdini: path.resolve('.', '$houdini'),
+			// these are the aliases and paths to them
+			'~': path.resolve('./src')
+		}
 	}
 };
 
