@@ -1,3 +1,11 @@
-name = "houdini-intro-api"
-main = "server/worker.ts"
+name = "houdini-intro"
+main = "./.cloudflare/worker.js"
+site.bucket = "./.cloudflare/public"
+
+build.command = "npm run build"
+
 compatibility_date = "2023-02-04"
+workers_dev = true
+
+[vars]
+PUBLIC_API_URL = "/graphql"
