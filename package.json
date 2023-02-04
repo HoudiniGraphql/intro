@@ -1,8 +1,9 @@
 {
 	"name": "houdini-intro",
 	"version": "0.0.1",
+	"type": "module",
 	"scripts": {
-		"server": "node api.cjs",
+		"server": "node server/api.js",
 		"web": "vite dev",
 		"build": "vite build",
 		"package": "vite package",
@@ -12,7 +13,6 @@
 		"generate": "houdini generate",
 		"dev": "concurrently \"npm run web\" \"npm run server\""
 	},
-	"type": "module",
 	"dependencies": {
 		"@graphql-tools/schema": "^8.3.2",
 		"@kitql/vite-plugin-watch-and-run": "^0.4.2",
@@ -26,6 +26,7 @@
 		"graphql": "15.7.2",
 		"graphql-subscriptions": "^2.0.0",
 		"graphql-tag": "^2.12.6",
+		"graphql-yoga": "^3.5.1",
 		"houdini": "^1.0.0-next.15",
 		"houdini-svelte": "^1.0.0-next.15",
 		"node-fetch": "^3.2.1",
@@ -35,5 +36,9 @@
 		"svelte-preprocess": "^5.0.1",
 		"typescript": "^4.9.5",
 		"vite": "^4.1.0"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20230115.0",
+		"wrangler": "^2.9.0"
 	}
 }

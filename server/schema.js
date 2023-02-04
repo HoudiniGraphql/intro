@@ -1,16 +1,7 @@
-const { ApolloServer } = require('apollo-server');
-const gql = require('graphql-tag');
-const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
-const { readFile } = require('fs/promises');
-const { PubSub, withFilter } = require('graphql-subscriptions');
+import data from './data/data.js';
+import { createSchema } from 'graphql-yoga';
 
-// an event broker for our subscription implementation
-const pubsub = new PubSub();
-
-// load the data file before we do anything
-let data;
-
-const typeDefs = gql`
+export const typeDefs = /* GraphQL */ `
 	scalar Map
 
 	type Query {
@@ -119,13 +110,13 @@ const typeDefs = gql`
 // the list of favorites
 const favorites = [];
 
-const resolvers = {
+export const resolvers = {
 	Query: {
 		species(_, { id }) {
 			return data.species[id - 1];
 		},
 		async pokemon(_, args) {
-			const { connectionFromArray } = await import('./src/lib/connections.mjs');
+			const { connectionFromArray } = await import('../src/lib/connections.mjs');
 
 			const connection = connectionFromArray(data.species, args);
 			connection.totalCount = data.species.length;
@@ -173,7 +164,7 @@ const resolvers = {
 			return evo_chain.map((id) => data.species[id - 1]);
 		},
 		async moves({ moves }, args) {
-			const { connectionFromArray } = await import('./src/lib/connections.mjs');
+			const { connectionFromArray } = await import('../src/lib/connections.mjs');
 
 			const connection = connectionFromArray(
 				moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })),
@@ -183,24 +174,10 @@ const resolvers = {
 
 			return connection;
 		}
-	},
-	Subscription: {
-		speciesFavoriteToggled: {
-			subscribe: () => pubsub.asyncIterator('FAVORITE_TOGGLED')
-		}
 	}
 };
 
-const server = new ApolloServer({
+export const schema = createSchema({
 	typeDefs,
-	resolvers,
-	plugins: [ApolloServerPluginLandingPageGraphQLPlayground()]
+	resolvers
 });
-
-readFile('./data/data.json', 'utf-8')
-	.then((result) => (data = JSON.parse(result)))
-	.then(() => {
-		server.listen().then(({ url }) => {
-			console.log(`🚀  Server ready at ${url}`);
-		});
-	});
