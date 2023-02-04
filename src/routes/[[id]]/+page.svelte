@@ -21,8 +21,6 @@
 
     $: ({ Info } = data)
 
-	$: console.log($Info)
-
 	const toggleFavorite = graphql(`
 		mutation ToggleFavorite($id: Int!) {
 			toggleFavorite(id: $id) {
