@@ -138,9 +138,6 @@ export const resolvers = {
 
 			const species = data.species[id - 1];
 
-			// notify any subscribers
-			pubsub.publish('FAVORITE_TOGGLED', { speciesFavoriteToggled: { species } });
-
 			// return the species
 			return { species };
 		}
