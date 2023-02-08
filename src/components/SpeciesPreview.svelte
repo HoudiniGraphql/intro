@@ -6,7 +6,7 @@
     export let species
     export let number
 
-    const data = fragment(graphql`
+    const data = fragment(species, graphql`
         fragment SpeciesPreview on Species { 
             name
             id
@@ -14,7 +14,7 @@
 				front
 			}
         }
-    `, species)
+    `)
 </script>
 
 <a href={$data.id}>

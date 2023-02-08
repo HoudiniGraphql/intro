@@ -4,7 +4,7 @@
 
     export let move
 
-    const data = fragment(graphql`
+    const data = fragment(move, graphql`
         fragment MoveDisplay on SpeciesMove {
             learned_at
             method
@@ -16,7 +16,7 @@
                 type
             }
         }
-    `, move)
+    `)
     
     const padValue = (val) => {
         if (val ===null) {
