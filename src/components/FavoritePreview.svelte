@@ -4,7 +4,7 @@
 
     export let species
 
-    const data = fragment(graphql`
+    const data = fragment(species, graphql`
         fragment FavoritePreview on Species { 
             id 
             name
@@ -12,7 +12,7 @@
                 front
             }
         }
-    `, species)
+    `)
 
 </script>
 
