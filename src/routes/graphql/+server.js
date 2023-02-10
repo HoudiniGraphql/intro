@@ -1,6 +1,5 @@
 import { json } from '@sveltejs/kit';
 import { schema } from './schema';
-import { createSchema } from 'graphql-yoga';
 import * as graphql from 'graphql';
 
 /** @type {import('./$types').RequestHandler} */
