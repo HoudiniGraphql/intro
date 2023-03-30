@@ -1,0 +1,22 @@
+query Info($id: Int! = 1) {
+	species(id: $id) {
+		name
+		flavor_text
+		favorite
+		evolution_chain {
+			...SpeciesPreview
+		}
+		...SpriteInfo
+
+		moves(first: 1) @paginate(mode: SinglePage) {
+			edges {
+				node {
+					...MoveDisplay
+				}
+			}
+		}
+	}
+	favorites @list(name: "FavoriteSpecies") {
+		...FavoritePreview
+	}
+}
