@@ -28,6 +28,7 @@
 </script>
 
 {#if $Info.fetching}
+	<FavoritesContainer />
 	<Container />
 {:else}
 	<FavoritesContainer>
