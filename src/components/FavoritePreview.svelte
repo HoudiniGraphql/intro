@@ -4,7 +4,7 @@
 
 	export let species
 
-	const data = fragment(
+	$: preview = fragment(
 		species,
 		graphql`
 			fragment FavoritePreview on Species {
@@ -18,8 +18,8 @@
 	)
 </script>
 
-<a href={$data.id}>
-	<img src={$data.sprites.front} alt={`${$data.name} sprite`} />
+<a href={$preview.id}>
+	<img src={$preview.sprites.front} alt={`${$preview.name} sprite`} />
 </a>
 
 <style>
