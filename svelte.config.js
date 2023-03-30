@@ -1,5 +1,5 @@
-import adapter from '@sveltejs/adapter-auto';
-import path from 'path';
+import adapter from '@sveltejs/adapter-auto'
+import path from 'path'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -8,9 +8,9 @@ const config = {
 		alias: {
 			// these are the aliases and paths to them
 			'~': path.resolve('./src'),
-			$houdini: path.resolve('.', '$houdini')
+			$houdini: path.resolve('./$houdini')
 		}
 	}
-};
+}
 
-export default config;
+export default config

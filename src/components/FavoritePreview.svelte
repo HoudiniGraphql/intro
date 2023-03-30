@@ -1,29 +1,30 @@
 <script>
-    import { graphql, fragment } from '$houdini'
-    import { Sprite } from '.'
+	import { graphql, fragment } from '$houdini'
+	import { Sprite } from '.'
 
-    export let species
+	export let species
 
-    const data = fragment(species, graphql`
-        fragment FavoritePreview on Species { 
-            id 
-            name
-            sprites { 
-                front
-            }
-        }
-    `)
-
+	const data = fragment(
+		species,
+		graphql`
+			fragment FavoritePreview on Species {
+				id
+				name
+				sprites {
+					front
+				}
+			}
+		`
+	)
 </script>
 
 <a href={$data.id}>
-    <img src={$data.sprites.front} alt={`${$data.name} sprite`} />
+	<img src={$data.sprites.front} alt={`${$data.name} sprite`} />
 </a>
 
 <style>
-    a {
-        display: flex;
-        flex-direction: column;
-    }
+	a {
+		display: flex;
+		flex-direction: column;
+	}
 </style>
-

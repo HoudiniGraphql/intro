@@ -6,7 +6,7 @@
 export function connectionFromArray(data, args) {
 	return connectionFromArraySlice(data, args, {
 		sliceStart: 0,
-		arrayLength: data.length,
+		arrayLength: data.length
 	})
 }
 
@@ -48,7 +48,7 @@ function connectionFromArraySlice(arraySlice, args, meta) {
 
 	const edges = slice.map((value, index) => ({
 		cursor: offsetToCursor(startOffset + index),
-		node: value,
+		node: value
 	}))
 
 	const firstEdge = edges[0]
@@ -62,8 +62,8 @@ function connectionFromArraySlice(arraySlice, args, meta) {
 			startCursor: firstEdge ? firstEdge.cursor : null,
 			endCursor: lastEdge ? lastEdge.cursor : null,
 			hasPreviousPage: startOffset > lowerBound,
-			hasNextPage: endOffset < upperBound,
-		},
+			hasNextPage: endOffset < upperBound
+		}
 	}
 }
 const PREFIX = 'arrayconnection:'
