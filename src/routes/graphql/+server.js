@@ -1,10 +1,10 @@
-import { json } from '@sveltejs/kit';
-import { schema } from './schema';
-import * as graphql from 'graphql';
+import { json } from '@sveltejs/kit'
+import { schema } from './schema'
+import * as graphql from 'graphql'
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
-	const { query, variables } = await request.json();
+	const { query, variables } = await request.json()
 
 	return json(
 		await graphql.execute({
@@ -12,5 +12,5 @@ export async function POST({ request }) {
 			document: graphql.parse(query),
 			variableValues: variables
 		})
-	);
+	)
 }

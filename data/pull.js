@@ -1,5 +1,5 @@
-import fetch from 'node-fetch';
-import fs from 'fs/promises';
+import fetch from 'node-fetch'
+import fs from 'fs/promises'
 
 // load the move data first so we can filter non-gen 1 moves out
 const moveData = await (
@@ -24,7 +24,7 @@ const moveData = await (
         `
 		})
 	})
-).json();
+).json()
 
 const moves = moveData.data.moves.reduce(
 	(acc, move) => ({
@@ -38,7 +38,7 @@ const moves = moveData.data.moves.reduce(
 		}
 	}),
 	{}
-);
+)
 
 const {
 	data: { pokemon: species }
@@ -64,42 +64,42 @@ const {
         `
 		})
 	})
-).json();
+).json()
 
 // load the extra info we need not present in the gql query
 await Promise.all(
 	species.map(async (pokemon) => {
-		const data = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`)).json();
+		const data = await (await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`)).json()
 
 		// condense the graphql response
 		pokemon.flavor_text = pokemon.flavor_texts.map(({ text }) =>
 			text.replace(/\n/g, ' ').replace(/\f/g, ' ')
-		)[0];
-		pokemon.evo_chain = pokemon.evo_chain.species.map(({ id }) => id).filter((id) => id <= 151);
+		)[0]
+		pokemon.evo_chain = pokemon.evo_chain.species.map(({ id }) => id).filter((id) => id <= 151)
 
 		// add the list of types
-		pokemon.types = data.types.map(({ type }) => type.name);
+		pokemon.types = data.types.map(({ type }) => type.name)
 
 		// add the sprites
 		pokemon.sprites = {
 			front: data.sprites.front_default,
 			back: data.sprites.back_default
-		};
+		}
 
 		const speciesMoves = data.moves.map(({ move, version_group_details }) => {
-			const details = version_group_details[0];
+			const details = version_group_details[0]
 
 			return {
 				learned_at: details.level_learned_at,
 				method: details.move_learn_method.name,
 				name: move.name
-			};
-		});
+			}
+		})
 
 		// first sort the moves by level learned
 		speciesMoves.sort((moveA, moveB) => {
-			return moveA.learned_at > moveB.learned_at ? 1 : -1;
-		});
+			return moveA.learned_at > moveB.learned_at ? 1 : -1
+		})
 
 		// group the moves by the method
 		const moveGroups = speciesMoves.reduce(
@@ -108,14 +108,14 @@ await Promise.all(
 				[move.method]: [...(acc[move.method] || []), move]
 			}),
 			{}
-		);
+		)
 
 		// order the moves
 		pokemon.moves = [
 			...moveGroups['level-up'],
 			...(moveGroups['machine'] || []),
 			...(moveGroups['egg'] || [])
-		].filter((move) => moves[move.name]);
+		].filter((move) => moves[move.name])
 
 		// merge the base stats into a single object
 		pokemon.base_stats = data.stats.reduce(
@@ -124,11 +124,11 @@ await Promise.all(
 				[stat.stat.name]: stat.base_stat
 			}),
 			{}
-		);
+		)
 
 		// clean up the values we aren't using
-		delete pokemon.flavor_texts;
+		delete pokemon.flavor_texts
 	})
-);
+)
 
-await fs.writeFile('./data/data.json', JSON.stringify({ species, moves }), 'utf-8');
+await fs.writeFile('./data/data.json', JSON.stringify({ species, moves }), 'utf-8')

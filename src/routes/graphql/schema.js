@@ -1,5 +1,5 @@
-import data from './data/data.js';
-import { createSchema } from 'graphql-yoga';
+import data from './data/data.js'
+import { createSchema } from 'graphql-yoga'
 
 export const typeDefs = `scalar Map
 
@@ -104,76 +104,76 @@ type Subscription {
 type SpeciesFavoriteToggledOutput {
 	species: Species!
 }
-`;
+`
 
 // the list of favorites
-const favorites = [];
+const favorites = []
 
 export const resolvers = {
 	Query: {
 		species(_, { id }) {
-			return data.species[id - 1];
+			return data.species[id - 1]
 		},
 		async pokemon(_, args) {
-			const { connectionFromArray } = await import('../../lib/connections.mjs');
+			const { connectionFromArray } = await import('../../lib/connections.mjs')
 
-			const connection = connectionFromArray(data.species, args);
-			connection.totalCount = data.species.length;
+			const connection = connectionFromArray(data.species, args)
+			connection.totalCount = data.species.length
 
-			return connection;
+			return connection
 		},
 		favorites() {
-			return favorites.map((id) => data.species[id - 1]);
+			return favorites.map((id) => data.species[id - 1])
 		}
 	},
 	Mutation: {
 		toggleFavorite(_, { id }) {
 			// if the id is in the list of favorites, remove it
 			if (favorites.includes(id)) {
-				favorites.splice(favorites.indexOf(id), 1);
+				favorites.splice(favorites.indexOf(id), 1)
 			} else {
-				favorites.push(id);
+				favorites.push(id)
 			}
 
-			const species = data.species[id - 1];
+			const species = data.species[id - 1]
 
 			// return the species
-			return { species };
+			return { species }
 		}
 	},
 	Move: {
 		type({ type }) {
-			return type[0].toUpperCase() + type.slice(1);
+			return type[0].toUpperCase() + type.slice(1)
 		}
 	},
 	Species: {
 		name({ name }) {
-			return name.charAt(0).toUpperCase() + name.slice(1);
+			return name.charAt(0).toUpperCase() + name.slice(1)
 		},
 		types({ types }) {
-			return types.map((type) => type.charAt(0).toUpperCase() + type.slice(1));
+			return types.map((type) => type.charAt(0).toUpperCase() + type.slice(1))
 		},
 		favorite({ id }) {
-			return favorites.includes(id);
+			return favorites.includes(id)
 		},
 		evolution_chain({ evo_chain }) {
-			return evo_chain.map((id) => data.species[id - 1]);
+			return evo_chain.map((id) => data.species[id - 1])
 		},
 		async moves({ moves }, args) {
-			const { connectionFromArray } = await import('../../lib/connections.mjs');
+			const { connectionFromArray } = await import('../../lib/connections.mjs')
 
 			const connection = connectionFromArray(
 				moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })),
 				args
-			);
-			connection.totalCount = moves.length;
+			)
+			connection.totalCount = moves.length
 
-			return connection;
+			return connection
 		}
 	}
-};
+}
 
 export const schema = createSchema({
 	typeDefs,
 	resolvers
-});
+})

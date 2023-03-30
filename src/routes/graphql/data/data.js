@@ -8767,4 +8767,4 @@ export default {
 		},
 		struggle: { accuracy: null, pp: 1, power: 50, name: 'Struggle', type: 'normal' }
 	}
-};
+}
