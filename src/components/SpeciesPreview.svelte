@@ -6,7 +6,7 @@
 	export let species
 	export let number
 
-	const data = fragment(
+	$: preview = fragment(
 		species,
 		graphql`
 			fragment SpeciesPreview on Species {
@@ -20,11 +20,11 @@
 	)
 </script>
 
-<a href={$data.id}>
+<a href={$preview.id}>
 	<Number value={number} />
-	<Sprite src={$data.sprites.front} speciesName={$data.name} class="preview-sprite" />
+	<Sprite src={$preview.sprites.front} speciesName={$preview.name} class="preview-sprite" />
 	<Display>
-		{$data.name}
+		{$preview.name}
 	</Display>
 </a>
 
