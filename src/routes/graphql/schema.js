@@ -16,7 +16,7 @@ type Species {
 	base_stats: Map!
 	favorite: Boolean!
 	evolution_chain: [Species!]!
-	moves(first: Int, after: String): SpeciesMoveConnection!
+	moves(first: Int, after: String, last: Int, before: String): SpeciesMoveConnection!
 	types: [Type!]!
 	sprites: SpeciesSprites!
 }
