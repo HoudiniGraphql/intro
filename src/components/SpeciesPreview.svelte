@@ -12,9 +12,7 @@
 			fragment SpeciesPreview on Species {
 				name
 				id
-				sprites {
-					front
-				}
+				...SpriteInfo
 			}
 		`
 	)
@@ -22,7 +20,7 @@
 
 <a href={$preview.id}>
 	<Number value={number} />
-	<Sprite src={$preview.sprites.front} speciesName={$preview.name} class="preview-sprite" />
+	<Sprite species={$preview} />
 	<Display>
 		{$preview.name}
 	</Display>
