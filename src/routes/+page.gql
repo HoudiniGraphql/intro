@@ -1,0 +1,10 @@
+query Info {
+	species(id: 1) {
+		id
+		name
+		flavor_text
+		sprites {
+			front
+		}
+	}
+}
