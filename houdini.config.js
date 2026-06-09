@@ -1,11 +1,9 @@
-/// <references types="houdini-svelte">
-
+/// <references types="houdini-react">
 /** @type {import('houdini').ConfigFile} */
 const config = {
-	schemaPath: './src/routes/graphql/schema.graphql',
 	plugins: {
-		'houdini-svelte': {}
-	}
+		'houdini-react': {},
+	},
 }
 
 export default config
