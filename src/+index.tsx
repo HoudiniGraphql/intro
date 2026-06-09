@@ -1,5 +1,5 @@
 import React from 'react'
-import './app.css'
+import appCssUrl from './app.css?url'
 
 export default function App({ children }: { children: React.ReactNode }) {
 	return (
@@ -9,6 +9,7 @@ export default function App({ children }: { children: React.ReactNode }) {
 				<meta name="description" content="" />
 				<link rel="icon" type="image/png" href="https://houdinigraphql.com/images/logo.png" />
 				<title>Houdini • React • Pokédex</title>
+				<link rel="stylesheet" href={appCssUrl} />
 				<link rel="stylesheet" href="/styles/colors.css" />
 				<link rel="stylesheet" href="/styles/elements.css" />
 				<link rel="stylesheet" href="/styles/pokedex.css" />

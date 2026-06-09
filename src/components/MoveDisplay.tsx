@@ -1,5 +1,5 @@
 import { useFragment, graphql } from '$houdini'
-import type { MoveDisplay$key } from '$houdini'
+import type { MoveDisplay as MoveDisplayFragment } from '$houdini'
 
 const padValue = (val: number | null) => {
 	if (val === null) return '..0'
@@ -19,7 +19,7 @@ const padKey = (val: string) => {
 	)
 }
 
-export function MoveDisplay({ move }: { move: MoveDisplay$key }) {
+export function MoveDisplay({ move }: { move: MoveDisplayFragment }) {
 	const data = useFragment(
 		move,
 		graphql(`

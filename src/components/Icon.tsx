@@ -27,7 +27,7 @@ export function Icon({
 	className?: string
 	style?: CSSProperties
 }) {
-	const icon = feather.icons[name]
+	const icon = (feather.icons as Record<string, feather.FeatherIcon | undefined>)[name]
 	if (!icon) return null
 
 	const attrs = { ...icon.attrs }

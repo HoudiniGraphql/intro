@@ -1,5 +1,5 @@
 import { useFragment, graphql } from '$houdini'
-import type { SpeciesPreview$key } from '$houdini'
+import type { SpeciesPreview as SpeciesPreviewFragment } from '$houdini'
 import { Sprite } from './Sprite'
 import { Display } from './Display'
 import { SpeciesPreviewNumber } from './SpeciesPreviewNumber'
@@ -8,7 +8,7 @@ export function SpeciesPreview({
 	species,
 	number,
 }: {
-	species: SpeciesPreview$key
+	species: SpeciesPreviewFragment
 	number: number
 }) {
 	const data = useFragment(

@@ -116,7 +116,7 @@ export default createSchema({
 				return data.species[id - 1]
 			},
 			pokemon(_: unknown, args: Record<string, unknown>) {
-				const connection = connectionFromArray(data.species, args)
+				const connection = connectionFromArray(data.species, args) as Record<string, unknown>
 				connection.totalCount = data.species.length
 				return connection
 			},
@@ -153,10 +153,11 @@ export default createSchema({
 				return evo_chain.map((id) => data.species[id - 1])
 			},
 			moves({ moves }: { moves: Array<{ name: string; [key: string]: unknown }> }, args: Record<string, unknown>) {
+				const movesData = data.moves as Record<string, unknown>
 				const connection = connectionFromArray(
-					moves.map(({ name, ...info }) => ({ ...info, move: data.moves[name] })),
+					moves.map(({ name, ...info }) => ({ ...info, move: movesData[name] })),
 					args
-				)
+				) as Record<string, unknown>
 				connection.totalCount = moves.length
 				return connection
 			},

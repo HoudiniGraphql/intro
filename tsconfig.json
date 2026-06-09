@@ -1,3 +1,11 @@
 {
-	"extends": "./.houdini/tsconfig.json"
+	"extends": "./.houdini/tsconfig.json",
+	"compilerOptions": {
+		"ignoreDeprecations": "6.0"
+	},
+	"exclude": [
+		"node_modules",
+		".houdini/runtime",
+		".houdini/plugins"
+	]
 }

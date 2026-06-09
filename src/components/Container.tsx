@@ -1,6 +1,15 @@
+import React from 'react'
 import type { ReactNode } from 'react'
 
-export function Container({ left, right }: { left: ReactNode; right: ReactNode }) {
+export function Container({ children }: { children: ReactNode }) {
+	const childArray = React.Children.toArray(children)
+	const left = childArray.find(
+		(child) => React.isValidElement(child) && (child.props as { side?: string }).side === 'left'
+	)
+	const right = childArray.find(
+		(child) => React.isValidElement(child) && (child.props as { side?: string }).side === 'right'
+	)
+
 	return (
 		<div id="pokedex">
 			<div id="left-panel" className="panel">

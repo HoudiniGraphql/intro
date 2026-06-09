@@ -1,7 +1,7 @@
 import { useFragment, graphql } from '$houdini'
-import type { FavoritePreview$key } from '$houdini'
+import type { FavoritePreview as FavoritePreviewFragment } from '$houdini'
 
-export function FavoritePreview({ species }: { species: FavoritePreview$key }) {
+export function FavoritePreview({ species }: { species: FavoritePreviewFragment }) {
 	const data = useFragment(
 		species,
 		graphql(`
