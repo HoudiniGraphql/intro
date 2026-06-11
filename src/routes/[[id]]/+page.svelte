@@ -16,17 +16,23 @@
 	const Info = new InfoStore()
 	const toggleFavorite = new ToggleFavoriteStore()
 
-  $inspect("page.daa", $Info)
-	const species = $derived($Info.data?.species)
-	const movePageInfo = $derived(species?.moves.pageInfo)
-	const previousId = $derived(species ? species.id - 1 : 1)
-	const nextId = $derived(species ? species.id + 1 : 1)
+	const fetchInfo = $derived.by(() => {
+		if (data.id) {
+			Info.fetch({
+				variables: { id: data.id }
+			})
+		}
+
+		return data.id
+	})
 
 	const loadPreviousMove = async () => {
+		const pageInfo = $Info.data.species.moves.pageInfo
+
 		await Info.fetch({
 			variables: {
 				id: data.id,
-				before: movePageInfo.startCursor,
+				before: pageInfo.startCursor,
 				last: 1,
 				first: null,
 				after: null
@@ -35,10 +41,12 @@
 	}
 
 	const loadNextMove = async () => {
+		const pageInfo = $Info.data.species.moves.pageInfo
+
 		await Info.fetch({
 			variables: {
 				id: data.id,
-				after: movePageInfo.endCursor,
+				after: pageInfo.endCursor,
 				first: 1,
 				before: null,
 				last: null
@@ -46,16 +54,9 @@
 		})
 	}
 
-	$effect(() => {
-		if (data.id) {
-			Info.fetch({
-				variables: { id: data.id }
-			})
-		}
-	})
 </script>
 
-{#if $Info.fetching || !$Info.data}
+{#if fetchInfo && ($Info.fetching || !$Info.data)}
 	<FavoritesContainer />
 	<Container />
 {:else}
@@ -107,19 +108,19 @@
 				<MoveDisplay move={$Info.data.species.moves.edges[0].node} />
 				<div id="move-controls">
 					<UpButton
-						disabled={!movePageInfo?.hasPreviousPage}
+						disabled={!$Info.data.species.moves.pageInfo.hasPreviousPage}
 						onclick={loadPreviousMove}
 					/>
 					<DownButton
-						disabled={!movePageInfo?.hasNextPage}
+						disabled={!$Info.data.species.moves.pageInfo.hasNextPage}
 						onclick={loadNextMove}
 					/>
 				</div>
 			</div>
 
 			<nav>
-				<a href={previousId} disabled={species.id <= 1}> previous </a>
-				<a href={nextId} disabled={species.id >= 151}> next </a>
+				<a href={$Info.data.species.id - 1} disabled={$Info.data.species.id <= 1}> previous </a>
+				<a href={$Info.data.species.id + 1} disabled={$Info.data.species.id >= 151}> next </a>
 			</nav>
 		</Panel>
 	</Container>
