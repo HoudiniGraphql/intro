@@ -1,8 +1,9 @@
 <script>
 	import { Icon } from '.'
-	export let disabled
+
+	let { disabled, onclick } = $props()
 </script>
 
-<button class="arrow-button" on:click {disabled}>
+<button class="arrow-button" {onclick} {disabled}>
 	<Icon name="arrow-down" />
 </button>

@@ -1,0 +1,5 @@
+fragment SpeciesPreview on Species {
+	name
+	id
+	...SpriteInfo
+}

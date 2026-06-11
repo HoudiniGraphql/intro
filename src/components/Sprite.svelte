@@ -1,24 +1,10 @@
 <script>
-	import { fragment, graphql } from '$houdini'
-
 	/* @type { import('$houdini').SpriteInfo } */
-	export let species
-
-	$: info = fragment(
-		species,
-		graphql(`
-			fragment SpriteInfo on Species {
-				name
-				sprites {
-					front
-				}
-			}
-		`)
-	)
+	let { species, id } = $props()
 </script>
 
-<div id={$$props.id} class="sprite">
-	<img src={$info.sprites.front} alt={`${$info.name} sprite`} height="100%" />
+<div {id} class="sprite">
+	<img src={species.sprites.front} alt={`${species.name} sprite`} height="100%" />
 </div>
 
 <style>

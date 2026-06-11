@@ -1,0 +1,11 @@
+fragment MoveDisplay on SpeciesMove {
+	learned_at
+	method
+	move {
+		name
+		accuracy
+		power
+		pp
+		type
+	}
+}

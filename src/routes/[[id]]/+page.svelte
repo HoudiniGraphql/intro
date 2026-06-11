@@ -1,4 +1,5 @@
 <script>
+	import { InfoStore, ToggleFavoriteStore } from '$houdini'
 	import { Container, Display, Sprite, Panel } from '~/components'
 	import DownButton from '~/components/DownButton.svelte'
 	import FavoritePreview from '~/components/FavoritePreview.svelte'
@@ -9,25 +10,52 @@
 	import SpeciesPreviewPlaceholder from '~/components/SpeciesPreviewPlaceholder.svelte'
 	import UpButton from '~/components/UpButton.svelte'
 
-	/* @type { import('./$houdini').PageData } */
-	export let data
+	/* @type { import('./$types').PageData } */
+	let { data } = $props()
 
-	$: ({ Info } = data)
+	const Info = new InfoStore()
+	const toggleFavorite = new ToggleFavoriteStore()
 
-	const toggleFavorite = graphql(`
-		mutation ToggleFavorite($id: Int!) {
-			toggleFavorite(id: $id) {
-				species {
-					id
-					favorite
-					...FavoriteSpecies_toggle
-				}
+  $inspect("page.daa", $Info)
+	const species = $derived($Info.data?.species)
+	const movePageInfo = $derived(species?.moves.pageInfo)
+	const previousId = $derived(species ? species.id - 1 : 1)
+	const nextId = $derived(species ? species.id + 1 : 1)
+
+	const loadPreviousMove = async () => {
+		await Info.fetch({
+			variables: {
+				id: data.id,
+				before: movePageInfo.startCursor,
+				last: 1,
+				first: null,
+				after: null
 			}
+		})
+	}
+
+	const loadNextMove = async () => {
+		await Info.fetch({
+			variables: {
+				id: data.id,
+				after: movePageInfo.endCursor,
+				first: 1,
+				before: null,
+				last: null
+			}
+		})
+	}
+
+	$effect(() => {
+		if (data.id) {
+			Info.fetch({
+				variables: { id: data.id }
+			})
 		}
-	`)
+	})
 </script>
 
-{#if $Info.fetching}
+{#if $Info.fetching || !$Info.data}
 	<FavoritesContainer />
 	<Container />
 {:else}
@@ -43,7 +71,7 @@
 		<Panel slot="left">
 			<button
 				id="favorite"
-				on:click={() =>
+				onclick={() =>
 					toggleFavorite.mutate({
 						id: $Info.data.species.id
 					})}
@@ -79,19 +107,19 @@
 				<MoveDisplay move={$Info.data.species.moves.edges[0].node} />
 				<div id="move-controls">
 					<UpButton
-						disabled={!$Info.pageInfo.hasPreviousPage}
-						on:click={async () => await Info.loadPreviousPage()}
+						disabled={!movePageInfo?.hasPreviousPage}
+						onclick={loadPreviousMove}
 					/>
 					<DownButton
-						disabled={!$Info.pageInfo.hasNextPage}
-						on:click={async () => await Info.loadNextPage()}
+						disabled={!movePageInfo?.hasNextPage}
+						onclick={loadNextMove}
 					/>
 				</div>
 			</div>
 
 			<nav>
-				<a href={$Info.data.species.id - 1} disabled={$Info.data.species.id <= 1}> previous </a>
-				<a href={$Info.data.species.id + 1} disabled={$Info.data.species.id >= 151}> next </a>
+				<a href={previousId} disabled={species.id <= 1}> previous </a>
+				<a href={nextId} disabled={species.id >= 151}> next </a>
 			</nav>
 		</Panel>
 	</Container>

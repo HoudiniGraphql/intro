@@ -1,0 +1,7 @@
+fragment FavoritePreview on Species {
+	id
+	name
+	sprites {
+		front
+	}
+}

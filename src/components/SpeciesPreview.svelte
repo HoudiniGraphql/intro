@@ -1,28 +1,15 @@
 <script>
-	import { graphql, fragment } from '$houdini'
 	import { Sprite, Display } from '.'
 	import Number from './SpeciesPreviewNumber.svelte'
 
-	export let species
-	export let number
-
-	$: preview = fragment(
-		species,
-		graphql`
-			fragment SpeciesPreview on Species {
-				name
-				id
-				...SpriteInfo
-			}
-		`
-	)
+	let { species, number } = $props()
 </script>
 
-<a href={$preview.id}>
+<a href={species.id}>
 	<Number value={number} />
-	<Sprite species={$preview} />
+	<Sprite species={species} />
 	<Display>
-		{$preview.name}
+		{species.name}
 	</Display>
 </a>
 

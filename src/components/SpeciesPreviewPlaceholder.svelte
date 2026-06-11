@@ -2,7 +2,7 @@
 	import { Display } from '.'
 	import Number from './SpeciesPreviewNumber.svelte'
 
-	export let number
+	let { number } = $props()
 </script>
 
 <div class="">
