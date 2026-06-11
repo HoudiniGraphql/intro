@@ -1,32 +1,39 @@
 <script>
 	import feather from 'feather-icons'
 	export const directions = ['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw']
-	export let name
-	export let direction = 'n'
-	export let strokeWidth = undefined
-	export let stroke = undefined
-	export let width = '1em'
-	export let height = '1em'
-	export let fill = ''
 
-	$: icon = feather.icons[name]
-	$: rotation = directions.indexOf(direction) * 45
-	$: if (icon) {
-		if (stroke) icon.attrs['stroke'] = stroke
-		if (strokeWidth) icon.attrs['stroke-width'] = strokeWidth
-		if (fill) icon.attrs['fill'] = fill
-	}
+	let {
+		name,
+		direction = 'n',
+		strokeWidth = undefined,
+		stroke = undefined,
+		width = '1em',
+		height = '1em',
+		fill = '',
+		class: className,
+		id
+	} = $props()
 
-	// prioritize the specied fill over the icon attrs
-	$: diagramFill = fill || icon.attrs?.fill
+	const icon = $derived(feather.icons[name])
+	const rotation = $derived(directions.indexOf(direction) * 45)
+	const attrs = $derived.by(() => {
+		if (!icon) return {}
+
+		return {
+			...icon.attrs,
+			...(stroke ? { stroke } : {}),
+			...(strokeWidth ? { 'stroke-width': strokeWidth } : {}),
+			...(fill ? { fill } : {})
+		}
+	})
 </script>
 
 {#if icon}
 	<svg
-		{...icon.attrs}
+		{...attrs}
 		style="width: {width}; height: {height}; transform: rotate({rotation}deg);"
-		class={$$props.class}
-		id={$$props.id}
+		class={className}
+		{id}
 	>
 		<g>
 			{@html icon.contents}

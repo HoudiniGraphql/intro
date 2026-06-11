@@ -1,5 +1,6 @@
 query Info($id: Int! = 1) {
 	species(id: $id) {
+		id
 		name
 		flavor_text
 		favorite

@@ -3,6 +3,8 @@
 /** @type {import('houdini').ConfigFile} */
 const config = {
 	schemaPath: './src/routes/graphql/schema.graphql',
+	include: 'src/**/*.{svelte,gql,js}',
+	exclude: 'src/routes/graphql/schema.graphql',
 	plugins: {
 		'houdini-svelte': {}
 	}

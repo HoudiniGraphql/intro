@@ -1,8 +1,10 @@
 <script>
-	export let value
-	const Is = Array.from({ length: value })
-		.map(() => 'I')
-		.join('')
+	let { value } = $props()
+	const Is = $derived(
+		Array.from({ length: value })
+			.map(() => 'I')
+			.join('')
+	)
 </script>
 
 <div>

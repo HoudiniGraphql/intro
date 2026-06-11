@@ -1,25 +1,9 @@
 <script>
-	import { graphql, fragment } from '$houdini'
-	import { Sprite } from '.'
-
-	export let species
-
-	$: preview = fragment(
-		species,
-		graphql`
-			fragment FavoritePreview on Species {
-				id
-				name
-				sprites {
-					front
-				}
-			}
-		`
-	)
+	let { species } = $props()
 </script>
 
-<a href={$preview.id}>
-	<img src={$preview.sprites.front} alt={`${$preview.name} sprite`} />
+<a href={species.id}>
+	<img src={species.sprites.front} alt={`${species.name} sprite`} />
 </a>
 
 <style>
