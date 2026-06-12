@@ -366,11 +366,24 @@
 }
 
 .light {
+	position: relative;
 	height: 15px;
 	width: 15px;
 	border-radius: 50%;
 	margin-right: 10px;
 	border: 2px solid black;
+	box-sizing: content-box;
+}
+
+.light::before {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 4px;
+	height: 4px;
+	width: 4px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.5);
 }
 
 #red-light {
@@ -383,25 +396,6 @@
 
 #green-light {
 	background: rgb(16, 145, 33);
-}
-
-#highlights {
-	position: absolute;
-	top: 15px;
-	left: 111px;
-	height: 20px;
-	width: 100px;
-	display: flex;
-	flex-direction: row;
-}
-
-.highlight {
-	height: 4px;
-	width: 4px;
-	border-radius: 50%;
-	margin-right: 25px;
-	background: rgba(255, 255, 255, 0.5);
-	z-index: 13;
 }
 
 #background {

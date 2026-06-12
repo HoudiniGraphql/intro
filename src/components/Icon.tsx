@@ -1,5 +1,5 @@
 import feather from 'feather-icons'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, SVGAttributes } from 'react'
 
 const directions = ['n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw'] as const
 type Direction = (typeof directions)[number]
@@ -30,16 +30,27 @@ export function Icon({
 	const icon = (feather.icons as Record<string, feather.FeatherIcon | undefined>)[name]
 	if (!icon) return null
 
-	const attrs = { ...icon.attrs }
-	if (stroke) attrs['stroke'] = stroke
-	if (strokeWidth) attrs['stroke-width'] = String(strokeWidth)
-	if (fill) attrs['fill'] = fill
+	const {
+		class: _class,
+		'stroke-width': svgStrokeWidth,
+		'stroke-linecap': svgStrokeLinecap,
+		'stroke-linejoin': svgStrokeLinejoin,
+		...attrs
+	} = { ...icon.attrs }
+	const svgAttrs = {
+		...attrs,
+		strokeWidth: strokeWidth ?? svgStrokeWidth,
+		strokeLinecap: svgStrokeLinecap as SVGAttributes<SVGSVGElement>['strokeLinecap'],
+		strokeLinejoin: svgStrokeLinejoin as SVGAttributes<SVGSVGElement>['strokeLinejoin'],
+	}
+	if (stroke) svgAttrs['stroke'] = stroke
+	if (fill) svgAttrs['fill'] = fill
 
 	const rotation = directions.indexOf(direction) * 45
 
 	return (
 		<svg
-			{...attrs}
+			{...svgAttrs}
 			style={{ width, height, transform: `rotate(${rotation}deg)`, ...styleProp }}
 			className={`overflow-visible origin-[50%_50%]${className ? ` ${className}` : ''}`}
 			id={id}

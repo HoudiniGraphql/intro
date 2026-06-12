@@ -16,6 +16,9 @@
 #species-flavor_text {
 	font-size: 20px;
 	height: 3em;
+	overflow: hidden;
+	line-height: 1;
+	box-sizing: content-box;
 }
 
 nav {
@@ -42,14 +45,14 @@ nav a {
 	box-sizing: border-box;
 }
 
-nav a[disabled='true'] {
+nav a.disabled {
 	background-color: #3a3a3a;
 	border-top: none;
 	border-right: none;
 	color: #727272;
 }
 
-a[disabled='true'] {
+a.disabled {
 	pointer-events: none;
 }
 
@@ -81,9 +84,54 @@ a {
 	stroke-width: 1px;
 }
 
+.sprite {
+	display: flex;
+	image-rendering: pixelated;
+	border: inset #9aa28b 3px;
+	border-radius: 5px;
+	margin: 10px 0;
+	box-sizing: border-box;
+	background: linear-gradient(
+		15deg,
+		#cad5b5 64%,
+		#dde2d4 70%,
+		#dde2d4 81%,
+		#fff 86%,
+		#dde2d4 89%,
+		#dde2d4 100%
+	);
+	align-items: center;
+	justify-content: center;
+}
+
+.arrow-button {
+	height: 40px;
+	width: 40px;
+	font-size: 37px;
+	border: groove grey 3px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-shadow: #e78181 -1px 1px;
+	cursor: pointer;
+	transform: rotate(60deg);
+	background: none;
+}
+
+.arrow-button svg {
+	transform: rotate(-60deg) !important;
+}
+
 #move-summary {
+	position: relative;
+	z-index: 11;
 	display: flex;
 	flex-direction: row;
+}
+
+#move-display {
+	flex-grow: 1;
 }
 
 #move-summary ~ nav {

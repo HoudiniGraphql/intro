@@ -24,6 +24,8 @@ export function SpeciesPreview({
 		`)
 	)
 
+	if (!data) return null
+
 	return (
 		<a href={`/${data.id}`} className="no-underline">
 			<SpeciesPreviewNumber value={number} />

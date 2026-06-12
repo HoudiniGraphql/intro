@@ -1,12 +1,14 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
 export function Display({
 	id,
 	className,
+	style,
 	children,
 }: {
 	id?: string
 	className?: string
+	style?: CSSProperties
 	children: ReactNode
 }) {
 	return (
@@ -20,6 +22,7 @@ export function Display({
 				fontFamily: "'VT323'",
 				border: 'inset #879a65 3px',
 				color: 'black',
+				...style,
 			}}
 		>
 			{children}

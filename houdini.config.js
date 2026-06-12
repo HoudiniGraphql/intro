@@ -2,8 +2,13 @@
 /** @type {import('houdini').ConfigFile} */
 const config = {
 	plugins: {
-		'houdini-react': {},
+		"houdini-react": {},
 	},
-}
+	types: {
+		SpeciesMove: {
+			keys: ["name"],
+		},
+	},
+};
 
-export default config
+export default config;

@@ -32,12 +32,7 @@ export function Container({ children }: { children: ReactNode }) {
 			<div>
 				<div id="ball-highlight" />
 				<div id="ball" />
-				<div id="highlights">
-					<div className="highlight" />
-					<div className="highlight" />
-					<div className="highlight" />
-				</div>
-				<div id="light-container">
+<div id="light-container">
 					<div id="red-light" className="light" />
 					<div id="yellow-light" className="light" />
 					<div id="green-light" className="light" />

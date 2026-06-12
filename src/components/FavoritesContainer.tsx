@@ -10,7 +10,7 @@ export function FavoritesContainer({ children }: { children: ReactNode }) {
 				style={{ fontFamily: "'VT323'" }}>
 				Favorites
 			</h2>
-			<div className="flex flex-row overflow-x-auto overflow-y-hidden h-full">{children}</div>
+			<div className="flex flex-row overflow-x-auto overflow-y-hidden flex-1 min-h-0">{children}</div>
 		</div>
 	)
 }
