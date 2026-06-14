@@ -33,7 +33,7 @@ export default function Page({ Info$handle }: PageProps) {
 	const id = species?.id ?? 1;
 	const favorites = Info.favorites ?? [];
 
-	const [toggleFavorite] = useMutation(toggleFavoriteMutation);
+	const [toggleFavorite, pending] = useMutation(toggleFavoriteMutation);
 
 	const evolutionChain = species?.evolution_chain ?? [];
 	const placeholderCount = Math.max(0, 3 - evolutionChain.length);
@@ -55,6 +55,7 @@ export default function Page({ Info$handle }: PageProps) {
 				<Panel side="left">
 					<button
 						id="favorite"
+						disabled={pending}
 						onClick={() =>
 							species && toggleFavorite({ variables: { id: species.id } })
 						}

@@ -1,8 +1,14 @@
-import { createSchema } from 'graphql-yoga'
-import data from './data/data.js'
-import { connectionFromArray } from '../lib/connections.mjs'
+import { createSchema, createPubSub } from "graphql-yoga";
+import data from "./data/data.js";
+import { connectionFromArray } from "./connections.ts";
 
-const favorites: number[] = []
+const favorites: number[] = [];
+
+type SpeciesData = (typeof data.species)[number];
+
+const pubSub = createPubSub<{
+	speciesFavoriteToggled: [{ species: SpeciesData }];
+}>();
 
 export default createSchema({
 	typeDefs: /* GraphQL */ `
@@ -21,7 +27,7 @@ export default createSchema({
 			base_stats: Map!
 			favorite: Boolean!
 			evolution_chain: [Species!]!
-			moves(first: Int, after: String): SpeciesMoveConnection!
+			moves(first: Int, after: String, last: Int, before: String): SpeciesMoveConnection!
 			types: [Type!]!
 			sprites: SpeciesSprites!
 		}
@@ -63,6 +69,7 @@ export default createSchema({
 			Ice
 			Ghost
 			Dragon
+			Dark
 		}
 
 		type SpeciesConnection {
@@ -113,54 +120,73 @@ export default createSchema({
 	resolvers: {
 		Query: {
 			species(_: unknown, { id }: { id: number }) {
-				return data.species[id - 1]
+				return data.species[id - 1];
 			},
-			pokemon(_: unknown, args: Record<string, unknown>) {
-				const connection = connectionFromArray(data.species, args) as Record<string, unknown>
-				connection.totalCount = data.species.length
-				return connection
+			pokemon(_: unknown, args: { first?: number; after?: string }) {
+				const connection = connectionFromArray(data.species, args) as Record<
+					string,
+					unknown
+				>;
+				connection.totalCount = data.species.length;
+				return connection;
 			},
 			favorites() {
-				return favorites.map((id) => data.species[id - 1])
+				return favorites.map((id) => data.species[id - 1]);
 			},
 		},
 		Mutation: {
 			toggleFavorite(_: unknown, { id }: { id: number }) {
 				if (favorites.includes(id)) {
-					favorites.splice(favorites.indexOf(id), 1)
+					favorites.splice(favorites.indexOf(id), 1);
 				} else {
-					favorites.push(id)
+					favorites.push(id);
 				}
-				return { species: data.species[id - 1] }
+				const species = data.species[id - 1];
+				pubSub.publish("speciesFavoriteToggled", { species });
+				return { species };
+			},
+		},
+		Subscription: {
+			speciesFavoriteToggled: {
+				subscribe: () => pubSub.subscribe("speciesFavoriteToggled"),
+				resolve: (payload: { species: SpeciesData }) => payload,
 			},
 		},
 		Move: {
 			type({ type }: { type: string }) {
-				return type[0].toUpperCase() + type.slice(1)
+				return type[0].toUpperCase() + type.slice(1);
 			},
 		},
 		Species: {
 			name({ name }: { name: string }) {
-				return name.charAt(0).toUpperCase() + name.slice(1)
+				return name.charAt(0).toUpperCase() + name.slice(1);
 			},
 			types({ types }: { types: string[] }) {
-				return types.map((type) => type.charAt(0).toUpperCase() + type.slice(1))
+				return types.map(
+					(type) => type.charAt(0).toUpperCase() + type.slice(1),
+				);
 			},
 			favorite({ id }: { id: number }) {
-				return favorites.includes(id)
+				return favorites.includes(id);
 			},
 			evolution_chain({ evo_chain }: { evo_chain: number[] }) {
-				return evo_chain.map((id) => data.species[id - 1])
+				return evo_chain.map((id) => data.species[id - 1]);
 			},
-			moves({ moves }: { moves: Array<{ name: string; [key: string]: unknown }> }, args: Record<string, unknown>) {
-				const movesData = data.moves as Record<string, unknown>
+			moves(
+				{ moves }: { moves: Array<{ name: string; [key: string]: unknown }> },
+				args: { first?: number; after?: string; last?: number; before?: string },
+			) {
+				const movesData = data.moves as Record<string, unknown>;
 				const connection = connectionFromArray(
-					moves.map(({ name, ...info }) => ({ ...info, move: movesData[name] })),
-					args
-				) as Record<string, unknown>
-				connection.totalCount = moves.length
-				return connection
+					moves.map(({ name, ...info }) => ({
+						...info,
+						move: movesData[name],
+					})),
+					args,
+				) as Record<string, unknown>;
+				connection.totalCount = moves.length;
+				return connection;
 			},
 		},
 	},
-})
+});
