@@ -76,8 +76,7 @@ export default function Page({ Info$handle }: PageProps) {
 					</Display>
 					<Sprite
 						id="species-sprite"
-						src={species?.sprites.front ?? ""}
-						speciesName={species?.name ?? ""}
+						species={species ?? null}
 					/>
 					<Display id="species-flavor_text">{species?.flavor_text}</Display>
 				</Panel>

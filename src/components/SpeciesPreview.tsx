@@ -17,9 +17,7 @@ export function SpeciesPreview({
 			fragment SpeciesPreview on Species {
 				name
 				id
-				sprites {
-					front
-				}
+				...SpriteInfo
 			}
 		`)
 	)
@@ -29,11 +27,7 @@ export function SpeciesPreview({
 	return (
 		<a href={`/${data.id}`} className="no-underline">
 			<SpeciesPreviewNumber value={number} />
-			<Sprite
-				src={data.sprites.front}
-				speciesName={data.name}
-				className="h-[102px] w-[102px]"
-			/>
+			<Sprite species={data} className="h-[102px] w-[102px]" />
 			<Display>{data.name}</Display>
 		</a>
 	)

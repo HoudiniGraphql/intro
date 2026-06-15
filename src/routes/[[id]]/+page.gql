@@ -4,9 +4,7 @@ query Info($id: Int = 1) {
 		name
 		flavor_text
 		favorite
-		sprites {
-			front
-		}
+		...SpriteInfo
 		evolution_chain {
 			id
 			...SpeciesPreview
@@ -24,7 +22,7 @@ query Info($id: Int = 1) {
 		}
 	}
 	favorites @list(name: "FavoriteSpecies") {
-    id
+		id
 		...FavoritePreview
 	}
 }
