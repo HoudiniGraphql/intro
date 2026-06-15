@@ -1,4 +1,4 @@
-query Info($id: Int = 1) {
+query Info($id: Int! = 1) {
 	species(id: $id) {
 		id
 		name
