@@ -1,10 +1,16 @@
-# Houdini/intro
+# houdinigraphql/intro
 
-This repository provides the starting place for the [Introduction found on the Houdini website](https://www.houdinigraphql.com/intro/welcome).
+Starting points and final states for the [Houdini getting started guides](https://www.houdinigraphql.com/intro).
 
-- A deployed version of this application can be found at https://houdini-intro.pages.dev/.
-- The source code for final version of the application can be found in the [final branch](https://github.com/HoudiniGraphql/intro/tree/final).
+| Branch | Description |
+|--------|-------------|
+| [`kit`](https://github.com/HoudiniGraphql/intro/tree/kit) | SvelteKit starting point |
+| [`kit-final`](https://github.com/HoudiniGraphql/intro/tree/kit-final) | SvelteKit completed app |
+| [`react`](https://github.com/HoudiniGraphql/intro/tree/react) | React starting point |
+| [`react-final`](https://github.com/HoudiniGraphql/intro/tree/react-final) | React completed app |
 
-## Starting the Project
+Use [degit](https://github.com/Rich-Harris/degit) to pull a branch without the git history:
 
-Once you have the project cloned, you can start it by running `npm run dev`
+```bash
+npx degit houdinigraphql/intro#kit hello-houdini
+```
