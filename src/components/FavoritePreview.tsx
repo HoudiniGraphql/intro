@@ -7,6 +7,7 @@ export function FavoritePreview({ species }: { species: FavoritePreviewFragment 
 		graphql(`
 			fragment FavoritePreview on Species {
 				id
+				pokedexNumber
 				name
 				sprites {
 					front
@@ -16,7 +17,7 @@ export function FavoritePreview({ species }: { species: FavoritePreviewFragment 
 	)
 
 	return (
-		<a href={`/${data.id}`} className="flex flex-col no-underline h-full">
+		<a href={`/${data.pokedexNumber}`} className="flex flex-col no-underline h-full">
 			<img src={data.sprites.front} alt={`${data.name} sprite`} className="h-full w-auto" />
 		</a>
 	)

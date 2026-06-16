@@ -22,6 +22,7 @@ export default createSchema({
 
 		type Species {
 			id: Int!
+			pokedexNumber: Int!
 			name: String!
 			flavor_text: String!
 			base_stats: Map!
@@ -158,6 +159,9 @@ export default createSchema({
 			},
 		},
 		Species: {
+			pokedexNumber({ id }: { id: number }) {
+				return id;
+			},
 			name({ name }: { name: string }) {
 				return name.charAt(0).toUpperCase() + name.slice(1);
 			},

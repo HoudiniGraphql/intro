@@ -1,6 +1,7 @@
 query Info($id: Int! = 1) {
 	species(id: $id) {
 		id
+		pokedexNumber
 		name
 		flavor_text
 		favorite

@@ -30,7 +30,7 @@ const toggleFavoriteMutation = graphql(`
 export default function Page({ Info$handle }: PageProps) {
 	const Info = Info$handle.data;
 	const species = Info.species;
-	const id = species?.id ?? 1;
+	const pokedexNumber = species?.pokedexNumber ?? 1;
 	const favorites = Info.favorites ?? [];
 
 	const [toggleFavorite, pending] = useMutation(toggleFavoriteMutation);
@@ -72,7 +72,7 @@ export default function Page({ Info$handle }: PageProps) {
 					</button>
 					<Display id="species-name">
 						{species?.name}
-						<span>no.{species?.id}</span>
+						<span>no.{species?.pokedexNumber}</span>
 					</Display>
 					<Sprite
 						id="species-sprite"
@@ -108,13 +108,13 @@ export default function Page({ Info$handle }: PageProps) {
 					<nav>
 						<Link
 							to="/[[id]]"
-							params={{ id: id - 1 }}
-							disabled={id <= 1}
-							className={id <= 1 ? "disabled" : undefined}
+							params={{ id: pokedexNumber - 1 }}
+							disabled={pokedexNumber <= 1}
+							className={pokedexNumber <= 1 ? "disabled" : undefined}
 						>
 							previous
 						</Link>
-						<Link to="/[[id]]" params={{ id: id + 1 }}>next</Link>
+						<Link to="/[[id]]" params={{ id: pokedexNumber + 1 }}>next</Link>
 					</nav>
 				</Panel>
 			</Container>
