@@ -1,4 +1,4 @@
-import { graphql, useMutation } from "$houdini";
+import { graphql, useMutation, Link } from "$houdini";
 import {
 	Container,
 	Display,
@@ -106,13 +106,12 @@ export default function Page({ Info$handle }: PageProps) {
 						</div>
 					</div>
 					<nav>
-						<a
-							href={id - 1 <= 0 ? undefined : `/${id - 1}`}
-							className={id - 1 <= 0 ? "disabled" : undefined}
-						>
-							previous
-						</a>
-						<a href={`/${id + 1}`}>next</a>
+						{id > 1 ? (
+							<Link to="/[[id]]" params={{ id: id - 1 }}>previous</Link>
+						) : (
+							<a className="disabled">previous</a>
+						)}
+						<Link to="/[[id]]" params={{ id: id + 1 }}>next</Link>
 					</nav>
 				</Panel>
 			</Container>
