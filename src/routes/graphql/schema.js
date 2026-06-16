@@ -11,6 +11,7 @@ type Query {
 
 type Species {
 	id: Int!
+	pokedexNumber: Int!
 	name: String!
 	flavor_text: String!
 	base_stats: Map!
@@ -147,6 +148,9 @@ export const resolvers = {
 		}
 	},
 	Species: {
+		pokedexNumber({ id }) {
+			return id
+		},
 		name({ name }) {
 			return name.charAt(0).toUpperCase() + name.slice(1)
 		},

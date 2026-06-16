@@ -6,6 +6,7 @@
 	const data = fragment(species, graphql(`
 		fragment FavoritePreview on Species {
 			id
+			pokedexNumber
 			name
 			sprites {
 				front
@@ -14,7 +15,7 @@
 	`))
 </script>
 
-<a href="/{$data.id}">
+<a href="/{$data.pokedexNumber}">
 	<img src={$data.sprites.front} alt="{$data.name} sprite" />
 </a>
 

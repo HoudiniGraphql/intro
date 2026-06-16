@@ -8,13 +8,14 @@
 	const data = fragment(species, graphql(`
 		fragment SpeciesPreview on Species {
 			id
+			pokedexNumber
 			name
 			...SpriteInfo
 		}
 	`))
 </script>
 
-<a href="/{$data.id}">
+<a href="/{$data.pokedexNumber}">
 	<Number value={number} />
 	<Sprite species={$data} />
 	<Display>{$data.name}</Display>

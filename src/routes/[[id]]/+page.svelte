@@ -51,7 +51,7 @@
 					</button>
 					<Display id="species-name">
 						{$Info.data.species.name}
-						<span>no.{$Info.data.species.id}</span>
+						<span>no.{$Info.data.species.pokedexNumber}</span>
 					</Display>
 					<Sprite id="species-sprite" species={$Info.data.species} />
 					<Display id="species-flavor_text">
@@ -89,12 +89,12 @@
 
 					<nav>
 						<a
-							href={$Info.data.species.id > 1 ? `/${$Info.data.species.id - 1}` : undefined}
-							class={$Info.data.species.id <= 1 ? 'disabled' : undefined}
+							href={$Info.data.species.pokedexNumber > 1 ? `/${$Info.data.species.pokedexNumber - 1}` : undefined}
+							class={$Info.data.species.pokedexNumber <= 1 ? 'disabled' : undefined}
 						>
 							previous
 						</a>
-						<a href="/{$Info.data.species.id + 1}">next</a>
+						<a href="/{$Info.data.species.pokedexNumber + 1}">next</a>
 					</nav>
 				</Panel>
 			{/snippet}
