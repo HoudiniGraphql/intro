@@ -1,16 +1,23 @@
 <script>
+	import { fragment, graphql } from '$houdini'
 	import { Sprite, Display } from '.'
 	import Number from './SpeciesPreviewNumber.svelte'
 
 	let { species, number } = $props()
+
+	const data = fragment(species, graphql(`
+		fragment SpeciesPreview on Species {
+			id
+			name
+			...SpriteInfo
+		}
+	`))
 </script>
 
-<a href="/{species.id}">
+<a href="/{$data.id}">
 	<Number value={number} />
-	<Sprite species={species} />
-	<Display>
-		{species.name}
-	</Display>
+	<Sprite species={$data} />
+	<Display>{$data.name}</Display>
 </a>
 
 <style>

@@ -1,10 +1,20 @@
 <script>
-	/* @type { import('$houdini').SpriteInfo } */
+	import { fragment, graphql } from '$houdini'
+
 	let { species, id } = $props()
+
+	const info = fragment(species, graphql(`
+		fragment SpriteInfo on Species {
+			name
+			sprites {
+				front
+			}
+		}
+	`))
 </script>
 
 <div {id} class="sprite">
-	<img src={species.sprites.front} alt={`${species.name} sprite`} height="100%" />
+	<img src={$info.sprites.front} alt="{$info.name} sprite" height="100%" />
 </div>
 
 <style>

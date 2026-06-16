@@ -1,7 +1,22 @@
 <script>
+	import { fragment, graphql } from '$houdini'
 	import { Display } from '.'
 
 	let { move } = $props()
+
+	const data = fragment(move, graphql(`
+		fragment MoveDisplay on SpeciesMove {
+			learned_at
+			method
+			move {
+				name
+				accuracy
+				power
+				pp
+				type
+			}
+		}
+	`))
 
 	const padValue = (val) => {
 		if (val === null) {
@@ -28,26 +43,26 @@
 <Display id="move-display">
 	<div>
 		<h3>
-			{move.move.name}
+			{$data.move.name}
 		</h3>
 		<div class="stat">
-			{padKey('Accuracy')}.....{padValue(move.move.accuracy)}
+			{padKey('Accuracy')}.....{padValue($data.move.accuracy)}
 		</div>
 		<div class="stat">
-			{padKey('Power')}.....{padValue(move.move.power)}
+			{padKey('Power')}.....{padValue($data.move.power)}
 		</div>
 		<div class="stat">
-			{padKey('PP')}.....{padValue(move.move.pp)}
+			{padKey('PP')}.....{padValue($data.move.pp)}
 		</div>
 	</div>
 	<div class="right-column">
 		<div class="type-pill">
-			Type: {move.move.type}
+			Type: {$data.move.type}
 		</div>
 		<div class="learn-data">
 			Learn:
-			{#if move.method === 'level-up'}
-				Lvl {move.learned_at}
+			{#if $data.method === 'level-up'}
+				Lvl {$data.learned_at}
 			{:else}
 				TM
 			{/if}

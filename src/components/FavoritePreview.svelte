@@ -1,9 +1,21 @@
 <script>
+	import { fragment, graphql } from '$houdini'
+
 	let { species } = $props()
+
+	const data = fragment(species, graphql(`
+		fragment FavoritePreview on Species {
+			id
+			name
+			sprites {
+				front
+			}
+		}
+	`))
 </script>
 
-<a href="/{species.id}">
-	<img src={species.sprites.front} alt={`${species.name} sprite`} />
+<a href="/{$data.id}">
+	<img src={$data.sprites.front} alt="{$data.name} sprite" />
 </a>
 
 <style>

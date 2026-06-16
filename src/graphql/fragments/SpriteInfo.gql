@@ -1,6 +1,0 @@
-fragment SpriteInfo on Species {
-	name
-	sprites {
-		front
-	}
-}
