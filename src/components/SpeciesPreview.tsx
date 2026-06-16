@@ -1,4 +1,4 @@
-import { useFragment, graphql } from '$houdini'
+import { useFragment, graphql, Link } from '$houdini'
 import type { SpeciesPreview as SpeciesPreviewFragment } from '$houdini'
 import { Sprite } from './Sprite'
 import { Display } from './Display'
@@ -27,7 +27,7 @@ export function SpeciesPreview({
 	if (!data) return null
 
 	return (
-		<a href={`/${data.id}`} className="no-underline">
+		<Link to="/[[id]]" params={{ id: data.id }} className="no-underline">
 			<SpeciesPreviewNumber value={number} />
 			<Sprite
 				src={data.sprites.front}
@@ -35,6 +35,6 @@ export function SpeciesPreview({
 				className="h-[102px] w-[102px]"
 			/>
 			<Display>{data.name}</Display>
-		</a>
+		</Link>
 	)
 }
