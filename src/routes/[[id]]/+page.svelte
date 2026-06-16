@@ -19,8 +19,8 @@
   $inspect("page.daa", $Info)
 	const species = $derived($Info.data?.species)
 	const movePageInfo = $derived(species?.moves.pageInfo)
-	const previousId = $derived(species ? species.id - 1 : 1)
-	const nextId = $derived(species ? species.id + 1 : 1)
+	const previousId = $derived(species ? species.pokedexNumber - 1 : 1)
+	const nextId = $derived(species ? species.pokedexNumber + 1 : 1)
 
 	const loadPreviousMove = async () => {
 		await Info.fetch({
@@ -84,7 +84,7 @@
 			</button>
 			<Display id="species-name">
 				{$Info.data.species.name}
-				<span>no.{$Info.data.species.id}</span>
+				<span>no.{$Info.data.species.pokedexNumber}</span>
 			</Display>
 			<Sprite id="species-sprite" species={$Info.data.species} />
 			<Display id="species-flavor_text">
@@ -118,8 +118,8 @@
 			</div>
 
 			<nav>
-				<a href={previousId} disabled={species.id <= 1}> previous </a>
-				<a href={nextId} disabled={species.id >= 151}> next </a>
+				<a href={"/" + previousId} disabled={species.pokedexNumber <= 1}> previous </a>
+				<a href={"/" + nextId} disabled={species.pokedexNumber >= 151}> next </a>
 			</nav>
 		</Panel>
 	</Container>

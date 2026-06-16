@@ -1,5 +1,6 @@
 fragment FavoritePreview on Species {
 	id
+	pokedexNumber
 	name
 	sprites {
 		front

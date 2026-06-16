@@ -1,5 +1,6 @@
 fragment SpeciesPreview on Species {
 	name
 	id
+	pokedexNumber
 	...SpriteInfo
 }
