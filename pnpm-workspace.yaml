@@ -1,10 +1,12 @@
 allowBuilds:
-  '@apollo/protobufjs': set this to true or false
-  '@sveltejs/kit': set this to true or false
-  core-js: set this to true or false
-  esbuild: set this to true or false
-  houdini-core: set this to true or false
-  houdini-svelte: set this to true or false
-  sharp: set this to true or false
-  svelte-preprocess: set this to true or false
-  workerd: set this to true or false
+  '@apollo/protobufjs': true
+  '@sveltejs/kit': true
+  core-js: true
+  esbuild: true
+  houdini-core: true
+  houdini-svelte: true
+  sharp: true
+  svelte-preprocess: true
+  workerd: true
+minimumReleaseAgeExclude:
+  - houdini@2.0.0-next.35

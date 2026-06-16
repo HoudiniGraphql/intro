@@ -48,14 +48,14 @@ importers:
         specifier: ^3.5.1
         version: 3.9.1(graphql@16.14.1)
       houdini:
-        specifier: 2.0.0-next.30
-        version: 2.0.0-next.30(graphql@16.14.1)(tslib@2.8.1)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3))
+        specifier: 2.0.0-next.35
+        version: 2.0.0-next.35(graphql@16.14.1)(tslib@2.8.1)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3))
       houdini-core:
-        specifier: 2.0.0-next.18
-        version: 2.0.0-next.18(graphql@16.14.1)
+        specifier: 2.0.0-next.22
+        version: 2.0.0-next.22(graphql@16.14.1)
       houdini-svelte:
-        specifier: 3.0.0-next.32
-        version: 3.0.0-next.32(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3)))(@types/node@25.9.2)(esbuild@0.27.3)(typescript@6.0.3)
+        specifier: 3.0.0-next.33
+        version: 3.0.0-next.33(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3)))(@types/node@25.9.2)(esbuild@0.27.3)(typescript@6.0.3)
       node-fetch:
         specifier: ^3.2.1
         version: 3.3.2
@@ -1781,76 +1781,88 @@ packages:
     resolution: {integrity: sha512-T2UbfbBEF32wiepXIsMlTW9+dDYC6wMh/t/vYA4tuOMKqWz/n3vr1NFSxQiyP+zk2mXsoMA/i/7qV6LKut1t1A==}
     engines: {node: '>= 0.4'}
 
-  houdini-core-darwin-arm64@2.0.0-next.18:
-    resolution: {integrity: sha512-zA8t3IKnKfJ+Lt7ya/UPGgVSeR/lOpY8yTFSSGMwdN+ryERQ29P5wmB4dKpJ7XCE1q5qo4Bk9znu51oq3dLDZA==}
+  houdini-core-darwin-arm64@2.0.0-next.22:
+    resolution: {integrity: sha512-zBryafI5LDy9f4sBBvFYVl+ralP9HWD8V8LnJgsmJ99UPWlqKLClCqrLWLRLwcvvghBc1tOoI2J32ZVZ6U0EJQ==}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
 
-  houdini-core-darwin-x64@2.0.0-next.18:
-    resolution: {integrity: sha512-8TUP9sC6KZycyllgBnlFhlNB2vRej9TpdHm69IEm/HWq4AtlQU0HdS9tfhNpW3Ut+sLQ+ZPP8P9tYFKVX4ATQw==}
+  houdini-core-darwin-x64@2.0.0-next.22:
+    resolution: {integrity: sha512-zLV8hjiSepCu3IESrwOyxCqNTJ3lMnoYc4s0RuLx4YLCkpWCo0qgHRO3Sd32u2uGmXW7pm8kkqVE8/kkHSZFsQ==}
     cpu: [x64]
     os: [darwin]
     hasBin: true
 
-  houdini-core-linux-arm64@2.0.0-next.18:
-    resolution: {integrity: sha512-bPthEb18fcHD+679FA2eXoUL+s4EMYzRx1JvtQF0LE5nrVeoBsnfd8vNFLQCuvhdCGwjmW3LOhx++uofUekKgA==}
+  houdini-core-linux-arm64@2.0.0-next.22:
+    resolution: {integrity: sha512-xhQowSlrFZe2q6aLJFdOT1XPWkz7lRrP6xqZz98YI0KHaA1MgbYwyfJEpBAuj0hzlH/c0QxWjZEOpsXfl+FuQw==}
     cpu: [arm64]
     os: [linux]
     hasBin: true
 
-  houdini-core-linux-x64@2.0.0-next.18:
-    resolution: {integrity: sha512-9yb8K6fieQpn3ETwodJll82vBd2wUBPHmmTuKOnjGsYjYV2LIWNQ9+LKydmvlBwjRqbR9NGV4LhlmODPohz8UA==}
+  houdini-core-linux-x64@2.0.0-next.22:
+    resolution: {integrity: sha512-sLVJq80KqJo+8n8GfkJ+bnwmRs68knvtULRCOJ3iQnRirli+7zbcL8wSix9rN/1Pzh2PkLT7x2UjmG6AlsWEuw==}
     cpu: [x64]
     os: [linux]
     hasBin: true
 
-  houdini-core-win32-arm64@2.0.0-next.18:
-    resolution: {integrity: sha512-wJevrYCeck0J4gqZRsLhdg8YI6gHhS/A7PtgSth0p+d66sTmqbCA4tLLdymbxOwlN6T9FV/iD3FjOKjZ9b2YhA==}
+  houdini-core-win32-arm64@2.0.0-next.22:
+    resolution: {integrity: sha512-pEb/MLaqG0aU3PKOxXnqnCW1DvOnYl+a7bRrR3HW0fu20O6/TCl8is2OvYZv9PS81fpG3PaXNymJp+1L7mQbfg==}
     cpu: [arm64]
     os: [win32]
     hasBin: true
 
-  houdini-core-win32-x64@2.0.0-next.18:
-    resolution: {integrity: sha512-19OpLjeOjmJmjCKGEz44FAKRXkhWgLv+DFaBm+bCvBUbMzRaSxTgKLVjlkDpQrGbbWO9l6cskugjbZBmsCWEhw==}
+  houdini-core-win32-x64@2.0.0-next.22:
+    resolution: {integrity: sha512-fRrgtEGpQvcB0COiKa/a2uMMug1gt8jJrdnCCGK7DaByTOJZZ+u0OhmNQ847ZDh6U7qu3nuL6L/qgB7zpdCvDg==}
     cpu: [x64]
     os: [win32]
     hasBin: true
 
-  houdini-core@2.0.0-next.18:
-    resolution: {integrity: sha512-1zReIIt3FFOxlEHmLH/gUTe3qoVCwewycRhn3SNnTG9CRGr6U1lbMz0s/2VVZ5xtEkWTl8mC0vRAC3MR5K9SFA==}
+  houdini-core@2.0.0-next.22:
+    resolution: {integrity: sha512-HCYI5B2PnLJzwi2MggKjWtGYt40bI5MRIGHUpSmh/at+0xlleZSerMp61mLCPbfsIfkm6328WH/YFgX5lwUybQ==}
     hasBin: true
 
-  houdini-svelte-darwin-arm64@3.0.0-next.32:
-    resolution: {integrity: sha512-eaF9SFzPUd6G4k95TdyP69eaJh94QGOAIGyyrzw5JMiJu/5id0aYe2xqKEZ704PnaJVAVCsIZy+zWWz3HwL/RA==}
+  houdini-svelte-darwin-arm64@3.0.0-next.33:
+    resolution: {integrity: sha512-Z0zAkRzVGUFcvzNbCBOrBoWICN0dbfALWsYhJyRau7iIZdUnVQaxGRvO+CRZbOrsghtMWwiC5sRa70XHq7A1nw==}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
 
-  houdini-svelte-darwin-x64@3.0.0-next.32:
-    resolution: {integrity: sha512-oleYN1Ca4EkSC3wbp1jxqL9reXG/akv/dH5kM8OIndHzyV7yJTKrwYNcL3cCgMaReD+COnBvSNGyG2edVdzdIw==}
+  houdini-svelte-darwin-x64@3.0.0-next.33:
+    resolution: {integrity: sha512-R/IN1NlyNuLOpXb2PWeD5iBSKVlKdppGUn4Gvp1TOcYVC+HsPC9OgZnMR6ArPhzgr9g+2Z50+yd586mkxG5XVA==}
     cpu: [x64]
     os: [darwin]
     hasBin: true
 
-  houdini-svelte-linux-arm64@3.0.0-next.32:
-    resolution: {integrity: sha512-ZgyidNktoCsABjsrsZ7A9o5wH/IoWdb8ivEtkcVW/5x+4u2g4OcgL8HyC0SK7GOqyOTsCwYsSiCS7ZEnFtf4Iw==}
+  houdini-svelte-linux-arm64@3.0.0-next.33:
+    resolution: {integrity: sha512-6byUzrumAGyWcKFjkF3gyBGN6dPGE0JPnApL39vRfVJyOD/y+S4I54Q3PBzKg2DshNayZOgyNTeedVvUcGKdUg==}
     cpu: [arm64]
     os: [linux]
     hasBin: true
 
-  houdini-svelte-linux-x64@3.0.0-next.32:
-    resolution: {integrity: sha512-s2Pczk3HQ+SKREHlu1OAqQIBgSH4ktWv2jDfccqiSSDRBrbCO7v7E0oUc6NdyzBh7BRa0WRRGy5or/0/2eV6JA==}
+  houdini-svelte-linux-x64@3.0.0-next.33:
+    resolution: {integrity: sha512-Nszc9DorkeOgmwmjuzMfCof4ONX50iA1JAqaPjVUCYwjZaYVSqBDPeTv33wvzmfQvB2Rf6U9xwG1OxVyaM42ew==}
     cpu: [x64]
     os: [linux]
     hasBin: true
 
-  houdini-svelte@3.0.0-next.32:
-    resolution: {integrity: sha512-BL0SaCQFvNggC5x+X8kkbOYv4efkhTIKWDSnTBLhikIeLVSEM3SkH+K9aUOI68t5bcyVUQ8wKkEbwgRZhsSTww==}
+  houdini-svelte-win32-arm64@3.0.0-next.33:
+    resolution: {integrity: sha512-iacEHGXWUqy+5PU9XtITbzyGgKkOL3dbDkL8IRn12geZ4CJVrHfjmVW+JnEdWZGk/k1mhqGoj0lc6Ames2ZcpQ==}
+    cpu: [arm64]
+    os: [win32]
     hasBin: true
 
-  houdini@2.0.0-next.30:
-    resolution: {integrity: sha512-4Nj48Od8novT8Pa6NVlOjLn8ES9l0wK16IEMWJYyjS7Mr95mjF4mp6msYeqSZL93ngsOPRSZmwf36dNwVvsDqQ==}
+  houdini-svelte-win32-x64@3.0.0-next.33:
+    resolution: {integrity: sha512-l7iyTOkRnVM2AxPwDdgSJQREW61gZsu97VupT6phq5N1QDiUe9ErgICToaONqzVok2k8WF4L5edAcu7Hve0oaQ==}
+    cpu: [x64]
+    os: [win32]
+    hasBin: true
+
+  houdini-svelte@3.0.0-next.33:
+    resolution: {integrity: sha512-a/wIm76Y1/+H2kty98CQH4PLINqnHZkOIH8NC4ZBtSu0kpQC0VB/F/eqkzWPF5G1g2HB4ohYYc1zGv/Jy3A2IQ==}
+    hasBin: true
+
+  houdini@2.0.0-next.35:
+    resolution: {integrity: sha512-upEZvU9mXCdBi1+gysk+kTyDTRNaZqp023pY47iuezWcGeJap1kizFe34rP8iYWBbYvFEEvNRqc1LN709cM7jg==}
     hasBin: true
     peerDependencies:
       graphql: '>=16'
@@ -4361,52 +4373,58 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  houdini-core-darwin-arm64@2.0.0-next.18:
+  houdini-core-darwin-arm64@2.0.0-next.22:
     optional: true
 
-  houdini-core-darwin-x64@2.0.0-next.18:
+  houdini-core-darwin-x64@2.0.0-next.22:
     optional: true
 
-  houdini-core-linux-arm64@2.0.0-next.18:
+  houdini-core-linux-arm64@2.0.0-next.22:
     optional: true
 
-  houdini-core-linux-x64@2.0.0-next.18:
+  houdini-core-linux-x64@2.0.0-next.22:
     optional: true
 
-  houdini-core-win32-arm64@2.0.0-next.18:
+  houdini-core-win32-arm64@2.0.0-next.22:
     optional: true
 
-  houdini-core-win32-x64@2.0.0-next.18:
+  houdini-core-win32-x64@2.0.0-next.22:
     optional: true
 
-  houdini-core@2.0.0-next.18(graphql@16.14.1):
+  houdini-core@2.0.0-next.22(graphql@16.14.1):
     dependencies:
       '@whatwg-node/server': 0.11.0
       graphql-yoga: 5.21.2(graphql@16.14.1)
       minimatch: 10.2.5
     optionalDependencies:
-      houdini-core-darwin-arm64: 2.0.0-next.18
-      houdini-core-darwin-x64: 2.0.0-next.18
-      houdini-core-linux-arm64: 2.0.0-next.18
-      houdini-core-linux-x64: 2.0.0-next.18
-      houdini-core-win32-arm64: 2.0.0-next.18
-      houdini-core-win32-x64: 2.0.0-next.18
+      houdini-core-darwin-arm64: 2.0.0-next.22
+      houdini-core-darwin-x64: 2.0.0-next.22
+      houdini-core-linux-arm64: 2.0.0-next.22
+      houdini-core-linux-x64: 2.0.0-next.22
+      houdini-core-win32-arm64: 2.0.0-next.22
+      houdini-core-win32-x64: 2.0.0-next.22
     transitivePeerDependencies:
       - graphql
 
-  houdini-svelte-darwin-arm64@3.0.0-next.32:
+  houdini-svelte-darwin-arm64@3.0.0-next.33:
     optional: true
 
-  houdini-svelte-darwin-x64@3.0.0-next.32:
+  houdini-svelte-darwin-x64@3.0.0-next.33:
     optional: true
 
-  houdini-svelte-linux-arm64@3.0.0-next.32:
+  houdini-svelte-linux-arm64@3.0.0-next.33:
     optional: true
 
-  houdini-svelte-linux-x64@3.0.0-next.32:
+  houdini-svelte-linux-x64@3.0.0-next.33:
     optional: true
 
-  houdini-svelte@3.0.0-next.32(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3)))(@types/node@25.9.2)(esbuild@0.27.3)(typescript@6.0.3):
+  houdini-svelte-win32-arm64@3.0.0-next.33:
+    optional: true
+
+  houdini-svelte-win32-x64@3.0.0-next.33:
+    optional: true
+
+  houdini-svelte@3.0.0-next.33(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3)))(@types/node@25.9.2)(esbuild@0.27.3)(typescript@6.0.3):
     dependencies:
       '@sveltejs/kit': 2.63.1(@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.56.3)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3)))(svelte@5.56.3)(typescript@6.0.3)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3))
       estree-walker: 3.0.3
@@ -4414,10 +4432,12 @@ snapshots:
       svelte: 5.56.3
       vite: 8.0.16(@types/node@25.9.2)(esbuild@0.27.3)
     optionalDependencies:
-      houdini-svelte-darwin-arm64: 3.0.0-next.32
-      houdini-svelte-darwin-x64: 3.0.0-next.32
-      houdini-svelte-linux-arm64: 3.0.0-next.32
-      houdini-svelte-linux-x64: 3.0.0-next.32
+      houdini-svelte-darwin-arm64: 3.0.0-next.33
+      houdini-svelte-darwin-x64: 3.0.0-next.33
+      houdini-svelte-linux-arm64: 3.0.0-next.33
+      houdini-svelte-linux-x64: 3.0.0-next.33
+      houdini-svelte-win32-arm64: 3.0.0-next.33
+      houdini-svelte-win32-x64: 3.0.0-next.33
     transitivePeerDependencies:
       - '@opentelemetry/api'
       - '@sveltejs/vite-plugin-svelte'
@@ -4436,7 +4456,7 @@ snapshots:
       - typescript
       - yaml
 
-  houdini@2.0.0-next.30(graphql@16.14.1)(tslib@2.8.1)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3)):
+  houdini@2.0.0-next.35(graphql@16.14.1)(tslib@2.8.1)(vite@8.0.16(@types/node@25.9.2)(esbuild@0.27.3)):
     dependencies:
       '@babel/parser': 7.29.7
       '@clack/prompts': 1.5.1
@@ -4454,7 +4474,7 @@ snapshots:
       glob: 13.0.6
       graphql: 16.14.1
       graphql-yoga: 5.21.2(graphql@16.14.1)
-      houdini-core: 2.0.0-next.18(graphql@16.14.1)
+      houdini-core: 2.0.0-next.22(graphql@16.14.1)
       kleur: 4.1.5
       memfs: 4.57.6(tslib@2.8.1)
       minimatch: 10.2.5

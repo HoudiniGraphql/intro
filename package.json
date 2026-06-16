@@ -10,6 +10,18 @@
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. ."
 	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"@apollo/protobufjs",
+			"core-js",
+			"esbuild",
+			"houdini-core",
+			"houdini-svelte",
+			"sharp",
+			"svelte-preprocess",
+			"workerd"
+		]
+	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20230321.0",
 		"@sveltejs/adapter-auto": "^7.0.1",
@@ -24,9 +36,9 @@
 		"graphql-subscriptions": "^2.0.0",
 		"graphql-tag": "^2.12.6",
 		"graphql-yoga": "^3.5.1",
-		"houdini": "2.0.0-next.30",
-		"houdini-core": "2.0.0-next.18",
-		"houdini-svelte": "3.0.0-next.32",
+		"houdini": "2.0.0-next.35",
+		"houdini-core": "2.0.0-next.22",
+		"houdini-svelte": "3.0.0-next.33",
 		"node-fetch": "^3.2.1",
 		"prettier": "^3.8.3",
 		"prettier-plugin-svelte": "^4.1.0",
