@@ -106,11 +106,14 @@ export default function Page({ Info$handle }: PageProps) {
 						</div>
 					</div>
 					<nav>
-						{id > 1 ? (
-							<Link to="/[[id]]" params={{ id: id - 1 }}>previous</Link>
-						) : (
-							<a className="disabled">previous</a>
-						)}
+						<Link
+							to="/[[id]]"
+							params={{ id: id - 1 }}
+							disabled={id <= 1}
+							className={id <= 1 ? "disabled" : undefined}
+						>
+							previous
+						</Link>
 						<Link to="/[[id]]" params={{ id: id + 1 }}>next</Link>
 					</nav>
 				</Panel>
