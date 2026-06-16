@@ -5,7 +5,7 @@
 	let { species, number } = $props()
 </script>
 
-<a href={species.id}>
+<a href="/{species.id}">
 	<Number value={number} />
 	<Sprite species={species} />
 	<Display>

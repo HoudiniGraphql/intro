@@ -1,7 +1,11 @@
+<script>
+	let { children } = $props()
+</script>
+
 <div id="favorites-container">
 	<h2>Favorites</h2>
 	<div>
-		<slot />
+		{@render children?.()}
 	</div>
 </div>
 

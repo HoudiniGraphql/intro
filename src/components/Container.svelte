@@ -1,6 +1,10 @@
+<script>
+	let { left, right } = $props()
+</script>
+
 <div id="pokedex">
 	<div id="left-panel" class="panel">
-		<slot name="left" />
+		{@render left()}
 	</div>
 	<div id="middle-panel" class="panel">
 		<div id="divider">
@@ -14,7 +18,7 @@
 		</div>
 	</div>
 	<div id="right-panel" class="panel">
-		<slot name="right" />
+		{@render right()}
 	</div>
 	<div>
 		<div id="ball-highlight" />
