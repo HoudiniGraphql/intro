@@ -17,6 +17,7 @@ export function SpeciesPreview({
 			fragment SpeciesPreview on Species {
 				name
 				id
+				pokedexNumber
 				sprites {
 					front
 				}
@@ -27,7 +28,7 @@ export function SpeciesPreview({
 	if (!data) return null
 
 	return (
-		<Link to="/[[id]]" params={{ id: data.id }} className="no-underline">
+		<Link to="/[[id]]" params={{ id: data.pokedexNumber }} className="no-underline">
 			<SpeciesPreviewNumber value={number} />
 			<Sprite
 				src={data.sprites.front}
