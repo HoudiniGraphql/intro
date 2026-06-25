@@ -1,5 +1,6 @@
 allowBuilds:
   core-js: true
+  esbuild: false
   houdini-core: true
   houdini-react: true
 minimumReleaseAgeExclude:
@@ -62,3 +63,20 @@ minimumReleaseAgeExclude:
   - houdini-react-linux-arm64@2.0.0-next.38
   - houdini-react-linux-x64@2.0.0-next.38
   - houdini-react@2.0.0-next.38
+  - houdini-core-darwin-arm64@2.0.0
+  - houdini-core-darwin-x64@2.0.0
+  - houdini-core-linux-arm64@2.0.0
+  - houdini-core-linux-x64@2.0.0
+  - houdini-core-wasm@2.0.0
+  - houdini-core-win32-arm64@2.0.0
+  - houdini-core-win32-x64@2.0.0
+  - houdini-core@2.0.0
+  - houdini-react-darwin-arm64@2.0.0
+  - houdini-react-darwin-x64@2.0.0
+  - houdini-react-linux-arm64@2.0.0
+  - houdini-react-linux-x64@2.0.0
+  - houdini-react-wasm@2.0.0
+  - houdini-react-win32-arm64@2.0.0
+  - houdini-react-win32-x64@2.0.0
+  - houdini-react@2.0.0
+  - houdini@2.0.0
