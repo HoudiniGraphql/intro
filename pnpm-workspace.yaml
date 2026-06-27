@@ -10,3 +10,20 @@ allowBuilds:
   workerd: true
 minimumReleaseAgeExclude:
   - houdini@2.0.0-next.35
+  - houdini-core-darwin-arm64@2.0.1
+  - houdini-core-darwin-x64@2.0.1
+  - houdini-core-linux-arm64@2.0.1
+  - houdini-core-linux-x64@2.0.1
+  - houdini-core-wasm@2.0.1
+  - houdini-core-win32-arm64@2.0.1
+  - houdini-core-win32-x64@2.0.1
+  - houdini-core@2.0.1
+  - houdini-svelte-darwin-arm64@3.0.1
+  - houdini-svelte-darwin-x64@3.0.1
+  - houdini-svelte-linux-arm64@3.0.1
+  - houdini-svelte-linux-x64@3.0.1
+  - houdini-svelte-wasm@3.0.1
+  - houdini-svelte-win32-arm64@3.0.1
+  - houdini-svelte-win32-x64@3.0.1
+  - houdini-svelte@3.0.1
+  - houdini@2.0.1
