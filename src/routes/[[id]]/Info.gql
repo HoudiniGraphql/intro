@@ -1,4 +1,4 @@
-query Info($id: Int! = 1) {
+query Info($id: Int! = 1) @loading {
 	species(id: $id) {
 		id
 		pokedexNumber
@@ -6,12 +6,13 @@ query Info($id: Int! = 1) {
 		flavor_text
 		favorite
 		evolution_chain {
+			id
 			...SpeciesPreview
 		}
 		...SpriteInfo
 
-		moves(first: 1) @paginate(mode: SinglePage) {
-			edges {
+		moves(first: 1) @paginate(mode: SinglePage) @loading(count: 1) {
+			edges @loading(count: 3) {
 				node {
 					...MoveDisplay
 				}
@@ -25,6 +26,7 @@ query Info($id: Int! = 1) {
 		}
 	}
 	favorites @list(name: "FavoriteSpecies") {
+		id
 		...FavoritePreview
 	}
 }

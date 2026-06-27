@@ -1,11 +1,11 @@
 <script>
-	import { fragment, graphql } from '$houdini'
+	import { fragment, graphql, isPending } from '$houdini'
 	import { Display } from '.'
 
 	let { move } = $props()
 
 	const data = fragment(move, graphql(`
-		fragment MoveDisplay on SpeciesMove {
+		fragment MoveDisplay on SpeciesMove @loading {
 			learned_at
 			method
 			move {
@@ -40,35 +40,37 @@
 	}
 </script>
 
-<Display id="move-display">
-	<div>
-		<h3>
-			{$data.move.name}
-		</h3>
-		<div class="stat">
-			{padKey('Accuracy')}.....{padValue($data.move.accuracy)}
+{#if $data && !isPending($data)}
+	<Display id="move-display">
+		<div>
+			<h3>
+				{$data.move.name}
+			</h3>
+			<div class="stat">
+				{padKey('Accuracy')}.....{padValue($data.move.accuracy)}
+			</div>
+			<div class="stat">
+				{padKey('Power')}.....{padValue($data.move.power)}
+			</div>
+			<div class="stat">
+				{padKey('PP')}.....{padValue($data.move.pp)}
+			</div>
 		</div>
-		<div class="stat">
-			{padKey('Power')}.....{padValue($data.move.power)}
+		<div class="right-column">
+			<div class="type-pill">
+				Type: {$data.move.type}
+			</div>
+			<div class="learn-data">
+				Learn:
+				{#if $data.method === 'level-up'}
+					Lvl {$data.learned_at}
+				{:else}
+					TM
+				{/if}
+			</div>
 		</div>
-		<div class="stat">
-			{padKey('PP')}.....{padValue($data.move.pp)}
-		</div>
-	</div>
-	<div class="right-column">
-		<div class="type-pill">
-			Type: {$data.move.type}
-		</div>
-		<div class="learn-data">
-			Learn:
-			{#if $data.method === 'level-up'}
-				Lvl {$data.learned_at}
-			{:else}
-				TM
-			{/if}
-		</div>
-	</div>
-</Display>
+	</Display>
+{/if}
 
 <style>
 	:global(#move-display) {

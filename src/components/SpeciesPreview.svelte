@@ -1,12 +1,12 @@
 <script>
-	import { fragment, graphql } from '$houdini'
+	import { fragment, graphql, isPending } from '$houdini'
 	import { Sprite, Display } from '.'
 	import Number from './SpeciesPreviewNumber.svelte'
 
 	let { species, number } = $props()
 
 	const data = fragment(species, graphql(`
-		fragment SpeciesPreview on Species {
+		fragment SpeciesPreview on Species @loading {
 			id
 			pokedexNumber
 			name
@@ -15,11 +15,13 @@
 	`))
 </script>
 
-<a href="/{$data.pokedexNumber}">
-	<Number value={number} />
-	<Sprite species={$data} />
-	<Display>{$data.name}</Display>
-</a>
+{#if $data && !isPending($data)}
+	<a href="/{$data.pokedexNumber}">
+		<Number value={number} />
+		<Sprite species={$data} />
+		<Display>{$data.name}</Display>
+	</a>
+{/if}
 
 <style>
 	:global(.preview-sprite) {

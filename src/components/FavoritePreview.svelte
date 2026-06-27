@@ -1,10 +1,10 @@
 <script>
-	import { fragment, graphql } from '$houdini'
+	import { fragment, graphql, isPending } from '$houdini'
 
 	let { species } = $props()
 
 	const data = fragment(species, graphql(`
-		fragment FavoritePreview on Species {
+		fragment FavoritePreview on Species @loading {
 			id
 			pokedexNumber
 			name
@@ -15,9 +15,11 @@
 	`))
 </script>
 
-<a href="/{$data.pokedexNumber}">
-	<img src={$data.sprites.front} alt="{$data.name} sprite" />
-</a>
+{#if $data && !isPending($data)}
+	<a href="/{$data.pokedexNumber}">
+		<img src={$data.sprites.front} alt="{$data.name} sprite" />
+	</a>
+{/if}
 
 <style>
 	a {

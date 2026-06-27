@@ -1,10 +1,10 @@
 <script>
-	import { fragment, graphql } from '$houdini'
+	import { fragment, graphql, isPending } from '$houdini'
 
 	let { species, id } = $props()
 
 	const info = fragment(species, graphql(`
-		fragment SpriteInfo on Species {
+		fragment SpriteInfo on Species @loading {
 			name
 			sprites {
 				front
@@ -13,9 +13,15 @@
 	`))
 </script>
 
-<div {id} class="sprite">
-	<img src={$info.sprites.front} alt="{$info.name} sprite" height="100%" />
-</div>
+{#if $info}
+	{#if isPending($info)}
+		-
+	{:else}
+		<div {id} class="sprite">
+			<img src={$info.sprites.front} alt="{$info.name} sprite" height="100%" />
+		</div>
+	{/if}
+{/if}
 
 <style>
 	div {
