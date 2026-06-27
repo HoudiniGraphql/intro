@@ -5,14 +5,19 @@
 
 	let { species, number } = $props()
 
-	const data = fragment(species, graphql(`
+	const data = $derived(
+		fragment(
+			species,
+			graphql(`
 		fragment SpeciesPreview on Species @loading {
 			id
 			pokedexNumber
 			name
 			...SpriteInfo
 		}
-	`))
+	`)
+		)
+	)
 </script>
 
 {#if $data && !isPending($data)}

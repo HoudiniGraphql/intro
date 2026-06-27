@@ -1,26 +1,32 @@
 <script>
 	import { fragment, graphql, isPending } from '$houdini'
+	import Shimmer from './Shimmer.svelte'
 
 	let { species, id } = $props()
 
-	const info = fragment(species, graphql(`
+	const info = $derived(
+		fragment(
+			species,
+			graphql(`
 		fragment SpriteInfo on Species @loading {
 			name
 			sprites {
 				front
 			}
 		}
-	`))
+	`)
+		)
+	)
 </script>
 
-{#if $info}
-	{#if isPending($info)}
-		-
-	{:else}
-		<div {id} class="sprite">
-			<img src={$info.sprites.front} alt="{$info.name} sprite" height="100%" />
-		</div>
-	{/if}
+{#if !$info || isPending($info)}
+	<div {id} class="sprite">
+		<Shimmer width="90%" height="90%" radius="5px" background="transparent" />
+	</div>
+{:else}
+	<div {id} class="sprite">
+		<img src={$info.sprites.front} alt="{$info.name} sprite" height="100%" />
+	</div>
 {/if}
 
 <style>

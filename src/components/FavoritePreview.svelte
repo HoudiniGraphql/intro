@@ -3,7 +3,10 @@
 
 	let { species } = $props()
 
-	const data = fragment(species, graphql(`
+	const data = $derived(
+		fragment(
+			species,
+			graphql(`
 		fragment FavoritePreview on Species @loading {
 			id
 			pokedexNumber
@@ -12,7 +15,9 @@
 				front
 			}
 		}
-	`))
+	`)
+		)
+	)
 </script>
 
 {#if $data && !isPending($data)}

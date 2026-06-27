@@ -1,6 +1,6 @@
 <script>
-	import { InfoStore, ToggleFavoriteStore, isPending } from '$houdini'
-	import { Container, Display, Sprite, Panel } from '~/components'
+	import { ToggleFavoriteStore, isPending } from '$houdini'
+	import { Container, Display, Sprite, Panel, Shimmer } from '~/components'
 	import DownButton from '~/components/DownButton.svelte'
 	import FavoritePreview from '~/components/FavoritePreview.svelte'
 	import FavoritesContainer from '~/components/FavoritesContainer.svelte'
@@ -12,12 +12,8 @@
 
 	let { data } = $props()
 
-	const Info = new InfoStore()
+	const Info = $derived(data.Info)
 	const toggleFavorite = new ToggleFavoriteStore()
-
-	$effect(() => {
-		Info.fetch({ variables: { id: data.id } })
-	})
 
 	const species = $derived($Info.data?.species)
 	const isLoading = $derived(!species || isPending(species))
@@ -38,78 +34,104 @@
 	{/each}
 </FavoritesContainer>
 
-{#key data.id}
-	<Container>
-		{#snippet left()}
-			<Panel>
-				<button
-					id="favorite"
-					disabled={$toggleFavorite.fetching}
-					onclick={() =>
-						species && !isPending(species.id) && toggleFavorite.mutate({ id: species.id })}
-				>
-					<Icon
-						name="star"
-						id="favorite-star"
-						fill={!isLoading && species?.favorite ? 'gold' : 'lightgrey'}
-					/>
-				</button>
-				<Display id="species-name">
-					{!isLoading ? species?.name : '...'}
-					<span>{isLoading ? '...' : `no.${species?.pokedexNumber}`}</span>
-				</Display>
-				<Sprite id="species-sprite" species={species} />
-				<Display id="species-flavor_text">
-					{isLoading ? '...' : species?.flavor_text}
-				</Display>
-			</Panel>
-		{/snippet}
-
-		{#snippet right()}
-			<Panel>
-				<div id="species-evolution-chain">
-					{#each evolutionChain as form, i (isPending(form) ? i : form.id)}
-						<SpeciesPreview species={form} number={i + 1} />
-					{/each}
-					{#each Array.from({ length: placeholderCount }) as _, i}
-						<SpeciesPreviewPlaceholder number={evolutionChain.length + i + 1} />
-					{/each}
-				</div>
-
-				<div id="move-summary">
-					{#key species?.moves?.pageInfo?.startCursor}
-						<MoveDisplay move={firstMove} />
-					{/key}
-					<div id="move-controls">
-						<UpButton
-							disabled={!pageInfo?.hasPreviousPage}
-							onclick={() => {
-								if (isLoading) return
-								Info.loadPreviousPage()
-							}}
-						/>
-						<DownButton
-							disabled={!pageInfo?.hasNextPage}
-							onclick={() => {
-								if (isLoading) return
-								Info.loadNextPage()
-							}}
-						/>
+<Container>
+	{#snippet left()}
+		<Panel>
+			<button
+				id="favorite"
+				disabled={$toggleFavorite.fetching}
+				onclick={() =>
+					species && !isPending(species.id) && toggleFavorite.mutate({ id: species.id })}
+			>
+				<Icon
+					name="star"
+					id="favorite-star"
+					fill={!isLoading && species?.favorite ? 'gold' : 'lightgrey'}
+				/>
+			</button>
+			<Display id="species-name">
+				{#if isLoading}
+					<Shimmer width="55%" height="30px" />
+					<Shimmer width="64px" height="20px" />
+				{:else}
+					{species?.name}
+					<span>no.{species?.pokedexNumber}</span>
+				{/if}
+			</Display>
+			<Sprite id="species-sprite" species={species} />
+			<Display id="species-flavor_text">
+				{#if isLoading}
+					<div class="shimmer-lines">
+						<Shimmer height="0.8em" />
+						<Shimmer width="92%" height="0.8em" />
+						<Shimmer width="60%" height="0.8em" />
 					</div>
-				</div>
+				{:else}
+					{species?.flavor_text}
+				{/if}
+			</Display>
+		</Panel>
+	{/snippet}
 
-				<nav>
-					{#if !isLoading && typeof pokedexNumber === 'number'}
-						<a
-							href={pokedexNumber > 1 ? `/${pokedexNumber - 1}` : undefined}
-							class={pokedexNumber <= 1 ? 'disabled' : undefined}
-						>
-							previous
-						</a>
-						<a href="/{pokedexNumber + 1}">next</a>
+	{#snippet right()}
+		<Panel>
+			<div id="species-evolution-chain">
+				{#each evolutionChain as form, i (isPending(form) ? i : form.id)}
+					{#if isPending(form)}
+						<SpeciesPreviewPlaceholder number={i + 1} />
+					{:else}
+						<SpeciesPreview species={form} number={i + 1} />
 					{/if}
-				</nav>
-			</Panel>
-		{/snippet}
-	</Container>
-{/key}
+				{/each}
+				{#each Array.from({ length: placeholderCount }) as _, i}
+					<SpeciesPreviewPlaceholder number={evolutionChain.length + i + 1} />
+				{/each}
+			</div>
+
+			<div id="move-summary">
+				{#key species?.moves?.pageInfo?.startCursor}
+					<MoveDisplay move={firstMove} />
+				{/key}
+				<div id="move-controls">
+					<UpButton
+						disabled={!pageInfo?.hasPreviousPage}
+						onclick={() => {
+							if (isLoading) return
+							Info.loadPreviousPage()
+						}}
+					/>
+					<DownButton
+						disabled={!pageInfo?.hasNextPage}
+						onclick={() => {
+							if (isLoading) return
+							Info.loadNextPage()
+						}}
+					/>
+				</div>
+			</div>
+
+			<nav>
+				{#if isLoading || typeof pokedexNumber !== 'number'}
+					<a class="disabled">previous</a>
+					<a class="disabled">next</a>
+				{:else}
+					<a
+						href={pokedexNumber > 1 ? `/${pokedexNumber - 1}` : undefined}
+						class={pokedexNumber <= 1 ? 'disabled' : undefined}
+					>
+						previous
+					</a>
+					<a href="/{pokedexNumber + 1}">next</a>
+				{/if}
+			</nav>
+		</Panel>
+	{/snippet}
+</Container>
+
+<style>
+	.shimmer-lines {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+</style>
