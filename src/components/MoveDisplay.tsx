@@ -1,4 +1,4 @@
-import { useFragment, graphql } from "$houdini";
+import { useFragment, graphql, isPending } from "$houdini";
 import type { MoveDisplay as MoveDisplayFragment } from "$houdini";
 import { Display } from "./Display";
 
@@ -24,7 +24,7 @@ export function MoveDisplay({ move }: { move: MoveDisplayFragment | null }) {
 	const data = useFragment(
 		move,
 		graphql(`
-			fragment MoveDisplay on SpeciesMove {
+			fragment MoveDisplay on SpeciesMove @loading {
 				learned_at
 				method
 				move {
@@ -38,7 +38,7 @@ export function MoveDisplay({ move }: { move: MoveDisplayFragment | null }) {
 		`),
 	);
 
-	if (!data) return null;
+	if (!data || isPending(data)) return null;
 
 	return (
 		<Display

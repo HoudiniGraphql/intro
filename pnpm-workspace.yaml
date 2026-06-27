@@ -80,3 +80,4 @@ minimumReleaseAgeExclude:
   - houdini-react-win32-x64@2.0.0
   - houdini-react@2.0.0
   - houdini@2.0.0
+  - houdini-adapter-auto@2.0.0
