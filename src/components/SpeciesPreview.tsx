@@ -3,6 +3,7 @@ import type { SpeciesPreview as SpeciesPreviewFragment } from "$houdini";
 import { Sprite } from "./Sprite";
 import { Display } from "./Display";
 import { SpeciesPreviewNumber } from "./SpeciesPreviewNumber";
+import { SpeciesPreviewPlaceholder } from "./SpeciesPreviewPlaceholder";
 
 export function SpeciesPreview({
 	species,
@@ -23,7 +24,11 @@ export function SpeciesPreview({
 		`),
 	);
 
-	if (!data || isPending(data)) return null;
+	if (!data) return null;
+
+	if (isPending(data)) {
+		return <SpeciesPreviewPlaceholder number={number} loading />;
+	}
 
 	return (
 		<Link

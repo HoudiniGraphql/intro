@@ -6,12 +6,12 @@ query Info($id: Int! = 1) @loading {
 		flavor_text
 		favorite
 		...SpriteInfo
-		evolution_chain  {
+		evolution_chain {
 			id
-			...SpeciesPreview 
+			...SpeciesPreview
 		}
-		moves(first: 1) @paginate(mode: SinglePage) @loading(count:1){
-			edges @loading(count:3){
+		moves(first: 1) @paginate(mode: SinglePage) {
+			edges @loading(count: 1) {
 				node {
 					...MoveDisplay 
 				}

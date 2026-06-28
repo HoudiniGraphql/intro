@@ -81,3 +81,20 @@ minimumReleaseAgeExclude:
   - houdini-react@2.0.0
   - houdini@2.0.0
   - houdini-adapter-auto@2.0.0
+  - houdini-core-darwin-arm64@2.0.1
+  - houdini-core-darwin-x64@2.0.1
+  - houdini-core-linux-arm64@2.0.1
+  - houdini-core-linux-x64@2.0.1
+  - houdini-core-wasm@2.0.1
+  - houdini-core-win32-arm64@2.0.1
+  - houdini-core-win32-x64@2.0.1
+  - houdini-core@2.0.1
+  - houdini-react-darwin-arm64@2.0.1
+  - houdini-react-darwin-x64@2.0.1
+  - houdini-react-linux-arm64@2.0.1
+  - houdini-react-linux-x64@2.0.1
+  - houdini-react-wasm@2.0.1
+  - houdini-react-win32-arm64@2.0.1
+  - houdini-react-win32-x64@2.0.1
+  - houdini-react@2.0.1
+  - houdini@2.0.1

@@ -9,6 +9,7 @@ import {
 	SpeciesPreview,
 	SpeciesPreviewPlaceholder,
 	Sprite,
+	Shimmer,
 	UpButton,
 	DownButton,
 	Icon,
@@ -35,16 +36,17 @@ export default function Page({ Info, Info$handle }: PageProps) {
 	const [toggleFavorite, pending] = useMutation(toggleFavoriteMutation);
 
 	const pokedexNumber =
-		!species || isLoading ? "-" : (species?.pokedexNumber ?? 1);
+		!species || isLoading || isPending(species.pokedexNumber)
+			? "-"
+			: species.pokedexNumber;
 
 	const favorites = Info.favorites ?? [];
 
 	const evolutionChain = species?.evolution_chain ?? [];
 	const placeholderCount = Math.max(0, 3 - evolutionChain.length);
 
-	console.log(species?.moves);
 	const moves = species?.moves.edges ?? [];
-	const firstMove = moves[0]!.node;
+	const firstMove = moves[0]?.node;
 	const pageInfo = isLoading ? null : species?.moves.pageInfo;
 
 	return (
@@ -52,7 +54,10 @@ export default function Page({ Info, Info$handle }: PageProps) {
 			<FavoritesContainer>
 				{favorites.length > 0 ? (
 					favorites.map((fav, i) => (
-						<FavoritePreview key={!isPending(fav) ? fav.id : i} species={fav} />
+						<FavoritePreview
+							key={isPending(fav.id) ? i : fav.id}
+							species={fav}
+						/>
 					))
 				) : (
 					<p>No Favorites Selected</p>
@@ -73,26 +78,44 @@ export default function Page({ Info, Info$handle }: PageProps) {
 							id="favorite-star"
 							name="star"
 							style={
-								!isLoading && species?.favorite
+								!isLoading && !isPending(species?.favorite) && species?.favorite
 									? { fill: "goldenrod", stroke: "goldenrod" }
 									: undefined
 							}
 						/>
 					</button>
 					<Display id="species-name">
-						{!isLoading ? species?.name : "..."}
-						<span>{isLoading ? "..." : `no.${species?.pokedexNumber}`}</span>
+						{isLoading || isPending(species?.name) ? (
+							<Shimmer width="55%" height="30px" />
+						) : (
+							species?.name
+						)}
+						{isLoading ? (
+							<Shimmer width="64px" height="20px" />
+						) : (
+							<span>no.{species?.pokedexNumber}</span>
+						)}
 					</Display>
 					<Sprite id="species-sprite" species={species ?? null} />
 					<Display id="species-flavor_text">
-						{isLoading ? "..." : species?.flavor_text}
+						{isLoading || isPending(species?.flavor_text) ? (
+							<div
+								style={{ display: "flex", flexDirection: "column", gap: "6px" }}
+							>
+								<Shimmer height="0.8em" />
+								<Shimmer width="92%" height="0.8em" />
+								<Shimmer width="60%" height="0.8em" />
+							</div>
+						) : (
+							species?.flavor_text
+						)}
 					</Display>
 				</Panel>
 				<Panel side="right">
 					<div id="species-evolution-chain">
 						{evolutionChain.map((s, i) => (
 							<SpeciesPreview
-								key={isPending(s) ? i : s.id}
+								key={isPending(s.id) ? i : s.id}
 								species={s}
 								number={i + 1}
 							/>
@@ -125,7 +148,10 @@ export default function Page({ Info, Info$handle }: PageProps) {
 					</div>
 					<nav>
 						{isLoading || typeof pokedexNumber == "string" ? (
-							<></>
+							<>
+								<a className="disabled">previous</a>
+								<a className="disabled">next</a>
+							</>
 						) : (
 							<>
 								<Link

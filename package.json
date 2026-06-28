@@ -13,9 +13,9 @@
 		"feather-icons": "^4.29.2",
 		"graphql": "^16.14.2",
 		"graphql-yoga": "^5.21.2",
-		"houdini": "^2.0.0",
+		"houdini": "2.0.1",
 		"houdini-adapter-auto": "^2.0.0",
-		"houdini-react": "^2.0.0",
+		"houdini-react": "2.0.1",
 		"react": "^19.2.7",
 		"react-dom": "^19.2.7"
 	},

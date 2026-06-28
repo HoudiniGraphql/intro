@@ -21,14 +21,14 @@ importers:
         specifier: ^5.21.2
         version: 5.21.2(graphql@16.14.2)
       houdini:
-        specifier: ^2.0.0
-        version: 2.0.0(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0))
+        specifier: 2.0.1
+        version: 2.0.1(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0))
       houdini-adapter-auto:
         specifier: ^2.0.0
-        version: 2.0.0(houdini@2.0.0(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0)))
+        version: 2.0.0(houdini@2.0.1(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0)))
       houdini-react:
-        specifier: ^2.0.0
-        version: 2.0.0(graphql@16.14.2)
+        specifier: 2.0.1
+        version: 2.0.1(graphql@16.14.2)
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -38,7 +38,7 @@ importers:
     devDependencies:
       '@tailwindcss/vite':
         specifier: ^4.3.0
-        version: 4.3.1(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0))
+        version: 4.3.1(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0))
       '@types/feather-icons':
         specifier: ^4.29.4
         version: 4.29.4
@@ -50,7 +50,7 @@ importers:
         version: 19.2.3(@types/react@19.2.17)
       '@vitejs/plugin-react':
         specifier: ^6.0.2
-        version: 6.0.3(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0))
+        version: 6.0.3(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0))
       tailwindcss:
         specifier: ^4.3.0
         version: 4.3.1
@@ -59,7 +59,7 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.16
-        version: 8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0)
+        version: 8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0)
 
 packages:
 
@@ -821,8 +821,8 @@ packages:
   '@types/jsonfile@6.1.4':
     resolution: {integrity: sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==}
 
-  '@types/node@26.0.0':
-    resolution: {integrity: sha512-vf2YFi1iY9lHGwNJMs01biZFbKJkrZR1T6/MlzjhJLPdntOHLhTrDSnSVcdtvjihi4VQNlrFRIxLsDBlQpAipA==}
+  '@types/node@26.0.1':
+    resolution: {integrity: sha512-fc3KiUoBt6kie0N9bIW3E47vZsuaMf0PM2AaUpLCLT0s/LvX1nxAim6Fc049cNxODPpGm6qRAuUOB86SkRuPQw==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -1152,102 +1152,102 @@ packages:
     peerDependencies:
       houdini: ^2.0.0
 
-  houdini-core-darwin-arm64@2.0.0:
-    resolution: {integrity: sha512-CFA/hMJ7b+G/+M/CbBWy9yrfp1fvM1Gwg96w1Ue+607+dhDkEJVLcIwQWbWztluP3F9QalyG5GOmPcHRvUjQug==}
+  houdini-core-darwin-arm64@2.0.1:
+    resolution: {integrity: sha512-3i4cRysIh1xUi7LcaA3JmaGEYZOtnK4AnJnxU8GxiZlbk5GdpC/Mg3scmLtgYS38XdmDcI3Ro8hlAF0iyWPzIw==}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
 
-  houdini-core-darwin-x64@2.0.0:
-    resolution: {integrity: sha512-pNoxp2U5Wk0smrfQXbiQn/7ZvGdIpMKjIFQfCt8VzPwticL02sfvZNaSfkmHZl3XoNsPYoF263Dl6/o43OSOIA==}
+  houdini-core-darwin-x64@2.0.1:
+    resolution: {integrity: sha512-xezgE/IwoUWLwXZxGWxrDGnKkVp8lhm3P3IPuNKGCkn5uawKpNv0kJRwckgCT9HHAkIGJPnIacSe+gV91J2Oog==}
     cpu: [x64]
     os: [darwin]
     hasBin: true
 
-  houdini-core-linux-arm64@2.0.0:
-    resolution: {integrity: sha512-qy1tYUrd4tjZDwdgXAmk72tpTY+zcp5AQtegZ5qp5rLQNxw2ZpdYEbT+SKsxmk1WL+o0O7l9TIMuecc+0uq0+A==}
+  houdini-core-linux-arm64@2.0.1:
+    resolution: {integrity: sha512-81bjLQHxaN2B9vnoO5POl98FzXLaV7aQBl8r/xhQ8VAi7sF7cHuQ5vT99GURzFq4YvzUdEQYX6yhaMWQLT2duw==}
     cpu: [arm64]
     os: [linux]
     hasBin: true
 
-  houdini-core-linux-x64@2.0.0:
-    resolution: {integrity: sha512-2nwKVHUi6F8UFIcfTozVLLSKPGJyFSyzulNE+r+pa4IuHzaY9LGZQx4bwuooGzMM/u44IS+/Det+mZ7OfmApNQ==}
+  houdini-core-linux-x64@2.0.1:
+    resolution: {integrity: sha512-5tEwfW6AhCXnYMLCetutsFkhhrokhekJpdQeIk6yCt/BtGxkusgJjY+IiZ7kkVJbuI+fbT2w8r1f1edh796TfQ==}
     cpu: [x64]
     os: [linux]
     hasBin: true
 
-  houdini-core-wasm@2.0.0:
-    resolution: {integrity: sha512-TiC01xYR31QcFm8eaLz54wZmSxvKTTUJKgiQd/tN832xm09hDVDzBtjylVENvwLh0OkkJpvZy+GEy7lKPaB2OQ==}
+  houdini-core-wasm@2.0.1:
+    resolution: {integrity: sha512-xSU381qlSeYHwNYcsHvFtfvm9eHY7oGAimnkyKIfRsJV3jo+ZBsS1d/6QX5krZcVmUgC7mRPAoWt2es+UkSW4Q==}
     cpu: [wasm32]
     os: [wasi]
     hasBin: true
 
-  houdini-core-win32-arm64@2.0.0:
-    resolution: {integrity: sha512-Uj2I8qqKnXkmwHYXxQmzM1YaW0xikPzvS/lOlU3ZMvqKA2FDYABXSPB2bAyGNKtYJAl3GhjrvhYpScotJozjuA==}
+  houdini-core-win32-arm64@2.0.1:
+    resolution: {integrity: sha512-c+25w44ogubvp+hOI0wB/RPyFKKo83L+iLiAPUgAVHs4vNHVQ96n07VM7W9yoZMFy013lNX3ff3L/kjNzzDyFQ==}
     cpu: [arm64]
     os: [win32]
     hasBin: true
 
-  houdini-core-win32-x64@2.0.0:
-    resolution: {integrity: sha512-E9SzsIEN7jvOF4l3lgAgaD2Je4T5cV6oH+U4ik9PhUo7P0L5CiPirn+XR8Vr+HTbfUUnSToPF866dLKp9Jh7XA==}
+  houdini-core-win32-x64@2.0.1:
+    resolution: {integrity: sha512-MMmgLkl5uuP7cXuM3VUWA6oULLwxlQ3Jy8LYnhPOh7ba7U6ml+46JxqAH+sYhkn5MEWUmdHtdUIWqjbuIlzwDw==}
     cpu: [x64]
     os: [win32]
     hasBin: true
 
-  houdini-core@2.0.0:
-    resolution: {integrity: sha512-zFM84qhbCGp+JNBQ51JElGjWHB/hxqXTJeVVSCW60EXMCxNZOIXE/E9pQaeavjKIR5DnBZVf21rRDBNeQrhbiA==}
+  houdini-core@2.0.1:
+    resolution: {integrity: sha512-CtkvY26UAu8CeXkfDaCv0DhPkweDgEk9fYFF0Z251ChMXD7YV1ELTh/Zo8vezv3drtFdXtJ7vcRqB0tFYv0NfA==}
     hasBin: true
 
-  houdini-react-darwin-arm64@2.0.0:
-    resolution: {integrity: sha512-V0Cho8iITVQXFteVgjUrG+Gz4On4FSzr2LGRSwtFP61RSVq8BjcLxt9vd0n0oh2+IqJm1BAJsAY3YY5nYTPB3Q==}
+  houdini-react-darwin-arm64@2.0.1:
+    resolution: {integrity: sha512-uc8hzBPybc4Tjx4OJcXnTLyEhj4VRoYWyJjdwK2Es/x0gTU06wIoNvxwqVn9rRD8SEHu4TYcCHcPiGUYnWNiwg==}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
 
-  houdini-react-darwin-x64@2.0.0:
-    resolution: {integrity: sha512-LayZDtYGy2za1LL0kJml4yfXw0Tf2+I6Sm41pONuWdrTLp+VaSx6B+SqbGwEwyUOvzta/i2w76tXL5Eu8RxtiQ==}
+  houdini-react-darwin-x64@2.0.1:
+    resolution: {integrity: sha512-ZQCNh77dzObs3V/tuttpMUFyARu2CLYyhi6n3t3fvZM0cCYOdZF6rIs9ubwgFlq/vuQcTV1LPrd7CKKAnIa39Q==}
     cpu: [x64]
     os: [darwin]
     hasBin: true
 
-  houdini-react-linux-arm64@2.0.0:
-    resolution: {integrity: sha512-JyHBQ4dTemr4SqAlQ8BlgfeaNFwNme4CaYP/Cd3cYXP4i/AaUoBbSGtCh6XCvWGhuRO3YuF3deUUCxBdydmhLg==}
+  houdini-react-linux-arm64@2.0.1:
+    resolution: {integrity: sha512-1ySZzIw2mjnrsO1tEABXfm0b/IZpn4V5AaTgRzDCjOaFq/EX6FwHErwlz7ncwWZxP2DZ9yQXhNpZv6phBhdfWA==}
     cpu: [arm64]
     os: [linux]
     hasBin: true
 
-  houdini-react-linux-x64@2.0.0:
-    resolution: {integrity: sha512-FXvS3rojYaS/YPFz90GROtdlGQ9D6JCZ/Kp/nGAScVcsL1wMp0ch2kuyCi7DQtSdLIbjUTXQMSfwYAK9oh5ltg==}
+  houdini-react-linux-x64@2.0.1:
+    resolution: {integrity: sha512-5uZwyCBW5QajwJlwexocyevtbIVkot3/rjFbzxOhFAYrxETeury1SSPcJIkVZjjfciRCPdE0Mkaj0oIPM1axiw==}
     cpu: [x64]
     os: [linux]
     hasBin: true
 
-  houdini-react-wasm@2.0.0:
-    resolution: {integrity: sha512-ReqRL4U2tQtk9dmi7ifYuHzvwBqX4wYEN6lKu4Ww9WoZGooTTLWEiZEYQbfi6XqfVrCSptx84tNV6xw0O2XYNw==}
+  houdini-react-wasm@2.0.1:
+    resolution: {integrity: sha512-/U0hXBc8ryZN1UIyiNj99XVVuIRYfQhfK7UUHuroKdoyAk0V3+4vNrXBzftlP52zv42phU4+rb78044eCrIlYw==}
     cpu: [wasm32]
     os: [wasi]
     hasBin: true
 
-  houdini-react-win32-arm64@2.0.0:
-    resolution: {integrity: sha512-hjWUrGEelhrdOxYFYfdVJpxwt5dq5D36xygEh6A4c7kNujeUmXqWxxiFs1UXEsxdUCYnnPgegfIKJXPt4l9ULg==}
+  houdini-react-win32-arm64@2.0.1:
+    resolution: {integrity: sha512-ed/ZkcG3BBlPFBk7zJ8suCtU2EueRuRcH6V4vaHtW+g6r+fCMPPfiamuCFReMD05vVOqaxSgcJJGtKp1Xvndpg==}
     cpu: [arm64]
     os: [win32]
     hasBin: true
 
-  houdini-react-win32-x64@2.0.0:
-    resolution: {integrity: sha512-sly1Iw76u6Etb6m4dPcj/GZ45yvUejEKHUHzCHKi52s2PO8CeptlN0LxV1MXd/J4oiQslg6acjrxD1KQ5u0HBw==}
+  houdini-react-win32-x64@2.0.1:
+    resolution: {integrity: sha512-quAiOOEpmERqQ5DxFtpg6R3h7Njo+6VvrOtUp8pFLZTcuKMGOgu50xtwUJQl35t4VsE8Fhv90A849YB17ehxuA==}
     cpu: [x64]
     os: [win32]
     hasBin: true
 
-  houdini-react@2.0.0:
-    resolution: {integrity: sha512-LZOuEesLSFsfZP9RuNoT65yAHm+lqTJiEpCmCPSbM5gjNou0LRmt0GBp6h+G/ewQslo3nlye1Xl8gOvAIe5xzQ==}
+  houdini-react@2.0.1:
+    resolution: {integrity: sha512-ol/VjI0+679ec1EEPrcBuMCZ+hvWoSZ0kNMqVz/lcOgLrjN19H53YahBEwSHag+LbCZFX1/UIjc2hr0SEtJYDg==}
     hasBin: true
     peerDependencies:
       graphql: '>=16'
 
-  houdini@2.0.0:
-    resolution: {integrity: sha512-mCeVVvxhIGY1tjSSWXK8bOOyMLn2EhdYGPyXEv57XaJWwla/3S64NYiRriu51ORfrXI3NtdSB6YKsfQXs2rxMw==}
+  houdini@2.0.1:
+    resolution: {integrity: sha512-Kjk6egzawB27S8PgjwM6KC3JLFwgj+Zy4K97wDDgf+PKynEM6/+bp8c7Ttep3s56ih9+NeHx+ebqGS1Odi+Lbg==}
     hasBin: true
     peerDependencies:
       graphql: '>=16'
@@ -1510,12 +1510,12 @@ packages:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
 
-  qs@6.15.2:
-    resolution: {integrity: sha512-Rzq0KEyX/w/tEybncDgdkZrJgVUsUMk3xjh3t5bv3S1HTAtg+uOYt72+ZfwiQwKdysThkTBdL/rTi6HDmX9Ddw==}
+  qs@6.15.3:
+    resolution: {integrity: sha512-O9gl3zCl5h5blw1KGUzQKhA5oUXSl8rwUIM5o0S3nCXMliSvy5Dzx7/DJcI+SwgICv+IneSZwhBh1oSyEHA71A==}
     engines: {node: '>=0.6'}
 
-  range-parser@1.2.1:
-    resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
+  range-parser@1.3.0:
+    resolution: {integrity: sha512-hek2mFQpPuI4E1BBKrSto+BU3e3x4xuarsbiwr3+lf7p44juvFMV0XFWQAP3xUyqXA4RrXLIoaSUGbSt056ZMw==}
     engines: {node: '>= 0.6'}
 
   raw-body@3.0.2:
@@ -1537,8 +1537,8 @@ packages:
     resolution: {integrity: sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ==}
     engines: {node: '>=0.10.0'}
 
-  recast@0.23.11:
-    resolution: {integrity: sha512-YTUo+Flmw4ZXiWfQKGcwwc11KnoRAYgzAE2E7mXKCjSviTKShtxBsN6YUUBB2gtaBzKzeKunxhUwNHQuRryhWA==}
+  recast@0.23.12:
+    resolution: {integrity: sha512-dEWRjcINDu/F4l2dYx57ugBtD7HV9KXESyxhzw/MqWLeglJrsjJKqACPyUPg+6AF8mIgm+Zi0dZ3ACoIg+QtpA==}
     engines: {node: '>= 4'}
 
   rolldown@1.1.3:
@@ -2317,12 +2317,12 @@ snapshots:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.3.1
       '@tailwindcss/oxide-win32-x64-msvc': 4.3.1
 
-  '@tailwindcss/vite@4.3.1(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0))':
+  '@tailwindcss/vite@4.3.1(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0))':
     dependencies:
       '@tailwindcss/node': 4.3.1
       '@tailwindcss/oxide': 4.3.1
       tailwindcss: 4.3.1
-      vite: 8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0)
+      vite: 8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0)
 
   '@tybys/wasm-util@0.10.3':
     dependencies:
@@ -2336,13 +2336,13 @@ snapshots:
   '@types/fs-extra@11.0.4':
     dependencies:
       '@types/jsonfile': 6.1.4
-      '@types/node': 26.0.0
+      '@types/node': 26.0.1
 
   '@types/jsonfile@6.1.4':
     dependencies:
-      '@types/node': 26.0.0
+      '@types/node': 26.0.1
 
-  '@types/node@26.0.0':
+  '@types/node@26.0.1':
     dependencies:
       undici-types: 8.3.0
 
@@ -2356,10 +2356,10 @@ snapshots:
 
   '@ungap/structured-clone@1.3.2': {}
 
-  '@vitejs/plugin-react@6.0.3(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0))':
+  '@vitejs/plugin-react@6.0.3(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0)
+      vite: 8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0)
 
   '@whatwg-node/disposablestack@0.0.6':
     dependencies:
@@ -2413,7 +2413,7 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.7.2
       on-finished: 2.4.1
-      qs: 6.15.2
+      qs: 6.15.3
       raw-body: 3.0.2
       type-is: 2.1.0
     transitivePeerDependencies:
@@ -2602,8 +2602,8 @@ snapshots:
       once: 1.4.0
       parseurl: 1.3.3
       proxy-addr: 2.0.7
-      qs: 6.15.2
-      range-parser: 1.2.1
+      qs: 6.15.3
+      range-parser: 1.3.0
       router: 2.2.0
       send: 1.2.1
       serve-static: 2.2.1
@@ -2716,70 +2716,70 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  houdini-adapter-auto@2.0.0(houdini@2.0.0(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0))):
+  houdini-adapter-auto@2.0.0(houdini@2.0.1(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0))):
     dependencies:
-      houdini: 2.0.0(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0))
+      houdini: 2.0.1(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0))
       import-meta-resolve: 4.2.0
 
-  houdini-core-darwin-arm64@2.0.0:
+  houdini-core-darwin-arm64@2.0.1:
     optional: true
 
-  houdini-core-darwin-x64@2.0.0:
+  houdini-core-darwin-x64@2.0.1:
     optional: true
 
-  houdini-core-linux-arm64@2.0.0:
+  houdini-core-linux-arm64@2.0.1:
     optional: true
 
-  houdini-core-linux-x64@2.0.0:
+  houdini-core-linux-x64@2.0.1:
     optional: true
 
-  houdini-core-wasm@2.0.0:
+  houdini-core-wasm@2.0.1:
     optional: true
 
-  houdini-core-win32-arm64@2.0.0:
+  houdini-core-win32-arm64@2.0.1:
     optional: true
 
-  houdini-core-win32-x64@2.0.0:
+  houdini-core-win32-x64@2.0.1:
     optional: true
 
-  houdini-core@2.0.0(graphql@16.14.2):
+  houdini-core@2.0.1(graphql@16.14.2):
     dependencies:
       '@whatwg-node/server': 0.11.0
       graphql-yoga: 5.21.2(graphql@16.14.2)
       minimatch: 10.2.5
     optionalDependencies:
-      houdini-core-darwin-arm64: 2.0.0
-      houdini-core-darwin-x64: 2.0.0
-      houdini-core-linux-arm64: 2.0.0
-      houdini-core-linux-x64: 2.0.0
-      houdini-core-wasm: 2.0.0
-      houdini-core-win32-arm64: 2.0.0
-      houdini-core-win32-x64: 2.0.0
+      houdini-core-darwin-arm64: 2.0.1
+      houdini-core-darwin-x64: 2.0.1
+      houdini-core-linux-arm64: 2.0.1
+      houdini-core-linux-x64: 2.0.1
+      houdini-core-wasm: 2.0.1
+      houdini-core-win32-arm64: 2.0.1
+      houdini-core-win32-x64: 2.0.1
     transitivePeerDependencies:
       - graphql
 
-  houdini-react-darwin-arm64@2.0.0:
+  houdini-react-darwin-arm64@2.0.1:
     optional: true
 
-  houdini-react-darwin-x64@2.0.0:
+  houdini-react-darwin-x64@2.0.1:
     optional: true
 
-  houdini-react-linux-arm64@2.0.0:
+  houdini-react-linux-arm64@2.0.1:
     optional: true
 
-  houdini-react-linux-x64@2.0.0:
+  houdini-react-linux-x64@2.0.1:
     optional: true
 
-  houdini-react-wasm@2.0.0:
+  houdini-react-wasm@2.0.1:
     optional: true
 
-  houdini-react-win32-arm64@2.0.0:
+  houdini-react-win32-arm64@2.0.1:
     optional: true
 
-  houdini-react-win32-x64@2.0.0:
+  houdini-react-win32-x64@2.0.1:
     optional: true
 
-  houdini-react@2.0.0(graphql@16.14.2):
+  houdini-react@2.0.1(graphql@16.14.2):
     dependencies:
       '@babel/parser': 7.29.7
       '@babel/types': 7.29.7
@@ -2794,21 +2794,21 @@ snapshots:
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
       react-streaming: 0.4.20(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
-      recast: 0.23.11
+      recast: 0.23.12
       rollup: 4.62.2
       use-deep-compare-effect: 1.8.1(react@19.2.7)
     optionalDependencies:
-      houdini-react-darwin-arm64: 2.0.0
-      houdini-react-darwin-x64: 2.0.0
-      houdini-react-linux-arm64: 2.0.0
-      houdini-react-linux-x64: 2.0.0
-      houdini-react-wasm: 2.0.0
-      houdini-react-win32-arm64: 2.0.0
-      houdini-react-win32-x64: 2.0.0
+      houdini-react-darwin-arm64: 2.0.1
+      houdini-react-darwin-x64: 2.0.1
+      houdini-react-linux-arm64: 2.0.1
+      houdini-react-linux-x64: 2.0.1
+      houdini-react-wasm: 2.0.1
+      houdini-react-win32-arm64: 2.0.1
+      houdini-react-win32-x64: 2.0.1
     transitivePeerDependencies:
       - supports-color
 
-  houdini@2.0.0(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0)):
+  houdini@2.0.1(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0)):
     dependencies:
       '@babel/parser': 7.29.7
       '@clack/prompts': 1.6.0
@@ -2827,15 +2827,15 @@ snapshots:
       glob: 13.0.6
       graphql: 16.14.2
       graphql-yoga: 5.21.2(graphql@16.14.2)
-      houdini-core: 2.0.0(graphql@16.14.2)
+      houdini-core: 2.0.1(graphql@16.14.2)
       kleur: 4.1.5
       memfs: 4.57.8(tslib@2.8.1)
       minimatch: 10.2.5
       npx-import: 1.1.4
       oauth4webapi: 3.8.6
-      recast: 0.23.11
+      recast: 0.23.12
       sql.js: 1.14.1
-      vite: 8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0)
+      vite: 8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0)
       ws: 8.21.0
     transitivePeerDependencies:
       - bufferutil
@@ -3047,11 +3047,12 @@ snapshots:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
 
-  qs@6.15.2:
+  qs@6.15.3:
     dependencies:
+      es-define-property: 1.0.1
       side-channel: 1.1.1
 
-  range-parser@1.2.1: {}
+  range-parser@1.3.0: {}
 
   raw-body@3.0.2:
     dependencies:
@@ -3076,7 +3077,7 @@ snapshots:
 
   react@19.2.7: {}
 
-  recast@0.23.11:
+  recast@0.23.12:
     dependencies:
       ast-types: 0.16.1
       esprima: 4.0.1
@@ -3165,7 +3166,7 @@ snapshots:
       mime-types: 3.0.2
       ms: 2.1.3
       on-finished: 2.4.1
-      range-parser: 1.2.1
+      range-parser: 1.3.0
       statuses: 2.0.2
     transitivePeerDependencies:
       - supports-color
@@ -3282,7 +3283,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@8.1.0(@types/node@26.0.0)(esbuild@0.28.0)(jiti@2.7.0):
+  vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -3290,7 +3291,7 @@ snapshots:
       rolldown: 1.1.3
       tinyglobby: 0.2.17
     optionalDependencies:
-      '@types/node': 26.0.0
+      '@types/node': 26.0.1
       esbuild: 0.28.0
       fsevents: 2.3.3
       jiti: 2.7.0

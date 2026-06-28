@@ -1,7 +1,14 @@
 import { Display } from "./Display";
 import { SpeciesPreviewNumber } from "./SpeciesPreviewNumber";
+import { Shimmer } from "./Shimmer";
 
-export function SpeciesPreviewPlaceholder({ number }: { number: number }) {
+export function SpeciesPreviewPlaceholder({
+	number,
+	loading,
+}: {
+	number: number;
+	loading?: boolean;
+}) {
 	return (
 		<div>
 			<SpeciesPreviewNumber value={number} />
@@ -20,6 +27,9 @@ export function SpeciesPreviewPlaceholder({ number }: { number: number }) {
 					<div className="bg-[#83887a] flex-1 w-full" />
 				</div>
 			</div>
+			<Display>
+				{loading ? <Shimmer width="70px" height="1em" /> : "No Data"}
+			</Display>
 		</div>
 	);
 }
