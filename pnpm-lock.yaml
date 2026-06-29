@@ -27,8 +27,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(houdini@2.0.1(graphql@16.14.2)(tslib@2.8.1)(vite@8.1.0(@types/node@26.0.1)(esbuild@0.28.0)(jiti@2.7.0)))
       houdini-react:
-        specifier: 2.0.1
-        version: 2.0.1(graphql@16.14.2)
+        specifier: 2.0.2
+        version: 2.0.2(graphql@16.14.2)
       react:
         specifier: ^19.2.7
         version: 19.2.7
@@ -1198,50 +1198,50 @@ packages:
     resolution: {integrity: sha512-CtkvY26UAu8CeXkfDaCv0DhPkweDgEk9fYFF0Z251ChMXD7YV1ELTh/Zo8vezv3drtFdXtJ7vcRqB0tFYv0NfA==}
     hasBin: true
 
-  houdini-react-darwin-arm64@2.0.1:
-    resolution: {integrity: sha512-uc8hzBPybc4Tjx4OJcXnTLyEhj4VRoYWyJjdwK2Es/x0gTU06wIoNvxwqVn9rRD8SEHu4TYcCHcPiGUYnWNiwg==}
+  houdini-react-darwin-arm64@2.0.2:
+    resolution: {integrity: sha512-CHupXQAFVuE6FAK08MbFsW3M7pUJccFQftArRs41vo+Vcst+fCN3AcFbtZdEkVhOowDqNOvSn3UxPu5AHX7Fwg==}
     cpu: [arm64]
     os: [darwin]
     hasBin: true
 
-  houdini-react-darwin-x64@2.0.1:
-    resolution: {integrity: sha512-ZQCNh77dzObs3V/tuttpMUFyARu2CLYyhi6n3t3fvZM0cCYOdZF6rIs9ubwgFlq/vuQcTV1LPrd7CKKAnIa39Q==}
+  houdini-react-darwin-x64@2.0.2:
+    resolution: {integrity: sha512-/+EG69S2d4QffQLbP3CESzd/g868WNEk4gPQ1/uKhLiLIuPYW3srlAea6Lmu6mCQEkzZhfvobG+n66Fk0QXciQ==}
     cpu: [x64]
     os: [darwin]
     hasBin: true
 
-  houdini-react-linux-arm64@2.0.1:
-    resolution: {integrity: sha512-1ySZzIw2mjnrsO1tEABXfm0b/IZpn4V5AaTgRzDCjOaFq/EX6FwHErwlz7ncwWZxP2DZ9yQXhNpZv6phBhdfWA==}
+  houdini-react-linux-arm64@2.0.2:
+    resolution: {integrity: sha512-6gdhiKxbihT0XkT1sALAwJITZ0ihEkxLVOBqyREMcaIOIxB0GHOB1jp9j0bjEjGfJ3dTPrG74dJULXtzaR5uzA==}
     cpu: [arm64]
     os: [linux]
     hasBin: true
 
-  houdini-react-linux-x64@2.0.1:
-    resolution: {integrity: sha512-5uZwyCBW5QajwJlwexocyevtbIVkot3/rjFbzxOhFAYrxETeury1SSPcJIkVZjjfciRCPdE0Mkaj0oIPM1axiw==}
+  houdini-react-linux-x64@2.0.2:
+    resolution: {integrity: sha512-YyYx4I8m1RmOWnmk+HGOWbhalq8dm/DjNfyacief07iIaFAqI5y03CzN/QNmNI2RNbAbCKfFbH5+WG0UWyxPRQ==}
     cpu: [x64]
     os: [linux]
     hasBin: true
 
-  houdini-react-wasm@2.0.1:
-    resolution: {integrity: sha512-/U0hXBc8ryZN1UIyiNj99XVVuIRYfQhfK7UUHuroKdoyAk0V3+4vNrXBzftlP52zv42phU4+rb78044eCrIlYw==}
+  houdini-react-wasm@2.0.2:
+    resolution: {integrity: sha512-LNPdQZ/fqGCSZYim4ER12oR46USophH8PsDPcrlCP2ZTGNowbsF2oPkBcYUxr6NKgGo17YwMH4nsAa86Sg0kVQ==}
     cpu: [wasm32]
     os: [wasi]
     hasBin: true
 
-  houdini-react-win32-arm64@2.0.1:
-    resolution: {integrity: sha512-ed/ZkcG3BBlPFBk7zJ8suCtU2EueRuRcH6V4vaHtW+g6r+fCMPPfiamuCFReMD05vVOqaxSgcJJGtKp1Xvndpg==}
+  houdini-react-win32-arm64@2.0.2:
+    resolution: {integrity: sha512-LrId4r5DzJEWDIEDpujpMCBNE8DJU2S+GiogmHbD864ntGljMroYfS8wJ+D1R+Tqsz2Fen9s9V2MBxg0GgrQyA==}
     cpu: [arm64]
     os: [win32]
     hasBin: true
 
-  houdini-react-win32-x64@2.0.1:
-    resolution: {integrity: sha512-quAiOOEpmERqQ5DxFtpg6R3h7Njo+6VvrOtUp8pFLZTcuKMGOgu50xtwUJQl35t4VsE8Fhv90A849YB17ehxuA==}
+  houdini-react-win32-x64@2.0.2:
+    resolution: {integrity: sha512-Pq5m2YlZImJ9IEcAe5xQ+yRfgi9LSv5/QPFBFYuMUsh0jiHmtEE6KOhmVNMtW4607mat92+YIlr6k+lIkqrQZg==}
     cpu: [x64]
     os: [win32]
     hasBin: true
 
-  houdini-react@2.0.1:
-    resolution: {integrity: sha512-ol/VjI0+679ec1EEPrcBuMCZ+hvWoSZ0kNMqVz/lcOgLrjN19H53YahBEwSHag+LbCZFX1/UIjc2hr0SEtJYDg==}
+  houdini-react@2.0.2:
+    resolution: {integrity: sha512-7S7hLBlHKlSZ38MFEjKrmtEZUgJY0zJ2DGwqHqN3QxQ0y0iapJuOWwJJQIdlfMtbD8IvcCd5AoR4aSQFK8HlnA==}
     hasBin: true
     peerDependencies:
       graphql: '>=16'
@@ -2758,28 +2758,28 @@ snapshots:
     transitivePeerDependencies:
       - graphql
 
-  houdini-react-darwin-arm64@2.0.1:
+  houdini-react-darwin-arm64@2.0.2:
     optional: true
 
-  houdini-react-darwin-x64@2.0.1:
+  houdini-react-darwin-x64@2.0.2:
     optional: true
 
-  houdini-react-linux-arm64@2.0.1:
+  houdini-react-linux-arm64@2.0.2:
     optional: true
 
-  houdini-react-linux-x64@2.0.1:
+  houdini-react-linux-x64@2.0.2:
     optional: true
 
-  houdini-react-wasm@2.0.1:
+  houdini-react-wasm@2.0.2:
     optional: true
 
-  houdini-react-win32-arm64@2.0.1:
+  houdini-react-win32-arm64@2.0.2:
     optional: true
 
-  houdini-react-win32-x64@2.0.1:
+  houdini-react-win32-x64@2.0.2:
     optional: true
 
-  houdini-react@2.0.1(graphql@16.14.2):
+  houdini-react@2.0.2(graphql@16.14.2):
     dependencies:
       '@babel/parser': 7.29.7
       '@babel/types': 7.29.7
@@ -2798,13 +2798,13 @@ snapshots:
       rollup: 4.62.2
       use-deep-compare-effect: 1.8.1(react@19.2.7)
     optionalDependencies:
-      houdini-react-darwin-arm64: 2.0.1
-      houdini-react-darwin-x64: 2.0.1
-      houdini-react-linux-arm64: 2.0.1
-      houdini-react-linux-x64: 2.0.1
-      houdini-react-wasm: 2.0.1
-      houdini-react-win32-arm64: 2.0.1
-      houdini-react-win32-x64: 2.0.1
+      houdini-react-darwin-arm64: 2.0.2
+      houdini-react-darwin-x64: 2.0.2
+      houdini-react-linux-arm64: 2.0.2
+      houdini-react-linux-x64: 2.0.2
+      houdini-react-wasm: 2.0.2
+      houdini-react-win32-arm64: 2.0.2
+      houdini-react-win32-x64: 2.0.2
     transitivePeerDependencies:
       - supports-color
 

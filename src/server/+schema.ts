@@ -1,4 +1,5 @@
 import { createSchema, createPubSub } from "graphql-yoga";
+import { GraphQLError } from "graphql";
 import data from "./data/data.js";
 import { connectionFromArray } from "./connections.ts";
 
@@ -121,7 +122,11 @@ export default createSchema({
 	resolvers: {
 		Query: {
 			species(_: unknown, { id }: { id: number }) {
-				return data.species[id - 1];
+				const species = data.species[id - 1];
+				if (!species) {
+					throw new GraphQLError(`No Pokémon found with id ${id}`);
+				}
+				return species;
 			},
 			pokemon(_: unknown, args: { first?: number; after?: string }) {
 				const connection = connectionFromArray(data.species, args) as Record<
