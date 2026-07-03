@@ -17,7 +17,7 @@ export default createSchema({
 
 		type Query {
 			pokemon(first: Int, after: String): SpeciesConnection!
-			species(id: Int!): Species
+			species(id: Int!, delay: Int): Species
 			favorites: [Species!]!
 		}
 
@@ -121,7 +121,12 @@ export default createSchema({
 	`,
 	resolvers: {
 		Query: {
-			species(_: unknown, { id }: { id: number }) {
+			async species(_: unknown, { id, delay }: { id: number; delay?: number }) {
+				// optional artificial latency (in seconds) so navigation exercises the router's
+				// delayed @loading state
+				if (delay) {
+					await new Promise((resolve) => setTimeout(resolve, delay));
+				}
 				const species = data.species[id - 1];
 				if (!species) {
 					throw new GraphQLError(`No Pokémon found with id ${id}`);
@@ -183,7 +188,12 @@ export default createSchema({
 			},
 			moves(
 				{ moves }: { moves: Array<{ name: string; [key: string]: unknown }> },
-				args: { first?: number; after?: string; last?: number; before?: string },
+				args: {
+					first?: number;
+					after?: string;
+					last?: number;
+					before?: string;
+				},
 			) {
 				const movesData = data.moves as Record<string, unknown>;
 				const connection = connectionFromArray(

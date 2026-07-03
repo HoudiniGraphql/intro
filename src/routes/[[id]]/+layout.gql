@@ -1,0 +1,6 @@
+query Favorites @loading {
+	favorites @list(name: "FavoriteSpecies") {
+		id
+		...FavoritePreview
+	}
+}

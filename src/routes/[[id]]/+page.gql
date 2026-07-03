@@ -1,5 +1,5 @@
 query Info($id: Int! = 1) @loading {
-	species(id: $id)  {
+	species(id: $id, delay: 500)  {
 		id 
 		pokedexNumber
 		name
@@ -13,7 +13,7 @@ query Info($id: Int! = 1) @loading {
 		moves(first: 1) @paginate(mode: SinglePage) {
 			edges @loading(count: 1) {
 				node {
-					...MoveDisplay 
+					...MoveDisplay
 				}
 			}
 			pageInfo {
@@ -21,9 +21,5 @@ query Info($id: Int! = 1) @loading {
 				hasPreviousPage
 			}
 		}
-	}
-	favorites @list(name: "FavoriteSpecies") {
-		id 
-		...FavoritePreview 
 	}
 }
