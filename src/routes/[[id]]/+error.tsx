@@ -1,10 +1,7 @@
 import { Container, Display, FavoritesContainer, Panel } from "~/components";
+import { ErrorProps } from "./$types";
 
-export default function ErrorView({
-	errors,
-}: {
-	errors: Array<{ message: string }>;
-}) {
+export default function ErrorView({ errors }: ErrorProps) {
 	const message =
 		errors?.map((e) => e.message).join("\n") || "Something went wrong";
 
