@@ -28,7 +28,7 @@ export function Sprite({
 			{!info || isPending(info) ? (
 				<Shimmer width="90%" height="90%" radius="5px" background="transparent" />
 			) : (
-				<img height="100%" src={info.sprites.front} alt={`${info.name} sprite`} />
+				<img className="h-full" src={info.sprites.front} alt={`${info.name} sprite`} />
 			)}
 		</div>
 	);
