@@ -1,6 +1,7 @@
-import { useFragment, graphql } from "$houdini";
+import { useFragment, graphql, isPending } from "$houdini";
 import type { MoveDisplay as MoveDisplayFragment } from "$houdini";
 import { Display } from "./Display";
+import { Shimmer } from "./Shimmer";
 
 const padValue = (val: number | null) => {
 	if (val === null) return "..0";
@@ -24,7 +25,7 @@ export function MoveDisplay({ move }: { move: MoveDisplayFragment | null }) {
 	const data = useFragment(
 		move,
 		graphql(`
-			fragment MoveDisplay on SpeciesMove {
+			fragment MoveDisplay on SpeciesMove @loading {
 				learned_at
 				method
 				move {
@@ -38,7 +39,7 @@ export function MoveDisplay({ move }: { move: MoveDisplayFragment | null }) {
 		`),
 	);
 
-	if (!data) return null;
+	const loading = !data || isPending(data);
 
 	return (
 		<Display
@@ -49,6 +50,8 @@ export function MoveDisplay({ move }: { move: MoveDisplayFragment | null }) {
 				flexDirection: "row",
 				position: "relative",
 				lineHeight: "1",
+				minWidth: 0,
+				overflow: "hidden",
 			}}
 		>
 			<div>
@@ -57,24 +60,40 @@ export function MoveDisplay({ move }: { move: MoveDisplayFragment | null }) {
 						margin: 0,
 						fontWeight: "normal",
 						fontSize: "24px",
-						borderBottom: "2px solid black",
+						borderBottom: loading ? "none" : "2px solid black",
 						padding: "0 4px",
 						width: "103px",
 						textAlign: "center",
 						whiteSpace: "nowrap",
 					}}
 				>
-					{data.move.name}
+					{loading ? <Shimmer width="90px" height="22px" /> : data.move.name}
 				</h3>
-				<div style={{ marginTop: "3px" }}>
-					{padKey("Accuracy")}.....{padValue(data.move.accuracy)}
-				</div>
-				<div style={{ marginTop: "3px" }}>
-					{padKey("Power")}.....{padValue(data.move.power)}
-				</div>
-				<div style={{ marginTop: "3px" }}>
-					{padKey("PP")}.....{padValue(data.move.pp)}
-				</div>
+				{loading ? (
+					<>
+						<div style={{ marginTop: "3px" }}>
+							<Shimmer width="150px" height="0.85em" />
+						</div>
+						<div style={{ marginTop: "3px" }}>
+							<Shimmer width="150px" height="0.85em" />
+						</div>
+						<div style={{ marginTop: "3px" }}>
+							<Shimmer width="150px" height="0.85em" />
+						</div>
+					</>
+				) : (
+					<>
+						<div style={{ marginTop: "3px" }}>
+							{padKey("Accuracy")}.....{padValue(data.move.accuracy)}
+						</div>
+						<div style={{ marginTop: "3px" }}>
+							{padKey("Power")}.....{padValue(data.move.power)}
+						</div>
+						<div style={{ marginTop: "3px" }}>
+							{padKey("PP")}.....{padValue(data.move.pp)}
+						</div>
+					</>
+				)}
 			</div>
 			<div
 				style={{
@@ -88,16 +107,20 @@ export function MoveDisplay({ move }: { move: MoveDisplayFragment | null }) {
 					style={{
 						fontSize: "18px",
 						textTransform: "uppercase",
-						border: "solid black 2px",
+						border: loading ? "solid transparent 2px" : "solid black 2px",
 						borderRadius: "7px",
 						padding: "2px 10px",
 						textAlign: "center",
 					}}
 				>
-					Type: {data.move.type}
+					{loading ? <Shimmer width="84px" height="18px" /> : <>Type: {data.move.type}</>}
 				</div>
 				<div style={{ marginRight: "10px" }}>
-					Learn: {data.method === "level-up" ? `Lvl ${data.learned_at}` : "TM"}
+					{loading ? (
+						<Shimmer width="70px" height="0.85em" />
+					) : (
+						<>Learn: {data.method === "level-up" ? `Lvl ${data.learned_at}` : "TM"}</>
+					)}
 				</div>
 			</div>
 		</Display>

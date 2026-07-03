@@ -1,6 +1,7 @@
 export { Container } from './Container'
 export { Display } from './Display'
 export { Sprite } from './Sprite'
+export { Shimmer } from './Shimmer'
 export { SpeciesPreview } from './SpeciesPreview'
 export { SpeciesPreviewNumber } from './SpeciesPreviewNumber'
 export { SpeciesPreviewPlaceholder } from './SpeciesPreviewPlaceholder'
